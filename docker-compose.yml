@@ -1,0 +1,16 @@
+version: '3'
+services:
+  ouzout-fpm:
+    image: php:7.1-fpm
+    container_name: ouzout
+    volumes:
+      - ./:/var/www/html
+  ouzout-nginx:
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./:/var/www/html
+    depends_on:
+      - ouzout-fpm

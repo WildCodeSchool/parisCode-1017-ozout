@@ -1,4 +1,5 @@
 DC=docker-compose
+restart: stop start
 
 init:                ## Init project (Does not work on Windows!)
 	@echo "\n# ozout" | sudo tee --append /etc/hosts
@@ -18,7 +19,6 @@ stop:                ## Stop your environment
 	$(DC) stop
 
 restart:             ## Stop and restart your box
-restart: stop start
 
 status:              ## Get your environment status
 	$(DC) ps

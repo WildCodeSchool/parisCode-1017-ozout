@@ -24,68 +24,33 @@
             <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
     </head>
-    <body>
-    {% block body %}
 
-          {# !-- Footer -->
-            <footer>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <ul class="list-inline quicklinks">
-                                <li class="list-inline-item">
-                                    <a href="#">Privacy Policy</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#">Terms of Use</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="col-md-4">
-                            <ul class="list-inline social-buttons">
-                                <li class="list-inline-item">
-                                    <a href="#">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#">
-                                        <i class="fa fa-facebook"></i>
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#">
-                                        <i class="fa fa-linkedin"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <span class="copyright">Contact</span>
-                        </div>
-
-                    </div>
-                </div>
-            </footer>
-
-
-            #}
-
+    {% block nav %}
     {% endblock %}
-        {% block javascripts %}
+
+
+    {% block body %}
+    {% endblock %}
+
+
+    {% block footer %}
+    {% endblock %}
+
+
+    {% block javascripts %}
 
             <!-- Bootstrap core JavaScript -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 
             <!-- Plugin JavaScript -->
-            <!--<script src="vendor/jquery-easing/jquery.easing.min.js"></script>--
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js."></script>
 
 
             <!-- Custom scripts for this template -->
             <script src="../web/assets/js/agency.min.js"></script>
 
-        {% endblock %}
+    {% endblock %}
+
     </body>
 </html>

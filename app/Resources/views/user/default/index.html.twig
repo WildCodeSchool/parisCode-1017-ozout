@@ -1,40 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends 'user/default/layout.html.twig' %}
 
 {% block body %}
 
-
-
 <body id="page-top">
-
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-    <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">OzOut</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            Menu
-            <i class="fa fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav text-uppercase ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#portfolio">Créer un événement</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#services">A propos d'Ozout</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#about">Inscription</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#team">Connexion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 
 <!-- Header -->
 <header class="masthead">
@@ -54,7 +22,7 @@
             <div class="col-lg-12 text-center">
                 <h2 class="section-heading text-uppercase">Top 10 des événements en cours</h2>
                 <h3 class="section-subheading text-muted">Connectez-vous pour voir les événements proches de vous.</h3>
-                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="">Se connecter</a>
+                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header" href="">Se connecter</a>
             </div>
         </div>
         <div class="row">
@@ -65,7 +33,7 @@
                             <i class="fa fa-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img class="img-fluid" src="img/portfolio/01-thumbnail.jpg" alt="">
+                    <img class="img-fluid" src="../web/assets/img/portfolio/01-thumbnail.jpg" alt="">
                 </a>
                 <div class="portfolio-caption">
                     <h4>Threads</h4>
@@ -79,7 +47,7 @@
                             <i class="fa fa-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img class="img-fluid" src="img/portfolio/02-thumbnail.jpg" alt="">
+                    <img class="img-fluid" src="../web/assets/img/portfolio/02-thumbnail.jpg" alt="">
                 </a>
                 <div class="portfolio-caption">
                     <h4>Explore</h4>
@@ -93,7 +61,7 @@
                             <i class="fa fa-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img class="img-fluid" src="img/portfolio/03-thumbnail.jpg" alt="">
+                    <img class="img-fluid" src="../web/assets/img/portfolio/03-thumbnail.jpg" alt="">
                 </a>
                 <div class="portfolio-caption">
                     <h4>Finish</h4>
@@ -107,7 +75,7 @@
                             <i class="fa fa-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img class="img-fluid" src="img/portfolio/04-thumbnail.jpg" alt="">
+                    <img class="img-fluid" src="../web/assets/img/portfolio/04-thumbnail.jpg" alt="">
                 </a>
                 <div class="portfolio-caption">
                     <h4>Lines</h4>
@@ -121,7 +89,7 @@
                             <i class="fa fa-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img class="img-fluid" src="img/portfolio/05-thumbnail.jpg" alt="">
+                    <img class="img-fluid" src="../web/assets/img/portfolio/05-thumbnail.jpg" alt="">
                 </a>
                 <div class="portfolio-caption">
                     <h4>Southwest</h4>
@@ -135,7 +103,7 @@
                             <i class="fa fa-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img class="img-fluid" src="img/portfolio/06-thumbnail.jpg" alt="">
+                    <img class="img-fluid" src="../web/assets/img/portfolio/06-thumbnail.jpg" alt="">
                 </a>
                 <div class="portfolio-caption">
                     <h4>Window</h4>
@@ -184,88 +152,9 @@
     </div>
 </section>
 
-<!-- About -->
-<!--<section id="about">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <h2 class="section-heading text-uppercase">Avancement de votre événement</h2>
-        <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12">
-        <ul class="timeline">
-          <li>
-            <div class="timeline-image">
-              <img class="rounded-circle img-fluid" src="img/about/1.jpg" alt="">
-            </div>
-            <div class="timeline-panel">
-              <div class="timeline-heading">
-                <h4>2009-2011</h4>
-                <h4 class="subheading">Our Humble Beginnings</h4>
-              </div>
-              <div class="timeline-body">
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-              </div>
-            </div>
-          </li>
-          <li class="timeline-inverted">
-            <div class="timeline-image">
-              <img class="rounded-circle img-fluid" src="img/about/2.jpg" alt="">
-            </div>
-            <div class="timeline-panel">
-              <div class="timeline-heading">
-                <h4>March 2011</h4>
-                <h4 class="subheading">An Agency is Born</h4>
-              </div>
-              <div class="timeline-body">
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="timeline-image">
-              <img class="rounded-circle img-fluid" src="img/about/3.jpg" alt="">
-            </div>
-            <div class="timeline-panel">
-              <div class="timeline-heading">
-                <h4>December 2012</h4>
-                <h4 class="subheading">Transition to Full Service</h4>
-              </div>
-              <div class="timeline-body">
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-              </div>
-            </div>
-          </li>
-          <li class="timeline-inverted">
-            <div class="timeline-image">
-              <img class="rounded-circle img-fluid" src="img/about/4.jpg" alt="">
-            </div>
-            <div class="timeline-panel">
-              <div class="timeline-heading">
-                <h4>July 2014</h4>
-                <h4 class="subheading">Phase Two Expansion</h4>
-              </div>
-              <div class="timeline-body">
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-              </div>
-            </div>
-          </li>
-          <li class="timeline-inverted">
-            <div class="timeline-image">
-              <h4>Be Part
-                <br>Of Our
-                <br>Story!</h4>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>-->
 
-<!-- Team -->
+
+<!-- Avis -->
 <section class="bg-light" id="team">
     <div class="container">
         <div class="row">
@@ -355,34 +244,6 @@
         </div>
     </div>
 </section>
-
-<!-- Clients -->
-<!--<section class="py-5">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3 col-sm-6">
-        <a href="#">
-          <img class="img-fluid d-block mx-auto" src="img/logos/envato.jpg" alt="">
-        </a>
-      </div>
-      <div class="col-md-3 col-sm-6">
-        <a href="#">
-          <img class="img-fluid d-block mx-auto" src="img/logos/designmodo.jpg" alt="">
-        </a>
-      </div>
-      <div class="col-md-3 col-sm-6">
-        <a href="#">
-          <img class="img-fluid d-block mx-auto" src="img/logos/themeforest.jpg" alt="">
-        </a>
-      </div>
-      <div class="col-md-3 col-sm-6">
-        <a href="#">
-          <img class="img-fluid d-block mx-auto" src="img/logos/creative-market.jpg" alt="">
-        </a>
-      </div>
-    </div>
-  </div>
-</section>-->
 
 <!-- Contact -->
 <section id="contact">

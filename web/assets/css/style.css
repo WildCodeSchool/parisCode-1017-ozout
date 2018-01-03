@@ -4,3 +4,7 @@ header.masthead .intro-text {
         padding-bottom: 200px;
 }
 
+
+.btn-header {
+        margin-bottom: 20px !important;
+}

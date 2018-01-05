@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Event</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ event.id }}</td>
+            </tr>
+            <tr>
+                <th>Nameevent</th>
+                <td>{{ event.nameEvent }}</td>
+            </tr>
+            <tr>
+                <th>Adress</th>
+                <td>{{ event.adress }}</td>
+            </tr>
+            <tr>
+                <th>Latitude</th>
+                <td>{{ event.latitude }}</td>
+            </tr>
+            <tr>
+                <th>Longitude</th>
+                <td>{{ event.longitude }}</td>
+            </tr>
+            <tr>
+                <th>Datetime</th>
+                <td>{% if event.dateTime %}{{ event.dateTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Targetmoney</th>
+                <td>{{ event.targetMoney }}</td>
+            </tr>
+            <tr>
+                <th>Deadline</th>
+                <td>{% if event.deadline %}{{ event.deadline|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Isprivate</th>
+                <td>{% if event.isPrivate %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('event_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('event_edit', { 'id': event.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,9 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'user/default/layout.html.twig' %}
 
 {% block body %}
-    <h1>Event</h1>
+<div class="container formShowEvent">
 
-    <table>
+    <h1 align="center">Event</h1>
+
+    <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -43,18 +45,18 @@
             </tr>
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('event_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('event_edit', { 'id': event.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        <div class="row">
+            <div class="col-md-1">
+                <a class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header" href="{{ path('event_edit', { 'id': event.id }) }}">Edit</a>
+            </div>
+            <div class="col-md-1">
+                {{ form_start(delete_form) }}
+                    <input type="submit" value="Delete" class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header">
+                {{ form_end(delete_form) }}
+            </div>
+        </div>
+    <div align="center">
+    <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header" href="{{ path('event_index') }}">Back to the list</a>
+    </div>
+</div>
 {% endblock %}

@@ -6,34 +6,21 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EventType extends AbstractType
+class ReviewType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('nameEvent')
-            ->add('adress')
-            ->add('city')
-            ->add('zipcode')
-            ->add('latitude')
-            ->add('longitude')
-            ->add('dateTime')
-            ->add('targetMoney')
-            ->add('deadline')
-            ->add('isPrivate')
-            ->add('maxPeople')
-            ->add('onGoingMoney')
-        ;
+        $builder->add('comment')->add('score');
     }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Event'
+            'data_class' => 'AppBundle\Entity\Review'
         ));
     }
 
@@ -42,7 +29,7 @@ class EventType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_event';
+        return 'appbundle_review';
     }
 
 

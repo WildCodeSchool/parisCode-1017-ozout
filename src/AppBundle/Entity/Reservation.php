@@ -10,8 +10,18 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="reservation")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ReservationRepository")
  */
+
 class Reservation
 {
+    // CODE RELATION ///////////////////////////////////////////////////////
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Event", inversedBy="reservations"))
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $event;
+
+////////////////////////////////////////////////////////////////////////////
+
     /**
      * @var int
      *
@@ -43,8 +53,9 @@ class Reservation
     private $doParticipate;
 
 
+
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -54,7 +65,7 @@ class Reservation
     }
 
     /**
-     * Set date
+     * Set date.
      *
      * @param \DateTime $date
      *
@@ -68,7 +79,7 @@ class Reservation
     }
 
     /**
-     * Get date
+     * Get date.
      *
      * @return \DateTime
      */
@@ -78,9 +89,9 @@ class Reservation
     }
 
     /**
-     * Set moneyGiven
+     * Set moneyGiven.
      *
-     * @param integer $moneyGiven
+     * @param int $moneyGiven
      *
      * @return Reservation
      */
@@ -92,7 +103,7 @@ class Reservation
     }
 
     /**
-     * Get moneyGiven
+     * Get moneyGiven.
      *
      * @return int
      */
@@ -102,9 +113,9 @@ class Reservation
     }
 
     /**
-     * Set doParticipate
+     * Set doParticipate.
      *
-     * @param boolean $doParticipate
+     * @param bool $doParticipate
      *
      * @return Reservation
      */
@@ -116,7 +127,7 @@ class Reservation
     }
 
     /**
-     * Get doParticipate
+     * Get doParticipate.
      *
      * @return bool
      */
@@ -124,5 +135,28 @@ class Reservation
     {
         return $this->doParticipate;
     }
-}
 
+    /**
+     * Set event.
+     *
+     * @param \AppBundle\Entity\Event $event
+     *
+     * @return Reservation
+     */
+    public function setEvent(\AppBundle\Entity\Event $event)
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+
+    /**
+     * Get event.
+     *
+     * @return \AppBundle\Entity\Event
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+}

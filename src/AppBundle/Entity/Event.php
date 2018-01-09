@@ -12,6 +12,20 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Event
 {
+    // CODE RELATION /////////////////////////////////////////////////
+    public function __toString()
+    {
+        // Return the name of event in reservation table.
+        return $this->nameEvent;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="event")
+     */
+    private $reservations;
+
+    ///////////////////////////////////////////////////////////////////
+
     /**
      * @var int
      *
@@ -406,5 +420,52 @@ class Event
     public function getOnGoingMoney()
     {
         return $this->onGoingMoney;
+    }
+
+    /////////////////////////////////////////////////////////////////
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add reservation.
+     *
+     * @param \AppBundle\Entity\Reservation $reservation
+     *
+     * @return Event
+     */
+    public function addReservation(\AppBundle\Entity\Reservation $reservation)
+    {
+        $this->reservations[] = $reservation;
+
+        return $this;
+    }
+
+    /**
+     * Remove reservation.
+     *
+     * @param \AppBundle\Entity\Reservation $reservation
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeReservation(\AppBundle\Entity\Reservation $reservation)
+    {
+        return $this->reservations->removeElement($reservation);
+    }
+
+    /**
+     * Get reservations.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReservations()
+    {
+        return $this->reservations;
     }
 }

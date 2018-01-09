@@ -125,3 +125,4 @@ class Picture
         return $this->altPicture;
     }
 }
+

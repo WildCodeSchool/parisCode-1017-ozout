@@ -12,6 +12,16 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Review
 {
+
+    // CODE RELATION ///////////////////////////////////////////////////////
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Event", inversedBy="reviews"))
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $event;
+
+////////////////////////////////////////////////////////////////////////////
+
     /**
      * @var int
      *
@@ -92,5 +102,29 @@ class Review
     public function getScore()
     {
         return $this->score;
+    }
+
+    /**
+     * Set event.
+     *
+     * @param \AppBundle\Entity\Event $event
+     *
+     * @return Review
+     */
+    public function setEvent(\AppBundle\Entity\Event $event)
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+
+    /**
+     * Get event.
+     *
+     * @return \AppBundle\Entity\Event
+     */
+    public function getEvent()
+    {
+        return $this->event;
     }
 }

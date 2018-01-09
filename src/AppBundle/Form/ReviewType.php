@@ -2,9 +2,11 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Event;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ReviewType extends AbstractType
 {
@@ -13,8 +15,18 @@ class ReviewType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('comment')->add('score');
-    }/**
+        $builder
+            ->add('comment')
+            ->add('score')
+            ->add('event', EntityType::class, array(
+                'class' => Event::class,
+                'choice_label' => 'nameEvent',
+                'label' => 'Choix de l\'event'
+            ));
+
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

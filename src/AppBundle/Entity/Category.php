@@ -12,6 +12,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Category
 {
+    ///// CODE RELATIONS ////////////////////////////
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Event", mappedBy="category")
+     */
+    private $events;
+
+    /////////////////////////////////////////////
+
     /**
      * @var int
      *
@@ -28,9 +37,18 @@ class Category
      */
     private $nameCategory;
 
+    ///////////////////////////////////////////
 
     /**
-     * Get id
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id.
      *
      * @return int
      */
@@ -40,11 +58,11 @@ class Category
     }
 
     /**
-     * Set nameCategory
+     * Set nameCategory.
      *
      * @param string $nameCategory
      *
-     * @return category
+     * @return Category
      */
     public function setNameCategory($nameCategory)
     {
@@ -54,12 +72,48 @@ class Category
     }
 
     /**
-     * Get nameCategory
+     * Get nameCategory.
      *
      * @return string
      */
     public function getNameCategory()
     {
         return $this->nameCategory;
+    }
+
+    /**
+     * Add event.
+     *
+     * @param \AppBundle\Entity\Event $event
+     *
+     * @return Category
+     */
+    public function addEvent(\AppBundle\Entity\Event $event)
+    {
+        $this->events[] = $event;
+
+        return $this;
+    }
+
+    /**
+     * Remove event.
+     *
+     * @param \AppBundle\Entity\Event $event
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeEvent(\AppBundle\Entity\Event $event)
+    {
+        return $this->events->removeElement($event);
+    }
+
+    /**
+     * Get events.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 }

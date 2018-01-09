@@ -53,4 +53,110 @@ class Reservation
     private $doParticipate;
 
 
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set date.
+     *
+     * @param \DateTime $date
+     *
+     * @return Reservation
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date.
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set moneyGiven.
+     *
+     * @param int $moneyGiven
+     *
+     * @return Reservation
+     */
+    public function setMoneyGiven($moneyGiven)
+    {
+        $this->moneyGiven = $moneyGiven;
+
+        return $this;
+    }
+
+    /**
+     * Get moneyGiven.
+     *
+     * @return int
+     */
+    public function getMoneyGiven()
+    {
+        return $this->moneyGiven;
+    }
+
+    /**
+     * Set doParticipate.
+     *
+     * @param bool $doParticipate
+     *
+     * @return Reservation
+     */
+    public function setDoParticipate($doParticipate)
+    {
+        $this->doParticipate = $doParticipate;
+
+        return $this;
+    }
+
+    /**
+     * Get doParticipate.
+     *
+     * @return bool
+     */
+    public function getDoParticipate()
+    {
+        return $this->doParticipate;
+    }
+
+    /**
+     * Set event.
+     *
+     * @param \AppBundle\Entity\Event $event
+     *
+     * @return Reservation
+     */
+    public function setEvent(\AppBundle\Entity\Event $event)
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+
+    /**
+     * Get event.
+     *
+     * @return \AppBundle\Entity\Event
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
 }

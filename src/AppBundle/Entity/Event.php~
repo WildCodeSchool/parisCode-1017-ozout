@@ -24,6 +24,26 @@ class Event
      */
     private $reservations;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", mappedBy="event")
+     */
+    private $reviews;
+
+    /**
+     * @var \AppBundle\Entity\Picture $picture
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Picture", cascade={"all"})
+     * @ORM\JoinColumn(nullable=true)
+     *
+     */
+    private $picture;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="events"))
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
     ///////////////////////////////////////////////////////////////////
 
     /**
@@ -122,7 +142,19 @@ class Event
 
     /** Generate code */
 
+    ////////////////////////////////////////////////////////////////
 
+
+
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id.
@@ -422,17 +454,6 @@ class Event
         return $this->onGoingMoney;
     }
 
-    /////////////////////////////////////////////////////////////////
-
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
     /**
      * Add reservation.
      *
@@ -467,5 +488,53 @@ class Event
     public function getReservations()
     {
         return $this->reservations;
+    }
+
+    /**
+     * Set picture.
+     *
+     * @param \AppBundle\Entity\Picture|null $picture
+     *
+     * @return Event
+     */
+    public function setPicture(\AppBundle\Entity\Picture $picture = null)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture.
+     *
+     * @return \AppBundle\Entity\Picture|null
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * Set category.
+     *
+     * @param \AppBundle\Entity\Category $category
+     *
+     * @return Event
+     */
+    public function setCategory(\AppBundle\Entity\Category $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category.
+     *
+     * @return \AppBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

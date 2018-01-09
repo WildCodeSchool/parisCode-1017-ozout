@@ -2,9 +2,18 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Picture;
+use AppBundle\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
+
 
 class EventType extends AbstractType
 {
@@ -13,8 +22,30 @@ class EventType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nameEvent')->add('adress')->add('latitude')->add('longitude')->add('dateTime')->add('targetMoney')->add('deadline')->add('isPrivate');
-    }/**
+        $builder
+            ->add('nameEvent')
+            ->add('adress')
+            ->add('city')
+            ->add('zipcode')
+            ->add('latitude')
+            ->add('longitude')
+            ->add('dateTime')
+            ->add('targetMoney')
+            ->add('deadline')
+            ->add('isPrivate')
+            ->add('maxPeople')
+            ->add('onGoingMoney')
+            ->add('picture', PictureType::class, array(
+            ))
+            ->add('category', EntityType::class, array(
+                'class' => Category::class,
+                'choice_label' => 'nameCategory',
+                'label' => 'Catégorie de l\'event'
+            ))
+        ;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

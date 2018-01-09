@@ -12,6 +12,40 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Event
 {
+    // CODE RELATION /////////////////////////////////////////////////
+    public function __toString()
+    {
+        // Return the name of event in reservation table.
+        return $this->nameEvent;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="event")
+     */
+    private $reservations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", mappedBy="event")
+     */
+    private $reviews;
+
+    /**
+     * @var \AppBundle\Entity\Picture $picture
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Picture", cascade={"all"})
+     * @ORM\JoinColumn(nullable=true)
+     *
+     */
+    private $picture;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="events"))
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
+    ///////////////////////////////////////////////////////////////////
+
     /**
      * @var int
      *
@@ -108,7 +142,19 @@ class Event
 
     /** Generate code */
 
+    ////////////////////////////////////////////////////////////////
 
+
+
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id.
@@ -406,5 +452,125 @@ class Event
     public function getOnGoingMoney()
     {
         return $this->onGoingMoney;
+    }
+
+    /**
+     * Add reservation.
+     *
+     * @param \AppBundle\Entity\Reservation $reservation
+     *
+     * @return Event
+     */
+    public function addReservation(\AppBundle\Entity\Reservation $reservation)
+    {
+        $this->reservations[] = $reservation;
+
+        return $this;
+    }
+
+    /**
+     * Remove reservation.
+     *
+     * @param \AppBundle\Entity\Reservation $reservation
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeReservation(\AppBundle\Entity\Reservation $reservation)
+    {
+        return $this->reservations->removeElement($reservation);
+    }
+
+    /**
+     * Get reservations.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReservations()
+    {
+        return $this->reservations;
+    }
+
+    /**
+     * Set picture.
+     *
+     * @param \AppBundle\Entity\Picture|null $picture
+     *
+     * @return Event
+     */
+    public function setPicture(\AppBundle\Entity\Picture $picture = null)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture.
+     *
+     * @return \AppBundle\Entity\Picture|null
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * Set category.
+     *
+     * @param \AppBundle\Entity\Category $category
+     *
+     * @return Event
+     */
+    public function setCategory(\AppBundle\Entity\Category $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category.
+     *
+     * @return \AppBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Add review.
+     *
+     * @param \AppBundle\Entity\Review $review
+     *
+     * @return Event
+     */
+    public function addReview(\AppBundle\Entity\Review $review)
+    {
+        $this->reviews[] = $review;
+
+        return $this;
+    }
+
+    /**
+     * Remove review.
+     *
+     * @param \AppBundle\Entity\Review $review
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeReview(\AppBundle\Entity\Review $review)
+    {
+        return $this->reviews->removeElement($review);
+    }
+
+    /**
+     * Get reviews.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
     }
 }

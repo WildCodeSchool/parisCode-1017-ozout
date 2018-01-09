@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\category;
+use AppBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  *
  * @Route("category")
  */
-class categoryController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Lists all category entities.
@@ -24,7 +24,7 @@ class categoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $categories = $em->getRepository('AppBundle:category')->findAll();
+        $categories = $em->getRepository('AppBundle:Category')->findAll();
 
         return $this->render('category/index.html.twig', array(
             'categories' => $categories,
@@ -40,7 +40,7 @@ class categoryController extends Controller
     public function newAction(Request $request)
     {
         $category = new Category();
-        $form = $this->createForm('AppBundle\Form\categoryType', $category);
+        $form = $this->createForm('AppBundle\Form\CategoryType', $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -58,12 +58,12 @@ class categoryController extends Controller
     }
 
     /**
-     * Finds and displays a category entity.
+     * Finds and displays a Category entity.
      *
      * @Route("/{id}", name="category_show")
      * @Method("GET")
      */
-    public function showAction(category $category)
+    public function showAction(Category $category)
     {
         $deleteForm = $this->createDeleteForm($category);
 
@@ -74,15 +74,15 @@ class categoryController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing category entity.
+     * Displays a form to edit an existing Category entity.
      *
      * @Route("/{id}/edit", name="category_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, category $category)
+    public function editAction(Request $request, Category $category)
     {
         $deleteForm = $this->createDeleteForm($category);
-        $editForm = $this->createForm('AppBundle\Form\categoryType', $category);
+        $editForm = $this->createForm('AppBundle\Form\CategoryType', $category);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -99,12 +99,12 @@ class categoryController extends Controller
     }
 
     /**
-     * Deletes a category entity.
+     * Deletes a Category entity.
      *
      * @Route("/{id}", name="category_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, category $category)
+    public function deleteAction(Request $request, Category $category)
     {
         $form = $this->createDeleteForm($category);
         $form->handleRequest($request);
@@ -119,13 +119,13 @@ class categoryController extends Controller
     }
 
     /**
-     * Creates a form to delete a category entity.
+     * Creates a form to delete a Category entity.
      *
-     * @param category $category The category entity
+     * @param Category $category The category entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(category $category)
+    private function createDeleteForm(Category $category)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('category_delete', array('id' => $category->getId())))

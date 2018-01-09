@@ -24,16 +24,30 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="nameEvent", type="string", length=45)
+     * @ORM\Column(name="nameEvent", type="string", length=255)
      */
     private $nameEvent;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="adress", type="string", length=45)
+     * @ORM\Column(name="adress", type="string", length=255)
      */
     private $adress;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=255)
+     */
+    private $city;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="zipcode", type="integer", length=5)
+     */
+    private $zipcode;
 
     /**
      * @var float
@@ -77,9 +91,27 @@ class Event
      */
     private $isPrivate;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="maxPeople", type="integer")
+     */
+    private $maxPeople;
 
     /**
-     * Get id
+     * @var int
+     *
+     * @ORM\Column(name="onGoingMoney", type="integer")
+     */
+    private $onGoingMoney;
+
+
+    /** Generate code */
+
+
+
+    /**
+     * Get id.
      *
      * @return int
      */
@@ -89,7 +121,7 @@ class Event
     }
 
     /**
-     * Set nameEvent
+     * Set nameEvent.
      *
      * @param string $nameEvent
      *
@@ -103,7 +135,7 @@ class Event
     }
 
     /**
-     * Get nameEvent
+     * Get nameEvent.
      *
      * @return string
      */
@@ -113,7 +145,7 @@ class Event
     }
 
     /**
-     * Set adress
+     * Set adress.
      *
      * @param string $adress
      *
@@ -127,7 +159,7 @@ class Event
     }
 
     /**
-     * Get adress
+     * Get adress.
      *
      * @return string
      */
@@ -137,7 +169,55 @@ class Event
     }
 
     /**
-     * Set latitude
+     * Set city.
+     *
+     * @param string $city
+     *
+     * @return Event
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city.
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set zipcode.
+     *
+     * @param int $zipcode
+     *
+     * @return Event
+     */
+    public function setZipcode($zipcode)
+    {
+        $this->zipcode = $zipcode;
+
+        return $this;
+    }
+
+    /**
+     * Get zipcode.
+     *
+     * @return int
+     */
+    public function getZipcode()
+    {
+        return $this->zipcode;
+    }
+
+    /**
+     * Set latitude.
      *
      * @param float $latitude
      *
@@ -151,7 +231,7 @@ class Event
     }
 
     /**
-     * Get latitude
+     * Get latitude.
      *
      * @return float
      */
@@ -161,7 +241,7 @@ class Event
     }
 
     /**
-     * Set longitude
+     * Set longitude.
      *
      * @param float $longitude
      *
@@ -175,7 +255,7 @@ class Event
     }
 
     /**
-     * Get longitude
+     * Get longitude.
      *
      * @return float
      */
@@ -185,7 +265,7 @@ class Event
     }
 
     /**
-     * Set dateTime
+     * Set dateTime.
      *
      * @param \DateTime $dateTime
      *
@@ -199,7 +279,7 @@ class Event
     }
 
     /**
-     * Get dateTime
+     * Get dateTime.
      *
      * @return \DateTime
      */
@@ -209,9 +289,9 @@ class Event
     }
 
     /**
-     * Set targetMoney
+     * Set targetMoney.
      *
-     * @param integer $targetMoney
+     * @param int $targetMoney
      *
      * @return Event
      */
@@ -223,7 +303,7 @@ class Event
     }
 
     /**
-     * Get targetMoney
+     * Get targetMoney.
      *
      * @return int
      */
@@ -233,7 +313,7 @@ class Event
     }
 
     /**
-     * Set deadline
+     * Set deadline.
      *
      * @param \DateTime $deadline
      *
@@ -247,7 +327,7 @@ class Event
     }
 
     /**
-     * Get deadline
+     * Get deadline.
      *
      * @return \DateTime
      */
@@ -257,9 +337,9 @@ class Event
     }
 
     /**
-     * Set isPrivate
+     * Set isPrivate.
      *
-     * @param boolean $isPrivate
+     * @param bool $isPrivate
      *
      * @return Event
      */
@@ -271,7 +351,7 @@ class Event
     }
 
     /**
-     * Get isPrivate
+     * Get isPrivate.
      *
      * @return bool
      */
@@ -279,5 +359,52 @@ class Event
     {
         return $this->isPrivate;
     }
-}
 
+    /**
+     * Set maxPeople.
+     *
+     * @param int $maxPeople
+     *
+     * @return Event
+     */
+    public function setMaxPeople($maxPeople)
+    {
+        $this->maxPeople = $maxPeople;
+
+        return $this;
+    }
+
+    /**
+     * Get maxPeople.
+     *
+     * @return int
+     */
+    public function getMaxPeople()
+    {
+        return $this->maxPeople;
+    }
+
+    /**
+     * Set onGoingMoney.
+     *
+     * @param int $onGoingMoney
+     *
+     * @return Event
+     */
+    public function setOnGoingMoney($onGoingMoney)
+    {
+        $this->onGoingMoney = $onGoingMoney;
+
+        return $this;
+    }
+
+    /**
+     * Get onGoingMoney.
+     *
+     * @return int
+     */
+    public function getOnGoingMoney()
+    {
+        return $this->onGoingMoney;
+    }
+}

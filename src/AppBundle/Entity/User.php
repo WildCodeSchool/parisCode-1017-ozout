@@ -42,6 +42,13 @@ class User
      */
     private $dateOfBirth;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="role", type="string", length=45)
+     */
+    private $role;
+
 
     /**
      * Get id
@@ -124,5 +131,23 @@ class User
     {
         return $this->dateOfBirth;
     }
+
+    /**
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param string $role
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+    }
+
+
 }
 

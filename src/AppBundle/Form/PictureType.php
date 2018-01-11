@@ -13,7 +13,12 @@ class PictureType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('namePicture')->add('description')->add('altPicture');
+        $builder
+            ->add('namePicture')
+            ->add('description')
+            ->add('altPicture')
+
+        ;
     }/**
      * {@inheritdoc}
      */

@@ -4,6 +4,8 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\Event;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -16,14 +18,17 @@ class ReviewType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('comment')
-            ->add('score')
+            ->add('score', HiddenType::class, array(
+                'label' => 'Sur une échelle de 1 à 5...'
+            ))
+            ->add('comment', TextareaType::class, array(
+                'label' => 'Dîtes-nous en plus'
+            ))
             ->add('event', EntityType::class, array(
                 'class' => Event::class,
                 'choice_label' => 'nameEvent',
-                'label' => 'Choix de l\'event'
+                'label' => 'A quel événement correspond votre avis ?'
             ));
-
     }
 
     /**

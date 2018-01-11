@@ -1,5 +1,7 @@
+/*Permet de voir les étoiles*/
 @charset "UTF-8";
 
+/*main*/
 body h1 {
     text-align: center;
     color: black;
@@ -22,7 +24,12 @@ body section {
     padding-top: 5px;
     padding-bottom: 15px;
 }
-
+footer {
+    position: absolute;
+    bottom:0;
+    width:100%;
+}
+/*section rating-score*/
 .rating {
     /*margin: auto;*/
     width: 145px;
@@ -45,10 +52,11 @@ body section {
     position: absolute;
     color: #fed300;
 }
-
 .btn-header {
     margin-top: 20px;
 }
 #rating {
     display: none;
 }
+
+/*end rating-score*/

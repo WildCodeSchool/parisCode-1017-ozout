@@ -2,20 +2,29 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use AppBundle\Entity\Event;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+
 
 class DefaultController extends Controller
 {
     /**
+     * List all event entities
+     *
      * @Route("/", name="homepage")
+     * @Method("GET")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
+        $em = $this->getDoctrine()->getManager();
+        $events = $em->getRepository('AppBundle:Event')->findAll();
+
         // replace this example code with whatever you need
         return $this->render('user/default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+            'events' =>$events,
         ]);
     }
 }

@@ -10,7 +10,6 @@
                 <th>Namepicture</th>
                 <th>Description</th>
                 <th>Altpicture</th>
-                <th>Images</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -21,10 +20,8 @@
                 <td>{{ picture.namePicture }}</td>
                 <td>{{ picture.description }}</td>
                 <td>{{ picture.altPicture }}</td>
-                <td>{{ picture.pictureUpload }}</td>
                 <td>
                     <ul>
-
                         <li>
                             <a href="{{ path('picture_show', { 'id': picture.id }) }}">show</a>
                         </li>

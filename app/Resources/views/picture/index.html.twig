@@ -15,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for picture in pictures %}
+        {% for picture in picture %}
             <tr>
                 <td><a href="{{ path('picture_show', { 'id': picture.id }) }}">{{ picture.id }}</a></td>
                 <td>{{ picture.namePicture }}</td>
@@ -24,7 +24,8 @@
                 <td>{{ picture.pictureUpload }}</td>
                 <td>
                     <ul>
-                        <li>
+
+                        session:                     <li>
                             <a href="{{ path('picture_show', { 'id': picture.id }) }}">show</a>
                         </li>
                         <li>

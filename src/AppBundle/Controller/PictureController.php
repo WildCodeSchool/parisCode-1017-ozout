@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Picture;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Service\FileUploader;
 
 /**
  * Picture controller.
@@ -27,7 +29,7 @@ class PictureController extends Controller
         $pictures = $em->getRepository('AppBundle:Picture')->findAll();
 
         return $this->render('picture/index.html.twig', array(
-            'pictures' => $pictures,
+            'picture' => $pictures,
         ));
     }
 
@@ -37,14 +39,23 @@ class PictureController extends Controller
      * @Route("/new", name="picture_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, FileUploader $fileUploader)
     {
         $picture = new Picture();
         $form = $this->createForm('AppBundle\Form\PictureType', $picture);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
             $em = $this->getDoctrine()->getManager();
+
+            //$file = $picture->getPictureUpload();
+            //$fileName = $fileUploader->upload($file);
+
+            //$picture->setPictureUpload($fileName);
+
+
             $em->persist($picture);
             $em->flush();
 

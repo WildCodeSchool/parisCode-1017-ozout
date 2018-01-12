@@ -46,7 +46,7 @@ class Picture
     /**
      * @ORM\Column(type="string")
      *
-     * @Assert\NotBlank(message="Merci d'uploader une image.")
+     * @Assert\NotBlank(message= "Merci d'uploader une image.")
      * @Assert\File(mimeTypes={ "image/jpeg" })
      */
     private $pictureUpload;

@@ -24,8 +24,13 @@
             <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
             <link href="{{ asset('assets/css/createEvent.css') }}" rel="stylesheet">
 
+            <!-- Custom styles for this Calender in showEvents page -->
+            <link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css') }}" />
+
+
         {% block stylesheets %}
         {% endblock %}
+
     </head>
 
     {% block nav %}
@@ -50,7 +55,20 @@
     <!-- Custom scripts for this template -->
     <script src="{{ asset('assets/js/agency.min.js') }}"></script>
 
+
+            <!-- Custom scripts for this template -->
+            <script src="../web/assets/js/agency.min.js"></script>
+
+
+            <!-- Custom scripts for Calender in showevents Page -->
+            <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/jquery.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/moment.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.default-settings.js') }}"></script>
+
+
     {% block javascripts %}
+
     {% endblock %}
 
     </body>

@@ -49,7 +49,7 @@ DirectoryIndex app.php
     RewriteRule ^app\.php(?:/(.*)|$) %{ENV:BASE}/$1 [R=301,L]
 
     # If the requested filename exists, simply serve it.
-    # We only want to let Apache serve files and not directories.
+    # We only want to let Apache serve pictures and not directories.
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule ^ - [L]
 

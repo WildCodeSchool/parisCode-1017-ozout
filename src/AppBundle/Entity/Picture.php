@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Picture
@@ -42,9 +43,17 @@ class Picture
      */
     private $altPicture;
 
+    /**
+     *
+     * @var string $pictureUpload
+     * @Assert\NotBlank(message= "Merci d'uploader une image.")
+     * @Assert\File(mimeTypes={ "image/jpeg" })
+     */
+    private $pictureUpload;
+
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -54,7 +63,7 @@ class Picture
     }
 
     /**
-     * Set namePicture
+     * Set namePicture.
      *
      * @param string $namePicture
      *
@@ -68,7 +77,7 @@ class Picture
     }
 
     /**
-     * Get namePicture
+     * Get namePicture.
      *
      * @return string
      */
@@ -78,7 +87,7 @@ class Picture
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
      *
@@ -92,7 +101,7 @@ class Picture
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -102,7 +111,7 @@ class Picture
     }
 
     /**
-     * Set altPicture
+     * Set altPicture.
      *
      * @param string $altPicture
      *
@@ -116,12 +125,36 @@ class Picture
     }
 
     /**
-     * Get altPicture
+     * Get altPicture.
      *
      * @return string
      */
     public function getAltPicture()
     {
         return $this->altPicture;
+    }
+
+    /**
+     * Set pictureUpload.
+     *
+     * @param string $pictureUpload
+     *
+     * @return Picture
+     */
+    public function setPictureUpload($pictureUpload)
+    {
+        $this->pictureUpload = $pictureUpload;
+
+        return $this;
+    }
+
+    /**
+     * Get pictureUpload.
+     *
+     * @return string
+     */
+    public function getPictureUpload()
+    {
+        return $this->pictureUpload;
     }
 }

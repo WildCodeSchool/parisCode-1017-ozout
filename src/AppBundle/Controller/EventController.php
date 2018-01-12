@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Event;
+use AppBundle\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -37,7 +38,7 @@ class EventController extends Controller
      * @Route("/new", name="event_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, FileUploader $fileUploader)
     {
         $event = new Event();
         $form = $this->createForm('AppBundle\Form\EventType', $event);
@@ -45,6 +46,12 @@ class EventController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $file = $event->getPicture()->getPictureUpload();
+            $fileName = $fileUploader->upload($file);
+
+            $event->getPicture()->setNamePicture($fileName);
+
             $em->persist($event);
             $em->flush();
 

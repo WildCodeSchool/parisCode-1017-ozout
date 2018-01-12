@@ -20,11 +20,16 @@ class Event
     }
 
     /**
+     *
+     * @var \AppBundle\Entity\Reservation $reservations
+     *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="event")
      */
     private $reservations;
 
     /**
+     * @var \AppBundle\Entity\Review $reviews
+     *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", mappedBy="event")
      */
     private $reviews;
@@ -39,6 +44,8 @@ class Event
     private $picture;
 
     /**
+     * @var \AppBundle\Entity\Category $category
+     *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="events"))
      * @ORM\JoinColumn(nullable=false)
      */

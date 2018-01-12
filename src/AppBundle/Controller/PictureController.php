@@ -48,12 +48,7 @@ class PictureController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
 
-            $em = $this->getDoctrine()->getManager();
 
-            //$file = $picture->getPictureUpload();
-            //$fileName = $fileUploader->upload($file);
-
-            //$picture->setPictureUpload($fileName);
 
 
             $em->persist($picture);

@@ -44,8 +44,8 @@ class Picture
     private $altPicture;
 
     /**
-     * @ORM\Column(type="string")
      *
+     * @var string $pictureUpload
      * @Assert\NotBlank(message= "Merci d'uploader une image.")
      * @Assert\File(mimeTypes={ "image/jpeg" })
      */

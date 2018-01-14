@@ -34,7 +34,7 @@
                                     <i class="fa fa-plus fa-3x"></i>
                                 </div>
                             </div>
-                            <img class="img-fluid" src="uploads/pictures{{event.picture.namePicture }}" alt="{{ event.nameEvent }}">
+                            <img class="img-fluid" src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="{{ event.nameEvent }}">
                         </a>
                         <div class="portfolio-caption">
                             <h4>{{ event.nameEvent }}</h4>

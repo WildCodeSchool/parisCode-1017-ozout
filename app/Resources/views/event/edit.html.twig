@@ -1,0 +1,23 @@
+{% extends 'user/default/layout.html.twig' %}
+
+{% block body %}
+
+<div class="container formEditEvent">
+    <h1 align="center">Event edit</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Edit" class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header"/>
+    {{ form_end(edit_form) }}
+
+    {{ form_start(delete_form) }}
+        <input type="submit" value="Delete" class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header">
+    {{ form_end(delete_form) }}
+        </div>
+
+    <div align="center">
+        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header" href="{{ path('event_index') }}">Back to the list</a>
+    </div>
+
+</div>
+{% endblock %}

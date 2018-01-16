@@ -17,3 +17,5 @@
 /web/bundles/
 .idea
 .DS_STORE
+uploads/
+composer.lock

@@ -45,6 +45,10 @@
                 <th>Isprivate</th>
                 <td>{% if event.isPrivate %}Yes{% else %}No{% endif %}</td>
             </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt=""> </td>
+            </tr>
         </tbody>
     </table>
         <div class="row">

@@ -103,4 +103,28 @@ class Review
     {
         return $this->score;
     }
+
+    /**
+     * Set event.
+     *
+     * @param \AppBundle\Entity\Event $event
+     *
+     * @return Review
+     */
+    public function setEvent(\AppBundle\Entity\Event $event)
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+
+    /**
+     * Get event.
+     *
+     * @return \AppBundle\Entity\Event
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
 }

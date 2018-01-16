@@ -14,6 +14,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Picture
 {
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        // Return the name of category in event table.
+        return $this->namePicture;
+    }
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -25,21 +34,21 @@ class Picture
     /**
      * @var string
      *
-     * @ORM\Column(name="namePicture", type="string", length=45)
+     * @ORM\Column(name="namePicture", type="string", length=45, nullable=true)
      */
     private $namePicture;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="altPicture", type="string", length=100)
+     * @ORM\Column(name="altPicture", type="string", length=100, nullable=true)
      */
     private $altPicture;
 

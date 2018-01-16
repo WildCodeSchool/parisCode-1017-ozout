@@ -12,7 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Event
 {
-    // CODE RELATION /////////////////////////////////////////////////
+    /**
+     * @return string
+     */
     public function __toString()
     {
         // Return the name of event in reservation table.
@@ -20,11 +22,26 @@ class Event
     }
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->dateTime= new \DateTime();
+        $this->deadline= new \DateTime();
+    }
+
+    /**
+     *
+     * @var \AppBundle\Entity\Reservation $reservations
+     *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="event")
      */
     private $reservations;
 
     /**
+     * @var \AppBundle\Entity\Review $reviews
+     *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", mappedBy="event")
      */
     private $reviews;
@@ -39,12 +56,12 @@ class Event
     private $picture;
 
     /**
+     * @var \AppBundle\Entity\Category $category
+     *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="events"))
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
-
-    ///////////////////////////////////////////////////////////////////
 
     /**
      * @var int
@@ -86,14 +103,15 @@ class Event
     /**
      * @var float
      *
-     * @ORM\Column(name="latitude", type="float")
+     * @ORM\Column(name="latitude", type="float", nullable=true)
+     *
      */
     private $latitude;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="longitude", type="float")
+     * @ORM\Column(name="longitude", type="float", nullable=true)
      */
     private $longitude;
 
@@ -128,33 +146,27 @@ class Event
     /**
      * @var int
      *
-     * @ORM\Column(name="maxPeople", type="integer")
+     * @ORM\Column(name="maxPeople", type="integer", nullable=true)
      */
     private $maxPeople;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="onGoingMoney", type="integer")
+     * @ORM\Column(name="onGoingMoney", type="integer", nullable=true)
      */
     private $onGoingMoney;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="eventDescription", type="text")
+     */
+    private $eventDescription;
+
+
 
     /** Generate code */
-
-    ////////////////////////////////////////////////////////////////
-
-
-
-
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id.
@@ -536,5 +548,41 @@ class Event
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Add review.
+     *
+     * @param \AppBundle\Entity\Review $review
+     *
+     * @return Event
+     */
+    public function addReview(\AppBundle\Entity\Review $review)
+    {
+        $this->reviews[] = $review;
+
+        return $this;
+    }
+
+    /**
+     * Remove review.
+     *
+     * @param \AppBundle\Entity\Review $review
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeReview(\AppBundle\Entity\Review $review)
+    {
+        return $this->reviews->removeElement($review);
+    }
+
+    /**
+     * Get reviews.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
     }
 }

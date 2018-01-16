@@ -9,41 +9,50 @@
 
     <table class="table">
         <tbody>
+
             <tr>
-                <th>Id</th>
-                <td>{{ event.id }}</td>
-            </tr>
-            <tr>
-                <th>Nameevent</th>
+                <th>Nom de l'événement</th>
                 <td>{{ event.nameEvent }}</td>
             </tr>
             <tr>
-                <th>Adress</th>
+                <th>Catégorie</th>
+                <td>{{ event.category }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ event.eventDescription }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
                 <td>{{ event.adress }}</td>
             </tr>
             <tr>
-                <th>Latitude</th>
-                <td>{{ event.latitude }}</td>
+                <th>Ville</th>
+                <td>{{ event.city }}</td>
             </tr>
             <tr>
-                <th>Longitude</th>
-                <td>{{ event.longitude }}</td>
+                <th>Code Postal</th>
+                <td>{{ event.zipcode }}</td>
             </tr>
             <tr>
-                <th>Datetime</th>
-                <td>{% if event.dateTime %}{{ event.dateTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <th>Montant de la cagnotte à atteindre</th>
+                <td>{{ event.targetMoney }} €</td>
             </tr>
             <tr>
-                <th>Targetmoney</th>
-                <td>{{ event.targetMoney }}</td>
+                <th>Date limite de participation</th>
+                <td>{% if event.deadline %}{{ event.deadline|date('d-m-Y') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Deadline</th>
-                <td>{% if event.deadline %}{{ event.deadline|date('Y-m-d') }}{% endif %}</td>
+                <th>L'événement est privé ?</th>
+                <td>{% if event.isPrivate %}Oui{% else %}Non{% endif %}</td>
             </tr>
             <tr>
-                <th>Isprivate</th>
-                <td>{% if event.isPrivate %}Yes{% else %}No{% endif %}</td>
+                <th>Participants (max.)</th>
+                <td>{{ event.maxPeople}}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="" width="400"> </td>
             </tr>
         </tbody>
     </table>

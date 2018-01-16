@@ -16,13 +16,11 @@ class PictureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('namePicture', TextType::class, array(
+            /*->add('namePicture', TextType::class, array(
                 'label'=>'Nom de l\'image',
-            ))
-            ->add('description')
-            ->add('altPicture')
+            ))*/
             ->add('pictureUpload', FileType::class, array(
-                'label'=> 'Image (format jpg)'
+                'label'=> '(formats jpg, gif, png uniquement)'
             ))
 
         ;

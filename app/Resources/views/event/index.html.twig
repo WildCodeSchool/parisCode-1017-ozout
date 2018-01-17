@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <div class="container formCreateEvent">
+
+            <h1 alihtmlgn="center">Events list</h1>
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Adress</th>
+                    <th>Datetime</th>
+                    <th>Targetmoney</th>
+                    <th>Deadline</th>
+                    <th>Isprivate</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for event in events %}
+                <tr>
+                    <td><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.id }}</a></td>
+                    <td>{{ event.nameEvent }}</td>
+                    <td>{{ event.adress }}</td>
+                    <td>{% if event.dateTime %}{{ event.dateTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{{ event.targetMoney }}</td>
+                    <td>{% if event.deadline %}{{ event.deadline|date('Y-m-d') }}{% endif %}</td>
+                    <td>{% if event.isPrivate %}Yes{% else %}No{% endif %}</td>
+                    <td><img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt=""> </td>
+
+                    <td>
+                        <div class="row">
+                            <div class="col-md-4">
+                            <a class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header" href="{{ path('event_show', { 'id': event.id }) }}">show</a>
+                            </div>
+                            <div class="offset-md-2 col-md-4">
+                            <a class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header" href="{{ path('event_edit', { 'id': event.id }) }}">edit</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+        <div align="center">
+                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header" href="{{ path('event_new') }}">Create a new event</a>
+        </div>
+
+
+
+    </div>
+{% endblock %}
+
+

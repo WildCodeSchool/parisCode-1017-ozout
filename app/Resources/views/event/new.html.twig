@@ -1,0 +1,19 @@
+{% extends 'user/default/layout.html.twig' %}
+
+{% block body %}
+
+        <div class="container formCreateEvent">
+
+            <h1 align="center">Créer un événenement</h1>
+
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <input type="submit" value="Create" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header"/>
+            {{ form_end(form) }}
+
+            <div align="center">
+                    <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header" href="{{ path('event_index') }}">Voir tous les évènements</a>
+            </div>
+        </div>
+
+{% endblock %}

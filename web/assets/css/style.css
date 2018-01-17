@@ -1,10 +1,31 @@
+/** GENERAL / HOME PAGE / NAVBAR / FOOTER **/
+/************************************************************************       GENERAL*/
+
+ul {
+        list-style: none;
+}
+
+
+/** HOMEPAGE *************************************************************      HOMEPAGE*/
 
 header.masthead .intro-text {
         padding-top: 400px;
         padding-bottom: 200px;
 }
 
-
 .btn-header {
         margin-bottom: 20px !important;
+}
+
+/** NAVBAR *************************************************************        NAVBAR*/
+
+.navbar{
+        padding-bottom: 0 !important;
+        background: #111111 !important;
+}
+
+/** FOOTER *************************************************************        FOOTER*/
+
+footer {
+        background: #111111;
 }

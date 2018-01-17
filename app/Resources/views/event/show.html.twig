@@ -1,0 +1,65 @@
+{% extends 'user/default/layout.html.twig' %}
+
+{% block body %}
+
+
+<div class="container formShowEvent">
+
+    <h1 align="center">Event</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ event.id }}</td>
+            </tr>
+            <tr>
+                <th>Nameevent</th>
+                <td>{{ event.nameEvent }}</td>
+            </tr>
+            <tr>
+                <th>Adress</th>
+                <td>{{ event.adress }}</td>
+            </tr>
+            <tr>
+                <th>Latitude</th>
+                <td>{{ event.latitude }}</td>
+            </tr>
+            <tr>
+                <th>Longitude</th>
+                <td>{{ event.longitude }}</td>
+            </tr>
+            <tr>
+                <th>Datetime</th>
+                <td>{% if event.dateTime %}{{ event.dateTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Targetmoney</th>
+                <td>{{ event.targetMoney }}</td>
+            </tr>
+            <tr>
+                <th>Deadline</th>
+                <td>{% if event.deadline %}{{ event.deadline|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Isprivate</th>
+                <td>{% if event.isPrivate %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+        <div class="row">
+            <div class="col-md-1">
+                <a class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header" href="{{ path('event_edit', { 'id': event.id }) }}">Edit</a>
+            </div>
+            <div class="col-md-1">
+                {{ form_start(delete_form) }}
+                    <input type="submit" value="Delete" class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header">
+                {{ form_end(delete_form) }}
+            </div>
+        </div>
+    <div align="center">
+    <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header" href="{{ path('event_index') }}">Back to the list</a>
+    </div>
+
+</div>
+{% endblock %}

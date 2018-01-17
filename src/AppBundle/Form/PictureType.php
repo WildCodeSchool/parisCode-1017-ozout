@@ -21,9 +21,8 @@ class PictureType extends AbstractType
             ))*/
             ->add('pictureUpload', FileType::class, array(
                 'label'=> '(formats jpg, gif, png uniquement)'
-            ))
-
-        ;
+            ));
+            
     }/**
      * {@inheritdoc}
      */

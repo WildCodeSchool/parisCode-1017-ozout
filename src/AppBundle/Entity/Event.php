@@ -30,7 +30,8 @@ class Event
     /**
      * @var \AppBundle\Entity\Review $reviews
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", cascade={"all"}, mappedBy="event")
+     *
      */
     private $reviews;
 

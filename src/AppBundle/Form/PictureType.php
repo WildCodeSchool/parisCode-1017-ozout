@@ -23,9 +23,8 @@ class PictureType extends AbstractType
             ->add('altPicture')
             ->add('pictureUpload', FileType::class, array(
                 'label'=> 'Image (format jpg)'
-            ))
+            ));
 
-        ;
     }/**
      * {@inheritdoc}
      */

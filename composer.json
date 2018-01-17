@@ -68,5 +68,8 @@
             "file": "app/config/parameters.yml"
         },
         "branch-alias": null
+    },
+    "repositories": {
+        "packagist": { "url": "https://packagist.org", "type": "composer" }
     }
 }

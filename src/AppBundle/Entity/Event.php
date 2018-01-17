@@ -12,11 +12,25 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Event
 {
-    // CODE RELATION /////////////////////////////////////////////////
+    /**
+     * @return string
+     */
     public function __toString()
     {
         // Return the name of event in reservation table.
         return $this->nameEvent;
+        return $this->category;
+        return $this->picture;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->dateTime= new \DateTime();
+        $this->deadline= new \DateTime();
     }
 
     /**
@@ -50,8 +64,6 @@ class Event
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
-
-    ///////////////////////////////////////////////////////////////////
 
     /**
      * @var int
@@ -93,14 +105,15 @@ class Event
     /**
      * @var float
      *
-     * @ORM\Column(name="latitude", type="float")
+     * @ORM\Column(name="latitude", type="float", nullable=true)
+     *
      */
     private $latitude;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="longitude", type="float")
+     * @ORM\Column(name="longitude", type="float", nullable=true)
      */
     private $longitude;
 
@@ -128,40 +141,34 @@ class Event
     /**
      * @var bool
      *
-     * @ORM\Column(name="isPrivate", type="boolean")
+     * @ORM\Column(name="isPrivate", type="boolean", nullable=true)
      */
     private $isPrivate;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="maxPeople", type="integer")
+     * @ORM\Column(name="maxPeople", type="integer", nullable=true)
      */
     private $maxPeople;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="onGoingMoney", type="integer")
+     * @ORM\Column(name="onGoingMoney", type="integer", nullable=true)
      */
     private $onGoingMoney;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="eventDescription", type="text")
+     */
+    private $eventDescription;
+
+
 
     /** Generate code */
-
-    ////////////////////////////////////////////////////////////////
-
-
-
-
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id.
@@ -579,5 +586,29 @@ class Event
     public function getReviews()
     {
         return $this->reviews;
+    }
+
+    /**
+     * Set eventDescription.
+     *
+     * @param string $eventDescription
+     *
+     * @return Event
+     */
+    public function setEventDescription($eventDescription)
+    {
+        $this->eventDescription = $eventDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get eventDescription.
+     *
+     * @return string
+     */
+    public function getEventDescription()
+    {
+        return $this->eventDescription;
     }
 }

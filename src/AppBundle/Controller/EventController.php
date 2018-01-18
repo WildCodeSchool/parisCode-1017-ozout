@@ -6,7 +6,8 @@ use AppBundle\Entity\Event;
 use AppBundle\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Event controller.
@@ -33,7 +34,7 @@ class EventController extends Controller
     }
 
     /**
-     * Creates a new event entity.
+     * Create a new event entity.
      *
      * @Route("/new", name="event_new")
      * @Method({"GET", "POST"})
@@ -47,10 +48,7 @@ class EventController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            $file = $event->getPicture()->getPictureUpload();
-            $fileName = $fileUploader->upload($file);
-
-            $event->getPicture()->setNamePicture($fileName);
+                $fileUploader->upload($event->getPicture());
 
             $em->persist($event);
             $em->flush();
@@ -65,18 +63,16 @@ class EventController extends Controller
     }
 
     /**
-     * Finds and displays a event entity.
+     * Find and display an event entity.
      *
      * @Route("/{id}", name="event_show")
      * @Method("GET")
      */
     public function showAction(Event $event)
     {
-        $deleteForm = $this->createDeleteForm($event);
 
         return $this->render('event/show.html.twig', array(
             'event' => $event,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -86,13 +82,17 @@ class EventController extends Controller
      * @Route("/{id}/edit", name="event_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Event $event)
+    public function editAction(Request $request, Event $event, FileUploader $fileUploader)
     {
-        $deleteForm = $this->createDeleteForm($event);
         $editForm = $this->createForm('AppBundle\Form\EventType', $event);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+//            If user upload a new File, call service fileUploader and update picture
+            if ($event->getPicture()->getPictureUpload() != null){
+                $fileUploader->update($event->getPicture());
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('event_edit', array('id' => $event->getId()));
@@ -101,43 +101,26 @@ class EventController extends Controller
         return $this->render('event/edit.html.twig', array(
             'event' => $event,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Deletes a event entity.
+     * Deletes an event entity.
      *
-     * @Route("/{id}", name="event_delete")
-     * @Method("DELETE")
+     * @Route("/delete/{id}", name="event_delete")
+     * @Method("GET")
      */
-    public function deleteAction(Request $request, Event $event)
+    public function deleteAction(Event $event, FileUploader $fileUploader)
     {
-        $form = $this->createDeleteForm($event);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
             $em->remove($event);
+
+            $fileUploader->remove($event->getPicture());
+
             $em->flush();
-        }
 
         return $this->redirectToRoute('event_index');
-    }
-
-    /**
-     * Creates a form to delete a event entity.
-     *
-     * @param Event $event The event entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Event $event)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('event_delete', array('id' => $event->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
     }
 }

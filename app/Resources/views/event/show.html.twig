@@ -54,17 +54,17 @@
                 <th>Image</th>
                 <td><img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="" width="400"> </td>
             </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt=""> </td>
+            </tr>
         </tbody>
     </table>
         <div class="row">
             <div class="col-md-1">
                 <a class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header" href="{{ path('event_edit', { 'id': event.id }) }}">Edit</a>
             </div>
-            <div class="col-md-1">
-                {{ form_start(delete_form) }}
-                    <input type="submit" value="Delete" class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header">
-                {{ form_end(delete_form) }}
-            </div>
+
         </div>
     <div align="center">
     <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header" href="{{ path('event_index') }}">Back to the list</a>

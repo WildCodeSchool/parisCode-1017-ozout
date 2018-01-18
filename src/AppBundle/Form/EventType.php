@@ -26,7 +26,7 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nameEvent', TextType::class, array(
+            ->add('title', TextType::class, array(
                 'label' => 'Nom de l\'événement'
             ))
             ->add('category', EntityType::class, array(
@@ -77,7 +77,7 @@ class EventType extends AbstractType
         ));
     }
 
-    /**
+    /**w
      * {@inheritdoc}
      */
     public function getBlockPrefix()

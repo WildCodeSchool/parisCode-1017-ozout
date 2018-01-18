@@ -12,7 +12,7 @@
 
             <tr>
                 <th>Nom de l'événement</th>
-                <td>{{ event.nameEvent }}</td>
+                <td>{{ event.title }}</td>
             </tr>
             <tr>
                 <th>Catégorie</th>
@@ -40,7 +40,7 @@
             </tr>
             <tr>
                 <th>Date limite de participation</th>
-                <td>{% if event.deadline %}{{ event.deadline|date('d-m-Y') }}{% endif %}</td>
+                <td>{% if event.start %}{{ event.start|date('d-m-Y') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>L'événement est privé ?</th>

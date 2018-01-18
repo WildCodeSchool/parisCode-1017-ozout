@@ -34,24 +34,17 @@
                                     <i class="fa fa-plus fa-3x"></i>
                                 </div>
                             </div>
-                            <img class="img-fluid" src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="{{ event.nameEvent }}">
+                            <img class="img-fluid" src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="{{ event.title }}">
                         </a>
                         <div class="portfolio-caption">
-                            <h4>{{ event.nameEvent }}</h4>
+                            <h4>{{ event.title }}</h4>
                             <p class="text-muted">{{ event.city }} </p>
                             <p class="text-muted">{{ event.targetMoney }} </p>
                             {#On choisit l'élément de l'event qu'on veut afficher#}
                         </div>
                     </div>
                 {% endfor %}
-                
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4 portofolio-item">
-                    <div class="calender">{% include '@FullCalendar/Calendar/calendar.html.twig' %}</div>
-                </div>
-                <div class="col-md-4"></div>
-            </div>
+
         </div>
     </div>
 

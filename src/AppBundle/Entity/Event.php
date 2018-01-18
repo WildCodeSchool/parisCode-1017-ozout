@@ -18,9 +18,7 @@ class Event
     public function __toString()
     {
         // Return the name of event in reservation table.
-        return $this->nameEvent;
-        return $this->category;
-        return $this->picture;
+        return $this->title;
     }
 
     /**
@@ -29,8 +27,9 @@ class Event
     public function __construct()
     {
         $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->dateTime= new \DateTime();
-        $this->deadline= new \DateTime();
+        //$this->reviews = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->start = new \DateTime();
+        $this->deadline = new \DateTime();
     }
 
     /**
@@ -78,9 +77,9 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="nameEvent", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255)
      */
-    private $nameEvent;
+    private $title;
 
     /**
      * @var string
@@ -121,9 +120,9 @@ class Event
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateTime", type="datetime")
+     * @ORM\Column(name="start", type="datetime")
      */
-    private $dateTime;
+    private $start;
 
     /**
      * @var int
@@ -167,9 +166,8 @@ class Event
      */
     private $eventDescription;
 
-
-
     /** Generate code */
+
 
     /**
      * Get id.
@@ -182,27 +180,27 @@ class Event
     }
 
     /**
-     * Set nameEvent.
+     * Set title.
      *
-     * @param string $nameEvent
+     * @param string $title
      *
      * @return Event
      */
-    public function setNameEvent($nameEvent)
+    public function setTitle($title)
     {
-        $this->nameEvent = $nameEvent;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get nameEvent.
+     * Get title.
      *
      * @return string
      */
-    public function getNameEvent()
+    public function getTitle()
     {
-        return $this->nameEvent;
+        return $this->title;
     }
 
     /**
@@ -326,27 +324,27 @@ class Event
     }
 
     /**
-     * Set dateTime.
+     * Set start.
      *
-     * @param \DateTime $dateTime
+     * @param \DateTime $start
      *
      * @return Event
      */
-    public function setDateTime($dateTime)
+    public function setStart($start)
     {
-        $this->dateTime = $dateTime;
+        $this->start = $start;
 
         return $this;
     }
 
     /**
-     * Get dateTime.
+     * Get start.
      *
      * @return \DateTime
      */
-    public function getDateTime()
+    public function getStart()
     {
-        return $this->dateTime;
+        return $this->start;
     }
 
     /**
@@ -506,6 +504,42 @@ class Event
     }
 
     /**
+     * Add review.
+     *
+     * @param \AppBundle\Entity\Review $review
+     *
+     * @return Event
+     */
+    public function addReview(\AppBundle\Entity\Review $review)
+    {
+        $this->reviews[] = $review;
+
+        return $this;
+    }
+
+    /**
+     * Remove review.
+     *
+     * @param \AppBundle\Entity\Review $review
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeReview(\AppBundle\Entity\Review $review)
+    {
+        return $this->reviews->removeElement($review);
+    }
+
+    /**
+     * Get reviews.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
+    }
+
+    /**
      * Set picture.
      *
      * @param \AppBundle\Entity\Picture|null $picture
@@ -551,42 +585,6 @@ class Event
     public function getCategory()
     {
         return $this->category;
-    }
-
-    /**
-     * Add review.
-     *
-     * @param \AppBundle\Entity\Review $review
-     *
-     * @return Event
-     */
-    public function addReview(\AppBundle\Entity\Review $review)
-    {
-        $this->reviews[] = $review;
-
-        return $this;
-    }
-
-    /**
-     * Remove review.
-     *
-     * @param \AppBundle\Entity\Review $review
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
-     */
-    public function removeReview(\AppBundle\Entity\Review $review)
-    {
-        return $this->reviews->removeElement($review);
-    }
-
-    /**
-     * Get reviews.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getReviews()
-    {
-        return $this->reviews;
     }
 
     /**

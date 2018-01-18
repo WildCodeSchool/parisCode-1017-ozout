@@ -135,7 +135,7 @@ class Event
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="deadline", type="date")
+     * @ORM\Column(name="deadline", type="datetime")
      */
     private $deadline;
 

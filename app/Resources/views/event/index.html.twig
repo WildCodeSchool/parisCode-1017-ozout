@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.print.css" media="print">
+{% endblock %}
 
 {% block body %}
 
     <div class="container formCreateEvent">
 
-            <h1 alihtmlgn="center">Events list</h1>
+            <h1 class="center">Events list</h1>
 
 
         <table class="table">
@@ -26,9 +30,9 @@
             {% for event in events %}
                 <tr>
                     <td><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.id }}</a></td>
-                    <td>{{ event.nameEvent }}</td>
+                    <td>{{ event.title }}</td>
                     <td>{{ event.adress }}</td>
-                    <td>{% if event.dateTime %}{{ event.dateTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if event.start %}{{ event.start|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>{{ event.targetMoney }}</td>
                     <td>{% if event.deadline %}{{ event.deadline|date('Y-m-d') }}{% endif %}</td>
                     <td>{% if event.isPrivate %}Yes{% else %}No{% endif %}</td>
@@ -53,10 +57,33 @@
         <div align="center">
                 <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header" href="{{ path('event_new') }}">Create a new event</a>
         </div>
-
-
-
+        <div id='calendar'></div>
     </div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/moment.js') }}">
+    </script>
+    <script src="{{ asset('assets/js/fullcalendar.js') }}">
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,basicWeek,basicDay'
+                },
+                navLinks: true, // can click day/week names to navigate views
+                eventLimit: true, // allow "more" link when too many events
+                events: "{{ path('event_api') }}"
+            })
+        });
+    </script>
 {% endblock %}
 
 

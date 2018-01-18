@@ -15,7 +15,7 @@
             </tr>
             <tr>
                 <th>Nameevent</th>
-                <td>{{ event.nameEvent }}</td>
+                <td>{{ event.title }}</td>
             </tr>
             <tr>
                 <th>Adress</th>
@@ -31,7 +31,7 @@
             </tr>
             <tr>
                 <th>Datetime</th>
-                <td>{% if event.dateTime %}{{ event.dateTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if event.start %}{{ event.start|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Targetmoney</th>

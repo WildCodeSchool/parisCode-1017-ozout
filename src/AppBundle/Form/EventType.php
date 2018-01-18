@@ -23,13 +23,13 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nameEvent')
+            ->add('title')
             ->add('adress')
             ->add('city')
             ->add('zipcode')
             ->add('latitude')
             ->add('longitude')
-            ->add('dateTime')
+            ->add('start')
             ->add('targetMoney')
             ->add('deadline')
             ->add('isPrivate')
@@ -55,7 +55,7 @@ class EventType extends AbstractType
         ));
     }
 
-    /**
+    /**w
      * {@inheritdoc}
      */
     public function getBlockPrefix()

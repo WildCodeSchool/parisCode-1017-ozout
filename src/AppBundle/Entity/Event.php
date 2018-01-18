@@ -12,7 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Event
 {
-    // CODE RELATION /////////////////////////////////////////////////
+    /**
+     * @return string
+     */
     public function __toString()
     {
         // Return the name of event in reservation table.
@@ -25,7 +27,7 @@ class Event
     public function __construct()
     {
         $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->reviews = new \Doctrine\Common\Collections\ArrayCollection();
+        //$this->reviews = new \Doctrine\Common\Collections\ArrayCollection();
         $this->start = new \DateTime();
         $this->deadline = new \DateTime();
     }
@@ -41,7 +43,8 @@ class Event
     /**
      * @var \AppBundle\Entity\Review $reviews
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", cascade={"all"}, mappedBy="event")
+     *
      */
     private $reviews;
 
@@ -61,8 +64,6 @@ class Event
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
-
-    ///////////////////////////////////////////////////////////////////
 
     /**
      * @var int
@@ -104,14 +105,15 @@ class Event
     /**
      * @var float
      *
-     * @ORM\Column(name="latitude", type="float")
+     * @ORM\Column(name="latitude", type="float", nullable=true)
+     *
      */
     private $latitude;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="longitude", type="float")
+     * @ORM\Column(name="longitude", type="float", nullable=true)
      */
     private $longitude;
 
@@ -132,35 +134,40 @@ class Event
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="deadline", type="date")
+     * @ORM\Column(name="deadline", type="datetime")
      */
     private $deadline;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="isPrivate", type="boolean")
+     * @ORM\Column(name="isPrivate", type="boolean", nullable=true)
      */
     private $isPrivate;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="maxPeople", type="integer")
+     * @ORM\Column(name="maxPeople", type="integer", nullable=true)
      */
     private $maxPeople;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="onGoingMoney", type="integer")
+     * @ORM\Column(name="onGoingMoney", type="integer", nullable=true)
      */
     private $onGoingMoney;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="eventDescription", type="text")
+     */
+    private $eventDescription;
 
     /** Generate code */
 
-    ////////////////////////////////////////////////////////////////
 
     /**
      * Get id.
@@ -578,5 +585,29 @@ class Event
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set eventDescription.
+     *
+     * @param string $eventDescription
+     *
+     * @return Event
+     */
+    public function setEventDescription($eventDescription)
+    {
+        $this->eventDescription = $eventDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get eventDescription.
+     *
+     * @return string
+     */
+    public function getEventDescription()
+    {
+        return $this->eventDescription;
     }
 }

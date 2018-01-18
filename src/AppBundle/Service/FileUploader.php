@@ -2,7 +2,7 @@
 
 namespace AppBundle\Service;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use AppBundle\Entity\Picture;
 
 /**
  * Created by PhpStorm.
@@ -15,27 +15,59 @@ class FileUploader
 
 {
 
+    /**
+     * Target to uploads Directory
+     * @var string $targetDir
+     *
+     */
     private $targetDir;
 
+    /**
+     * FileUploader constructor.
+     *
+     * Define targetDirectory from arguments service declaration
+     *
+     * @param $targetDir
+     */
     public function __construct($targetDir)
     {
         $this->targetDir = $targetDir;
     }
 
-    public function upload(UploadedFile $file)
+    /**
+     * Upload file from Picture entity
+     *
+     * @param \AppBundle\Entity\Picture $picture
+     */
+    public function upload(Picture $picture)
     {
-        $fileName = md5(uniqid()).'.'.$file->guessExtension();
+        $file = $picture->getPictureUpload();
 
-        $file->move($this->getTargetDir(), $fileName);
+        $fileName = uniqid() . '.' . $file->guessExtension();
+        $file->move($this->targetDir, $fileName);
 
-        return $fileName;
+        $picture->setNamePicture($fileName);
     }
 
-    public function getTargetDir()
-    {
-        return $this->targetDir;
+    /**
+     * Update file, remove old et create new
+     *
+     * @param \AppBundle\Entity\Picture $picture
+     */
+    public function update(Picture $picture){
+        $this->remove($picture);
+        $this->upload($picture);
     }
 
-
-
+    /**
+     * Check if file exists and remove if is ok
+     *
+     * @param \AppBundle\Entity\Picture $picture
+     */
+    public function remove(Picture $picture){
+        $file = $this->targetDir . $picture->getNamePicture();
+        if (file_exists($file)){
+            unlink($this->targetDir . $picture->getNamePicture());
+        }
+    }
 }

@@ -12,14 +12,28 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Category
 {
-    ///// CODE RELATIONS ////////////////////////////
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        // Return the name of category in event table.
+        return $this->nameCategory;
+    }
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Event", mappedBy="category")
      */
     private $events;
 
-    /////////////////////////////////////////////
 
     /**
      * @var int
@@ -37,15 +51,6 @@ class Category
      */
     private $nameCategory;
 
-    ///////////////////////////////////////////
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->events = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id.

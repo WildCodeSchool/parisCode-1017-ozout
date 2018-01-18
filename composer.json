@@ -24,6 +24,7 @@
         "ancarebeca/full-calendar-bundle": "^5.0",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
+        "friendsofsymfony/user-bundle": "~2.0",
         "incenteev/composer-parameter-handler": "^2.0",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^5.0.0",
@@ -68,5 +69,8 @@
             "file": "app/config/parameters.yml"
         },
         "branch-alias": null
+    },
+    "repositories": {
+        "packagist": { "url": "https://packagist.org", "type": "composer" }
     }
 }

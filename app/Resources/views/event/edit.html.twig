@@ -10,13 +10,16 @@
         <input type="submit" value="Edit" class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header"/>
     {{ form_end(edit_form) }}
 
-    {{ form_start(delete_form) }}
-        <input type="submit" value="Delete" class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header">
-    {{ form_end(delete_form) }}
-        </div>
+
 
     <div align="center">
         <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header" href="{{ path('event_index') }}">Back to the list</a>
+    </div>
+
+    <div class="col-md-1">
+
+        <a class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header" href="{{ path('event_delete', {'id': event.id}) }}">Supprimer</a>
+
     </div>
 
 </div>

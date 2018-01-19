@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Service\GoogleMap;
+
 
 /**
  * Event controller.
@@ -30,6 +32,7 @@ class EventController extends Controller
 
         return $this->render('event/index.html.twig', array(
             'events' => $events,
+            'events_json' => json_encode($events)
         ));
     }
 
@@ -39,16 +42,23 @@ class EventController extends Controller
      * @Route("/new", name="event_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, FileUploader $fileUploader)
+    public function newAction(Request $request, FileUploader $fileUploader, GoogleMap $googleMap)
     {
         $event = new Event();
         $form = $this->createForm('AppBundle\Form\EventType', $event);
+
         $form->handleRequest($request);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-                $fileUploader->upload($event->getPicture());
+            $location = $googleMap->getLatLng($event->getAdress(), $event->getZipcode(), $event->getCity());
+            $event->setLatitude($location['lat']);
+            $event->setLongitude($location['lng']);
+
+
+            $fileUploader->upload($event->getPicture());
 
             $em->persist($event);
             $em->flush();
@@ -82,16 +92,22 @@ class EventController extends Controller
      * @Route("/{id}/edit", name="event_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Event $event, FileUploader $fileUploader)
+    public function editAction(Request $request, Event $event, FileUploader $fileUploader, GoogleMap $googleMap)
     {
         $editForm = $this->createForm('AppBundle\Form\EventType', $event);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
+            $location = $googleMap->getLatLng($event->getAdress(), $event->getZipcode(), $event->getCity());
+            $event->setLatitude($location['lat']);
+            $event->setLongitude($location['lng']);
+
+
 //            If user upload a new File, call service fileUploader and update picture
             if ($event->getPicture()->getPictureUpload() != null){
                 $fileUploader->update($event->getPicture());
+
             }
             $this->getDoctrine()->getManager()->flush();
 
@@ -123,4 +139,6 @@ class EventController extends Controller
 
         return $this->redirectToRoute('event_index');
     }
+
+
 }

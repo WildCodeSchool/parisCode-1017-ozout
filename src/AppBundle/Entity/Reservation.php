@@ -28,6 +28,14 @@ class Reservation
      */
     private $id;
 
+
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", inversedBy="reservations"))
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     /**
      * @var \DateTime
      *
@@ -48,7 +56,6 @@ class Reservation
      * @ORM\Column(name="doParticipate", type="boolean")
      */
     private $doParticipate;
-
 
     /**
      * Get id.
@@ -154,5 +161,29 @@ class Reservation
     public function getEvent()
     {
         return $this->event;
+    }
+
+    /**
+     * Set user.
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Reservation
+     */
+    public function setUser(\AppBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user.
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

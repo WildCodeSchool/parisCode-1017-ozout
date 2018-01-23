@@ -49,7 +49,7 @@ class EventType extends AbstractType
             ->add('targetMoney', MoneyType::class, array(
                 'label' => ' Montant de la cagnotte à atteindre'
             ))
-            ->add('deadline', DateTimeType::class, array(
+            ->add('start', DateTimeType::class, array(
                 'label' => 'Date limite de participation'
             ))
             ->add('isPrivate', CheckboxType::class, array(

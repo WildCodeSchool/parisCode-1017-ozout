@@ -11,6 +11,7 @@ use Symfony\Component\Serializer\Serializer;
 
 /**
  * Class ApiController
+ *
  * @package AppBundle\Controller
  *
  * @Route("api")
@@ -24,7 +25,8 @@ class ApiController extends Controller
      *
      * @return string
      */
-    public function getJsonEventAction(){
+    public function getJsonEventAction()
+    {
         $em = $this->getDoctrine()->getManager();
         $events = $em->getRepository(Event::class)->findAll();
 
@@ -36,14 +38,18 @@ class ApiController extends Controller
                 ? $dateTime->format(\DateTime::ISO8601)
                 : '';
         };
-        $normalizer->setCallbacks(array(
+        $normalizer->setCallbacks(
+            array(
             'start' => $callback,
             'deadline' => $callback
-        ));
+            )
+        );
 
-        $normalizer->setCircularReferenceHandler(function ($object) {
-            return $object->getId();
-        });
+        $normalizer->setCircularReferenceHandler(
+            function ($object) {
+                return $object->getId();
+            }
+        );
 
         $serializer = new Serializer(array($normalizer), array($encoder));
 

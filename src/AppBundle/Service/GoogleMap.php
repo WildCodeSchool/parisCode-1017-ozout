@@ -6,6 +6,7 @@ use AppBundle\Entity\Event;
 
 /**
  * Class GoogleMap
+ *
  * @package AppBundle\Service
  */
 class GoogleMap

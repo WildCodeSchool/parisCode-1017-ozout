@@ -12,15 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Review
 {
-
-    // CODE RELATION ///////////////////////////////////////////////////////
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Event", inversedBy="reviews"))
      * @ORM\JoinColumn(nullable=false)
      */
     private $event;
-
-////////////////////////////////////////////////////////////////////////////
 
     /**
      * @var int

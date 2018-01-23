@@ -13,15 +13,16 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Picture
 {
+    // Added code
     /**
      * @return string
      */
     public function __toString()
     {
-        // Return the name of category in event table.
         return $this->namePicture;
     }
 
+    //CLI auto-generated code
     /**
      * @var int
      *
@@ -53,7 +54,6 @@ class Picture
     private $altPicture;
 
     /**
-     *
      * @var string $pictureUpload
      * @Assert\NotBlank(message= "Merci d'uploader une image.")
      * @Assert\File(mimeTypes={ "image/jpeg" })

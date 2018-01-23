@@ -19,18 +19,22 @@ class PictureType extends AbstractType
             /*->add('namePicture', TextType::class, array(
                 'label'=>'Nom de l\'image',
             ))*/
-            ->add('pictureUpload', FileType::class, array(
+            ->add(
+                'pictureUpload', FileType::class, array(
                 'label'=> '(formats jpg, gif, png uniquement)'
-            ));
+                )
+            );
             
     }/**
-     * {@inheritdoc}
-     */
+      * {@inheritdoc}
+      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults(
+            array(
             'data_class' => 'AppBundle\Entity\Picture'
-        ));
+            )
+        );
     }
 
     /**

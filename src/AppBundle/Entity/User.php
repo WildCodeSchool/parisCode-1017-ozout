@@ -13,6 +13,16 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser
 {
+    // Added Code
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    // CLI Auto-generated code
     /**
      * @var int
      *
@@ -21,15 +31,6 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-    /**
-     * User constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-    }
 
     /**
      * @var string

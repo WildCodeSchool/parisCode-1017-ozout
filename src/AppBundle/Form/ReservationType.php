@@ -17,8 +17,7 @@ class ReservationType extends AbstractType
             ->add('date')
             ->add('moneyGiven')
             ->add('doParticipate')
-            ->add('event')
-        ;
+            ->add('event');
 
     }
 
@@ -28,9 +27,11 @@ class ReservationType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults(
+            array(
             'data_class' => 'AppBundle\Entity\Reservation'
-        ));
+            )
+        );
     }
 
     /**

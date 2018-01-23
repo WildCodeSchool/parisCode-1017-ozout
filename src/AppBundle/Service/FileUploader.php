@@ -12,13 +12,12 @@ use AppBundle\Entity\Picture;
  */
 
 class FileUploader
-
 {
 
     /**
      * Target to uploads Directory
-     * @var string $targetDir
      *
+     * @var string $targetDir
      */
     private $targetDir;
 
@@ -54,7 +53,8 @@ class FileUploader
      *
      * @param \AppBundle\Entity\Picture $picture
      */
-    public function update(Picture $picture){
+    public function update(Picture $picture)
+    {
         $this->remove($picture);
         $this->upload($picture);
     }
@@ -64,9 +64,10 @@ class FileUploader
      *
      * @param \AppBundle\Entity\Picture $picture
      */
-    public function remove(Picture $picture){
+    public function remove(Picture $picture)
+    {
         $file = $this->targetDir . $picture->getNamePicture();
-        if (file_exists($file)){
+        if (file_exists($file)) {
             unlink($this->targetDir . $picture->getNamePicture());
         }
     }

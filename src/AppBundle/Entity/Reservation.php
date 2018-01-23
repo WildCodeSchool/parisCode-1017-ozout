@@ -13,14 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 class Reservation
 {
-    // CODE RELATION ///////////////////////////////////////////////////////
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Event", inversedBy="reservations"))
      * @ORM\JoinColumn(nullable=false)
      */
     private $event;
-
-////////////////////////////////////////////////////////////////////////////
 
     /**
      * @var int
@@ -51,7 +48,6 @@ class Reservation
      * @ORM\Column(name="doParticipate", type="boolean")
      */
     private $doParticipate;
-
 
 
     /**

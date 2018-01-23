@@ -13,12 +13,12 @@ use JsonSerializable;
  */
 class Event implements JsonSerializable
 {
+    //Added code
     /**
      * @return string
      */
     public function __toString()
     {
-        // Return the name of event in reservation table.
         return $this->title;
     }
 
@@ -28,11 +28,11 @@ class Event implements JsonSerializable
     public function __construct()
     {
         $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
-        //$this->reviews = new \Doctrine\Common\Collections\ArrayCollection();
         $this->start = new \DateTime();
         $this->deadline = new \DateTime();
     }
 
+    //CLI auto-generated code
     /**
      *
      * @var \AppBundle\Entity\Reservation $reservations
@@ -45,7 +45,6 @@ class Event implements JsonSerializable
      * @var \AppBundle\Entity\Review $reviews
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", cascade={"all"}, mappedBy="event")
-     *
      */
     private $reviews;
 
@@ -54,7 +53,6 @@ class Event implements JsonSerializable
      *
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Picture", cascade={"all"})
      * @ORM\JoinColumn(nullable=true)
-     *
      */
     private $picture;
 
@@ -107,7 +105,6 @@ class Event implements JsonSerializable
      * @var float
      *
      * @ORM\Column(name="latitude", type="float", nullable=true)
-     *
      */
     private $latitude;
 
@@ -166,8 +163,6 @@ class Event implements JsonSerializable
      * @ORM\Column(name="eventDescription", type="text")
      */
     private $eventDescription;
-
-    /** Generate code */
 
 
     /**
@@ -614,10 +609,11 @@ class Event implements JsonSerializable
 
     /**
      * Specify data which should be serialized to JSON
-     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @link   http://php.net/manual/en/jsonserializable.jsonserialize.php
      * @return mixed data which can be serialized by <b>json_encode</b>,
      * which is a value of any type other than a resource.
-     * @since 5.4.0
+     * @since  5.4.0
      */
     public function jsonSerialize()
     {

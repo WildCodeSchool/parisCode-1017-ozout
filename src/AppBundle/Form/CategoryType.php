@@ -15,13 +15,15 @@ class CategoryType extends AbstractType
     {
         $builder->add('nameCategory');
     }/**
-     * {@inheritdoc}
-     */
+      * {@inheritdoc}
+      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults(
+            array(
             'data_class' => 'AppBundle\Entity\Category'
-        ));
+            )
+        );
     }
 
     /**

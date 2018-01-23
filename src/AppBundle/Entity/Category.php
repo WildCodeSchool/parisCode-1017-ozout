@@ -25,7 +25,6 @@ class Category
      */
     public function __toString()
     {
-        // Return the name of category in event table.
         return $this->nameCategory;
     }
 
@@ -33,7 +32,6 @@ class Category
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Event", mappedBy="category")
      */
     private $events;
-
 
     /**
      * @var int
@@ -50,7 +48,6 @@ class Category
      * @ORM\Column(name="nameCategory", type="string", length=45)
      */
     private $nameCategory;
-
 
     /**
      * Get id.
@@ -96,7 +93,6 @@ class Category
     public function addEvent(\AppBundle\Entity\Event $event)
     {
         $this->events[] = $event;
-
         return $this;
     }
 

@@ -19,6 +19,12 @@ class Review
     private $event;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="reviews"))
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -122,5 +128,29 @@ class Review
     public function getEvent()
     {
         return $this->event;
+    }
+
+    /**
+     * Set user.
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Review
+     */
+    public function setUser(\AppBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user.
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

@@ -33,6 +33,15 @@ class Event implements JsonSerializable
     }
 
     //CLI auto-generated code
+
+    /**
+     * @var \AppBundle\Entity\User $users
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Event", inversedBy="events")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $users;
+
     /**
      *
      * @var \AppBundle\Entity\Reservation $reservations
@@ -621,5 +630,41 @@ class Event implements JsonSerializable
             "lat" => $this->latitude,
             "lng" => $this->longitude
         ];
+    }
+
+    /**
+     * Add user.
+     *
+     * @param \AppBundle\Entity\Event $user
+     *
+     * @return Event
+     */
+    public function addUser(\AppBundle\Entity\Event $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user.
+     *
+     * @param \AppBundle\Entity\Event $user
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeUser(\AppBundle\Entity\Event $user)
+    {
+        return $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

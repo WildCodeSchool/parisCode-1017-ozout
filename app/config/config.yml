@@ -82,3 +82,42 @@ fos_user:
     registration:
         form:
             type: AppBundle\Form\RegistrationType
+
+
+#EasyAdmin Configuration
+easy_admin:
+    site_name: 'OzOut'
+    design:
+        brand_color: '#fec503'
+    list:
+        actions:
+            - { name: 'edit', label: '', icon: 'edit'}
+            - { name: 'delete', label: '', icon: 'trash'}
+    entities:
+        Event:
+            class: AppBundle\Entity\Event
+            list:
+                fields:
+                    - id
+                    - title
+                    - city
+                    - targetMoney
+                    - isPrivate
+                    - deadline
+                    - maxPeople
+        User:
+            class: AppBundle\Entity\User
+        Category:
+            class: AppBundle\Entity\Category
+        Reservation:
+            class: AppBundle\Entity\Reservation
+        Review:
+            class: AppBundle\Entity\Review
+        Picture:
+            class: AppBundle\Entity\Picture
+            list:
+                fields:
+                    - id
+                    - { property: 'namePicture', type: 'image', base_path: '../web/uploads/pictures/'}
+                    - description
+                    - altPicture

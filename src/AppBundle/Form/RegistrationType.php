@@ -8,7 +8,10 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class RegistrationType extends AbstractType
@@ -18,11 +21,17 @@ class RegistrationType extends AbstractType
 
     {
         $builder
-            ->add('nameUser')
-            ->add('surnameUser')
-            ->add('dateOfBirth')
+            ->add('nameUser',TextType::class, array(
+                'label' =>'Prénom'
+            ))
+            ->add('surnameUser',TextType::class, array(
+                'label' => 'Nom'
+            ))
+            ->add('dateOfBirth',DateTimeType::class, array(
+                'label' => 'Date de naissance'
+            ))
             ->add('picture', PictureType::class, array(
-            'label'=> 'votre photo'
+            'label'=> 'Votre photo'
         ));
     }
 

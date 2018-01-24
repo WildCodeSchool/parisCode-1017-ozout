@@ -27,6 +27,7 @@
         </div>
         <div class="row">
                 {% for event in events %}
+                    {% if (event.isPrivate == false) %}
                     <div class="col-md-4 col-sm-6 portfolio-item thumb-post">
                         <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
                             <div class="portfolio-hover">
@@ -43,6 +44,7 @@
                             {#On choisit l'élément de l'event qu'on veut afficher#}
                         </div>
                     </div>
+                    {% endif %}
                 {% endfor %}
 
         </div>

@@ -17,7 +17,8 @@ class ReservationType extends AbstractType
             ->add('date')
             ->add('moneyGiven')
             ->add('doParticipate')
-            ->add('event');
+            ->add('event')
+            ->add('user');
 
     }
 

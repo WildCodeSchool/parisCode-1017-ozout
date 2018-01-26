@@ -34,7 +34,7 @@
                     <td>{{ event.adress }}</td>
                     <td>{% if event.start %}{{ event.start|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>{{ event.targetMoney }}</td>
-                    <td>{% if event.deadline %}{{ event.deadline|date('Y-m-d') }}{% endif %}</td>
+                    <td>{% if event.deadline %}{{ event.deadline|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>{% if event.isPrivate %}Yes{% else %}No{% endif %}</td>
                     <td><img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt=""> </td>
 

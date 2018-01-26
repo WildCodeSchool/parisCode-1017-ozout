@@ -241,23 +241,29 @@
 </section>
 </div> <!--div col-9-->
     <div class="col-lg-3"><!--div aside col-3 begin-->
-        <div class="container">
+        <section>
         <div class="row">
-            <div class="col-lg-12">
-            </div>
-        </div>
-
-        <div class="row">
-        <div class="col-lg-12">
             <div id="calendar">
             </div>
             </div>
         </div>
+        </section>
+    </div>
+    <section class="map">
+
+        <h1>Map</h1>
+
+        <div id="map" style="height:400px; width: 100%;"></div>
+
+    </section>
+
     </div>
     </div><!--div aside col-3 end--<
     </div><!--main row end-->
 
 </div><!-- end div wrapper -->
+
+{#<input id="markers_locations" type="hidden" value='{{ events_json }}' />#}
 
 
 
@@ -310,4 +316,33 @@
         })
     });
 </script>
+    <script>
+        function initMap(){
+
+            var options = {
+                zoom:10,
+                center:{lat:48.856614,lng:2.3522219000000177}
+            };
+
+            var map = new google.maps.Map(document.getElementById('map'), options);
+
+
+            var markers = JSON.parse(document.querySelector('#markers_locations').value);
+
+            console.info(markers);
+
+            markers.map(function(marker){
+                new google.maps.Marker ({
+                    map : map,
+                    position :{lat:marker.lat, lng:marker.lng}
+                })
+            });
+
+
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPoRjII2N8Ce3xXg3hRshEikPWbDMlGNY&callback=initMap">
+    </script>
+
 {% endblock %}

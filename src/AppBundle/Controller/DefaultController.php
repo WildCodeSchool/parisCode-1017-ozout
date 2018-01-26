@@ -14,7 +14,7 @@ class DefaultController extends Controller
     /**
      * List all event entities
      *
-     * @Route("/",    name="homepage")
+     * @Route("/", name="homepage")
      * @Method("GET")
      */
     public function indexAction()

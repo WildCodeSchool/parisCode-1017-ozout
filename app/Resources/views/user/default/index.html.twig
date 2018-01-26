@@ -22,13 +22,13 @@
             <div class="col-lg-12 text-center">
                 <h2 class="section-heading text-uppercase">Top 10 des événements en cours</h2>
                 <h3 class="section-subheading text-muted">Connectez-vous pour voir les événements proches de vous.</h3>
-                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header" href="">Se connecter</a>
+                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header" href="{{ path('fos_user_security_login') }}">Se connecter</a>
             </div>
         </div>
         <div class="row">
                 {% for event in events %}
                     <div class="col-md-4 col-sm-6 portfolio-item thumb-post">
-                        <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
+                        <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1{{ event.id }}">
                             <div class="portfolio-hover">
                                 <div class="portfolio-hover-content">
                                     <i class="fa fa-plus fa-3x"></i>
@@ -43,8 +43,8 @@
                             {#On choisit l'élément de l'event qu'on veut afficher#}
                         </div>
                     </div>
-                {% endfor %}
 
+                {% endfor %}
         </div>
     </div>
 
@@ -182,7 +182,8 @@
 </section>
 
 <!-- Modal Event/Description-->
-<div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+{% for event in events %}
+<div class="portfolio-modal modal fade" id="portfolioModal1{{ event.id }}" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
@@ -195,9 +196,12 @@
                     <div class="col-lg-8 mx-auto">
                         <div class="modal-body">
                             <!-- Event Details Go Here -->
-                            <h2 class="text-uppercase">Description de l'évènement</h2>
-                            <a class="item-intro text-muted"> </p>
-                            <p> </p>
+                            <h2 class="text-uppercase">{{ event.title }}</h2>
+                            <a class="item-intro text-muted"></a>
+                            <p>{{ event.eventDescription }}</p>
+                            <p>{{ event.deadline|date ("d/m/Y")}}</p>
+                            <p>{{ event.city }}</p>
+                            <img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="eventimg">
                             <button class="btn btn-primary" data-dismiss="modal" type="button">
                                 <i class="fa fa-times"></i>
                                 Fermer</button>
@@ -208,6 +212,7 @@
         </div>
     </div>
 </div>
+{% endfor %}
 
 
 

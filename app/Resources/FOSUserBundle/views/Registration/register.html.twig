@@ -7,12 +7,12 @@
 
 {% block fos_user_content %}
     <div class="container">
-    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-primary btn-xl text-uppercase btn-header"/>
-    </div>
-    {{ form_end(form) }}
+        {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+        {{ form_widget(form) }}
+        <div>
+            <input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-primary btn-xl text-uppercase btn-header"/>
+        </div>
+        {{ form_end(form) }}
     </div>
 
 {% endblock fos_user_content %}

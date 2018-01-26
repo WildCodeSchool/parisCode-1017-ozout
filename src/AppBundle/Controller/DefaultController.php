@@ -22,11 +22,21 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $events = $em->getRepository('AppBundle:Event')->findAll();
 
-        // replace this example code with whatever you need
         return $this->render(
             'user/default/index.html.twig', [
             'events' =>$events,
             ]
         );
+    }
+
+    /**
+     * Send to Contact Page
+     *
+     * @Route("/", name="contact")
+     * @Method("GET")
+     */
+    public function contactShowAction()
+    {
+        return $this->render('user/default/contact.html.twig');
     }
 }

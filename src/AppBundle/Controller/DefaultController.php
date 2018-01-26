@@ -14,7 +14,7 @@ class DefaultController extends Controller
     /**
      * List all event entities
      *
-     * @Route("/",    name="homepage")
+     * @Route("/", name="homepage")
      * @Method("GET")
      */
     public function indexAction()
@@ -22,7 +22,6 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $events = $em->getRepository('AppBundle:Event')->findAll();
 
-        // replace this example code with whatever you need
         return $this->render(
             'user/default/index.html.twig', [
             'events' =>$events,

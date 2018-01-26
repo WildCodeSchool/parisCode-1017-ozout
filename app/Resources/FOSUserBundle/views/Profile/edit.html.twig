@@ -1,0 +1,18 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block fos_user_content %}
+<div class="profile-container">
+    <h1>Mettre à jour mes informations</h1>
+    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+    {{ form_widget(form) }}
+    <div>
+        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+    </div>
+</div>
+    {{ form_end(form) }}
+{% endblock fos_user_content %}

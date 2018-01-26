@@ -1,0 +1,46 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block fos_user_content %}
+
+    <div class="profile-container">
+
+        <h1>Mes informations</h1>
+
+            <div class="fos_user_user_show">
+
+                    <nav class="menu">
+                        <ul class="nav">
+                            <li><span class="fa fa-user"></span> Mon Profil</li>
+                        </ul>
+                    </nav>
+
+                    <div class="profile-picture">
+                        <img class="img-profile" src="https://image.noelshack.com/fichiers/2018/04/4/1516918074-sub6a3ff0-58d8b70b540f3-gkykh-880.jpg" alt="">
+                    </div>
+
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>{{ 'profile.show.username'|trans }}</td>
+                                <td>{{ user.username }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'profile.show.email'|trans }}</td>
+                                <td>{{ user.email }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="profile-edit">
+                        <a href="{{ path('fos_user_profile_edit') }}"> Mettre à jour mes informations </a>
+                    </div>
+
+            </div>
+    </div>
+
+{% endblock fos_user_content %}

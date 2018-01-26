@@ -32,7 +32,7 @@ class DefaultController extends Controller
     /**
      * Send to Contact Page
      *
-     * @Route("/", name="contact")
+     * @Route("/contact", name="contact")
      * @Method("GET")
      */
     public function contactShowAction()

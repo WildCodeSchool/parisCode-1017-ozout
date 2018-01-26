@@ -26,7 +26,7 @@
             {% for event in events %}
                 {% if (event.isPrivate == true) %}
                 <div class="col-md-4 col-sm-6 portfolio-item thumb-post">
-                    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
+                    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1{{ event.id }}">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content">
                                 <i class="fa fa-plus fa-3x"></i>
@@ -46,58 +46,55 @@
     </div>
 
 </section>
-
     </div> <!--end col-9-->
-        <div class="col-lg-4"><!--aside col-3 begin-->
+        <div class="col-lg-4"><!--Side Bar col-3 begin-->
             <section class="margin">
                  <div class="row">
                      <h1> Agenda Events</h1>
-
                      <div id="calendar">
                      </div>
-                </div>
+                 </div>
                     <div class="row">
                         <h1>Map</h1>
                      <div id="map" style="height:400px; width: 100%;"></div>
                     </div>
             </section>
-
         </div><!--div aside col-4 end-->
     </div><!--main row end-->
-
 </div><!-- end div wrapper -->
-{#<input id="markers_locations" type="hidden" value='{{ events_json }}' />#}
-
-
-
+{#<input id="markers_locations" type="hidden" value="{{ events_json }}" />#}
 
 <!-- Modal Event/Description-->
-<div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl"></div>
+{% for event in events %}
+    <div class="portfolio-modal modal fade" id="portfolioModal1{{ event.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 mx-auto">
-                        <div class="modal-body">
-                            <!-- Event Details Go Here -->
-                            <h2 class="text-uppercase">Description de l'évènement</h2>
-                            <a class="item-intro text-muted"> </a>
-                                <p> </p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto">
+                            <div class="modal-body">
+                                <h2 class="text-uppercase">{{ event.title }}</h2>
+                                <a class="item-intro text-muted"></a>
+                                <p>{{ event.eventDescription }}</p>
+                                <p>{{ event.deadline|date ("d/m/Y")}}</p>
+                                <p>{{ event.city }}</p>
+                                <img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="eventimg">
                                 <button class="btn btn-primary" data-dismiss="modal" type="button">
                                     <i class="fa fa-times"></i>
                                     Fermer</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+{% endfor %}
 
 {% endblock %}
 {% block javascripts %}

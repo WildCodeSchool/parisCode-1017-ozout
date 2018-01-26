@@ -70,7 +70,7 @@ class EventType extends AbstractType
                 'isPrivate', CheckboxType::class, array(
                 'label' => 'l\'événement est privé',
                 'mapped' => true,
-                'required' => true
+                'required' => false
                 )
             )
             ->add(

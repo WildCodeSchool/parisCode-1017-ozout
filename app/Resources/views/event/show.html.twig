@@ -40,7 +40,7 @@
             </tr>
             <tr>
                 <th>Date limite de participation</th>
-                <td>{% if event.start %}{{ event.start|date('d-m-Y') }}{% endif %}</td>
+                <td>{% if event.start %}{{ event.start|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>L'événement est privé ?</th>

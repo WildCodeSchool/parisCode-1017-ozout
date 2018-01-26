@@ -31,10 +31,11 @@ class ReviewType extends AbstractType
             ->add(
                 'event', EntityType::class, array(
                 'class' => Event::class,
-                'choice_label' => 'nameEvent',
+                'choice_label' => 'title',
                 'label' => 'A quel événement correspond votre avis ?'
                 )
-            );
+            )
+            ->add('user') ;
     }
 
     /**

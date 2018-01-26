@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block nav %}
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="{{ path('home_connected') }}">OzOut</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{ path('event_new') }}">Créer un événement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#services">A propos d'Ozout</a>
+                    </li>
+                    <li class="nav-item">
+                        {#<a class="nav-link js-scroll-trigger" href="{{ path('') }}">Inscription</a>#}
+                        <a class="nav-link js-scroll-trigger" href="#inscription">Inscription</a>
+                    </li>
+                    <li class="nav-item">
+                        {#<a class="nav-link js-scroll-trigger" href="{{ path('') }}">Connexion</a>#}
+                        <a class="nav-link js-scroll-trigger" href="#connexion">Connexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+{% endblock %}
+
+    {% block body %}
+    {% endblock %}
+
+{% block footer %}
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <ul class="list-inline quicklinks">
+                        <li class="list-inline-item">
+                            <a href="#">Privacy Policy</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">Terms of Use</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <ul class="list-inline social-buttons">
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <span class="copyright">Contact</span>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+{% endblock %}

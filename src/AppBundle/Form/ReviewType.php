@@ -18,17 +18,24 @@ class ReviewType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('score', HiddenType::class, array(
+            ->add(
+                'score', HiddenType::class, array(
                 'label' => 'Sur une échelle de 1 à 5...'
-            ))
-            ->add('comment', TextareaType::class, array(
+                )
+            )
+            ->add(
+                'comment', TextareaType::class, array(
                 'label' => 'Dîtes-nous en plus'
-            ))
-            ->add('event', EntityType::class, array(
+                )
+            )
+            ->add(
+                'event', EntityType::class, array(
                 'class' => Event::class,
-                'choice_label' => 'nameEvent',
+                'choice_label' => 'title',
                 'label' => 'A quel événement correspond votre avis ?'
-            ));
+                )
+            )
+            ->add('user') ;
     }
 
     /**
@@ -36,9 +43,11 @@ class ReviewType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults(
+            array(
             'data_class' => 'AppBundle\Entity\Review'
-        ));
+            )
+        );
     }
 
     /**

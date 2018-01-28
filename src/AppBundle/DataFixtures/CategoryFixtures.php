@@ -32,7 +32,7 @@ class CategoryFixtures extends Fixture
             'Remerciements',
             'Sport',
             'Autres'
-,        ];
+        ,        ];
 
         foreach ($categories as $nameCategory){
             $category = new Category();

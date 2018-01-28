@@ -6,7 +6,10 @@ use AppBundle\Entity\Event;
 use AppBundle\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Service\GoogleMap;
+
 
 /**
  * Event controller.
@@ -18,7 +21,7 @@ class EventController extends Controller
     /**
      * Lists all event entities.
      *
-     * @Route("/", name="event_index")
+     * @Route("/",    name="event_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -27,30 +30,37 @@ class EventController extends Controller
 
         $events = $em->getRepository('AppBundle:Event')->findAll();
 
-        return $this->render('event/index.html.twig', array(
+        return $this->render(
+            'event/index.html.twig', array(
             'events' => $events,
-        ));
+            'events_json' => json_encode($events)
+            )
+        );
     }
 
     /**
-     * Creates a new event entity.
+     * Create a new event entity.
      *
-     * @Route("/new", name="event_new")
+     * @Route("/new",  name="event_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, FileUploader $fileUploader)
+    public function newAction(Request $request, FileUploader $fileUploader, GoogleMap $googleMap)
     {
         $event = new Event();
         $form = $this->createForm('AppBundle\Form\EventType', $event);
+
         $form->handleRequest($request);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            $file = $event->getPicture()->getPictureUpload();
-            $fileName = $fileUploader->upload($file);
+            $location = $googleMap->getLatLng($event->getAdress(), $event->getZipcode(), $event->getCity());
+            $event->setLatitude($location['lat']);
+            $event->setLongitude($location['lng']);
 
-            $event->getPicture()->setNamePicture($fileName);
+
+            $fileUploader->upload($event->getPicture());
 
             $em->persist($event);
             $em->flush();
@@ -58,86 +68,85 @@ class EventController extends Controller
             return $this->redirectToRoute('event_show', array('id' => $event->getId()));
         }
 
-        return $this->render('event/new.html.twig', array(
+        return $this->render(
+            'event/new.html.twig', array(
             'event' => $event,
             'form' => $form->createView(),
-        ));
+            )
+        );
     }
 
     /**
-     * Finds and displays a event entity.
+     * Find and display an event entity.
      *
      * @Route("/{id}", name="event_show")
      * @Method("GET")
      */
     public function showAction(Event $event)
     {
-        $deleteForm = $this->createDeleteForm($event);
 
-        return $this->render('event/show.html.twig', array(
+        return $this->render(
+            'event/show.html.twig', array(
             'event' => $event,
-            'delete_form' => $deleteForm->createView(),
-        ));
+            )
+        );
     }
 
     /**
      * Displays a form to edit an existing event entity.
      *
      * @Route("/{id}/edit", name="event_edit")
-     * @Method({"GET", "POST"})
+     * @Method({"GET",      "POST"})
      */
-    public function editAction(Request $request, Event $event)
+    public function editAction(Request $request, Event $event, FileUploader $fileUploader, GoogleMap $googleMap)
     {
-        $deleteForm = $this->createDeleteForm($event);
         $editForm = $this->createForm('AppBundle\Form\EventType', $event);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            $location = $googleMap->getLatLng($event->getAdress(), $event->getZipcode(), $event->getCity());
+            $event->setLatitude($location['lat']);
+            $event->setLongitude($location['lng']);
+
+
+            //            If user upload a new File, call service fileUploader and update picture
+            if ($event->getPicture()->getPictureUpload() != null) {
+                $fileUploader->update($event->getPicture());
+
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('event_edit', array('id' => $event->getId()));
         }
 
-        return $this->render('event/edit.html.twig', array(
+        return $this->render(
+            'event/edit.html.twig', array(
             'event' => $event,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+            )
+        );
     }
 
     /**
-     * Deletes a event entity.
+     * Deletes an event entity.
      *
-     * @Route("/{id}", name="event_delete")
-     * @Method("DELETE")
+     * @Route("/delete/{id}", name="event_delete")
+     * @Method("GET")
      */
-    public function deleteAction(Request $request, Event $event)
+    public function deleteAction(Event $event, FileUploader $fileUploader)
     {
-        $form = $this->createDeleteForm($event);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
             $em->remove($event);
+
+            $fileUploader->remove($event->getPicture());
+
             $em->flush();
-        }
 
         return $this->redirectToRoute('event_index');
     }
 
-    /**
-     * Creates a form to delete a event entity.
-     *
-     * @param Event $event The event entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Event $event)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('event_delete', array('id' => $event->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
+
 }

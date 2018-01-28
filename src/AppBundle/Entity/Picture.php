@@ -13,6 +13,16 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Picture
 {
+    // Added code
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->namePicture;
+    }
+
+    //CLI auto-generated code
     /**
      * @var int
      *
@@ -25,26 +35,25 @@ class Picture
     /**
      * @var string
      *
-     * @ORM\Column(name="namePicture", type="string", length=45)
+     * @ORM\Column(name="namePicture", type="string", length=45, nullable=true)
      */
     private $namePicture;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="altPicture", type="string", length=100)
+     * @ORM\Column(name="altPicture", type="string", length=100, nullable=true)
      */
     private $altPicture;
 
     /**
-     *
      * @var string $pictureUpload
      * @Assert\NotBlank(message= "Merci d'uploader une image.")
      * @Assert\File(mimeTypes={ "image/jpeg" })

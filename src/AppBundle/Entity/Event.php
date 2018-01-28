@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
  * Event
@@ -10,14 +11,36 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\EventRepository")
  */
-class Event
+class Event implements JsonSerializable
 {
-    // CODE RELATION /////////////////////////////////////////////////
+    //Added code
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        // Return the name of event in reservation table.
-        return $this->nameEvent;
+        return $this->title;
     }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->start = new \DateTime();
+        $this->deadline = new \DateTime();
+    }
+
+    //CLI auto-generated code
+
+    /**
+     * @var \AppBundle\Entity\User $users
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Event", inversedBy="events")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $users;
 
     /**
      *
@@ -30,7 +53,7 @@ class Event
     /**
      * @var \AppBundle\Entity\Review $reviews
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", cascade={"all"}, mappedBy="event")
      */
     private $reviews;
 
@@ -39,7 +62,6 @@ class Event
      *
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Picture", cascade={"all"})
      * @ORM\JoinColumn(nullable=true)
-     *
      */
     private $picture;
 
@@ -50,8 +72,6 @@ class Event
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
-
-    ///////////////////////////////////////////////////////////////////
 
     /**
      * @var int
@@ -65,9 +85,9 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="nameEvent", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255)
      */
-    private $nameEvent;
+    private $title;
 
     /**
      * @var string
@@ -93,23 +113,23 @@ class Event
     /**
      * @var float
      *
-     * @ORM\Column(name="latitude", type="float")
+     * @ORM\Column(name="latitude", type="float", nullable=true)
      */
     private $latitude;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="longitude", type="float")
+     * @ORM\Column(name="longitude", type="float", nullable=true)
      */
     private $longitude;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateTime", type="datetime")
+     * @ORM\Column(name="start", type="datetime")
      */
-    private $dateTime;
+    private $start;
 
     /**
      * @var int
@@ -121,47 +141,38 @@ class Event
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="deadline", type="date")
+     * @ORM\Column(name="deadline", type="datetime")
      */
     private $deadline;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="isPrivate", type="boolean")
+     * @ORM\Column(name="isPrivate", type="boolean", nullable=true)
      */
     private $isPrivate;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="maxPeople", type="integer")
+     * @ORM\Column(name="maxPeople", type="integer", nullable=true)
      */
     private $maxPeople;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="onGoingMoney", type="integer")
+     * @ORM\Column(name="onGoingMoney", type="integer", nullable=true)
      */
     private $onGoingMoney;
 
-
-    /** Generate code */
-
-    ////////////////////////////////////////////////////////////////
-
-
-
-
-
     /**
-     * Constructor
+     * @var string
+     *
+     * @ORM\Column(name="eventDescription", type="text")
      */
-    public function __construct()
-    {
-        $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+    private $eventDescription;
+
 
     /**
      * Get id.
@@ -174,27 +185,27 @@ class Event
     }
 
     /**
-     * Set nameEvent.
+     * Set title.
      *
-     * @param string $nameEvent
+     * @param string $title
      *
      * @return Event
      */
-    public function setNameEvent($nameEvent)
+    public function setTitle($title)
     {
-        $this->nameEvent = $nameEvent;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get nameEvent.
+     * Get title.
      *
      * @return string
      */
-    public function getNameEvent()
+    public function getTitle()
     {
-        return $this->nameEvent;
+        return $this->title;
     }
 
     /**
@@ -318,27 +329,27 @@ class Event
     }
 
     /**
-     * Set dateTime.
+     * Set start.
      *
-     * @param \DateTime $dateTime
+     * @param \DateTime $start
      *
      * @return Event
      */
-    public function setDateTime($dateTime)
+    public function setStart($start)
     {
-        $this->dateTime = $dateTime;
+        $this->start = $start;
 
         return $this;
     }
 
     /**
-     * Get dateTime.
+     * Get start.
      *
      * @return \DateTime
      */
-    public function getDateTime()
+    public function getStart()
     {
-        return $this->dateTime;
+        return $this->start;
     }
 
     /**
@@ -498,6 +509,42 @@ class Event
     }
 
     /**
+     * Add review.
+     *
+     * @param \AppBundle\Entity\Review $review
+     *
+     * @return Event
+     */
+    public function addReview(\AppBundle\Entity\Review $review)
+    {
+        $this->reviews[] = $review;
+
+        return $this;
+    }
+
+    /**
+     * Remove review.
+     *
+     * @param \AppBundle\Entity\Review $review
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeReview(\AppBundle\Entity\Review $review)
+    {
+        return $this->reviews->removeElement($review);
+    }
+
+    /**
+     * Get reviews.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
+    }
+
+    /**
      * Set picture.
      *
      * @param \AppBundle\Entity\Picture|null $picture
@@ -546,38 +593,78 @@ class Event
     }
 
     /**
-     * Add review.
+     * Set eventDescription.
      *
-     * @param \AppBundle\Entity\Review $review
+     * @param string $eventDescription
      *
      * @return Event
      */
-    public function addReview(\AppBundle\Entity\Review $review)
+    public function setEventDescription($eventDescription)
     {
-        $this->reviews[] = $review;
+        $this->eventDescription = $eventDescription;
 
         return $this;
     }
 
     /**
-     * Remove review.
+     * Get eventDescription.
      *
-     * @param \AppBundle\Entity\Review $review
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     * @return string
      */
-    public function removeReview(\AppBundle\Entity\Review $review)
+    public function getEventDescription()
     {
-        return $this->reviews->removeElement($review);
+        return $this->eventDescription;
     }
 
     /**
-     * Get reviews.
+     * Specify data which should be serialized to JSON
+     *
+     * @link   http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since  5.4.0
+     */
+    public function jsonSerialize()
+    {
+        return [
+            "lat" => $this->latitude,
+            "lng" => $this->longitude
+        ];
+    }
+
+    /**
+     * Add user.
+     *
+     * @param \AppBundle\Entity\Event $user
+     *
+     * @return Event
+     */
+    public function addUser(\AppBundle\Entity\Event $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user.
+     *
+     * @param \AppBundle\Entity\Event $user
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeUser(\AppBundle\Entity\Event $user)
+    {
+        return $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getReviews()
+    public function getUsers()
     {
-        return $this->reviews;
+        return $this->users;
     }
 }

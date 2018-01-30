@@ -51,7 +51,7 @@ class LoadData extends Fixture
 
         // création des users
         $users = [];
-        for ($i=0; $i < 10; $i++) {
+        for ($i=0; $i < 15; $i++) {
             $picture = new Picture();
             $picture->setNamePicture('profile.jpg');
             $picture->setAltPicture('faker');
@@ -71,7 +71,7 @@ class LoadData extends Fixture
 
         // création des reviews
         $reviews = [];
-        for ($j = 0; $j < 10; $j++) {
+        for ($j = 0; $j < 15; $j++) {
             $reviews[$j] = new Review();
             $reviews[$j]->setComment($faker->text)
                 ->setScore($faker->numberBetween($min = 0, $max = 5));
@@ -86,7 +86,7 @@ class LoadData extends Fixture
 
         // création des events
         $events = [];
-        for ($k=0; $k < 10; $k++) {
+        for ($k=0; $k < 15; $k++) {
 
             $picture = new Picture();
             $picture->setNamePicture('pinata.jpg');
@@ -104,7 +104,9 @@ class LoadData extends Fixture
                 ->setDeadline($faker->dateTimeBetween($startDate = 'now', $endDate = '+1 years', $timezone = null))
                 ->setMaxPeople($faker->numberBetween($min = 1, $max = 250))
                 ->setEventDescription($faker->text($maxNbChars = 300))
+                ->setIsPrivate($faker->boolean($chanceOfGettingTrue = 20))
                 ->setPicture($picture);
+
 
 
             // on récupère un nombre aléatoire de Categories dans un tableau

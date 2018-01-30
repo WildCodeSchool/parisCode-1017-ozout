@@ -64,7 +64,7 @@ class LoadData extends Fixture
                 ->setDateOfBirth($faker->dateTime)
                 ->setUserName($faker->lastName)
                 ->setEmail($faker->email)
-                ->setpassword($faker->password)
+                ->setpassword($faker->word)
                 ->setPicture($picture);
             $manager->persist($users[$i]);
         }

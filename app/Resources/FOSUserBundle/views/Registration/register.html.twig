@@ -5,6 +5,21 @@
     <link href="{{ asset('assets/css/register.css') }}" rel="stylesheet">
 {% endblock %}
 
+{% block body %}
+
+<div class="connected">
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+    <a href="{{ path('fos_user_security_logout') }}">
+        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+    </a>
+</div>
+{% else %}
+<div class="login-container">
+    <h2>Déjà un compte OzOut ? </h2>
+    <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary text-uppercase btn-header connexion-btn">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+    {% endif %}
+</div>
 {% block fos_user_content %}
     <div class="container">
         <h2 class="">Pas encore de compte ?</h2>
@@ -18,5 +33,7 @@
     </div>
 
 {% endblock fos_user_content %}
+
+{% endblock body %}
 
 

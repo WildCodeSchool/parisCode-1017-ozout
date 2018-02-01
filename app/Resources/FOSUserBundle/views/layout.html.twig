@@ -37,20 +37,6 @@
 
 {% block body %}
 
-        <div class="connected">
-            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-                <a href="{{ path('fos_user_security_logout') }}">
-                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                </a>
-        </div>
-            {% else %}
-        <div class="login-container">
-            <h2>Déjà un compte OzOut ? </h2>
-            <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary text-uppercase btn-header connexion-btn">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-            {% endif %}
-        </div>
-
         {% if app.request.hasPreviousSession %}
             {% for type, messages in app.session.flashbag.all() %}
                 {% for message in messages %}

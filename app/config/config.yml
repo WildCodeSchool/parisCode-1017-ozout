@@ -82,6 +82,7 @@ fos_user:
     registration:
         form:
             type: AppBundle\Form\RegistrationType
+            type: AppBUndle\Form\ProfileType
 
 
 #EasyAdmin Configuration

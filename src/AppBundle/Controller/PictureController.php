@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\FileUploader;
 
+
 /**
  * Picture controller.
  *
@@ -48,10 +49,6 @@ class PictureController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-
-
-
 
             $em->persist($picture);
             $em->flush();

@@ -79,3 +79,15 @@
 .divcreateaccount{
     margin-top: 27%;
 }
+footer {
+    position: absolute;
+    left: 0 ; right: 0; bottom: 0;
+    height:[footer-height]
+}
+
+html { height: 100%; }
+body {
+    min-height:100%;
+    position:relative;
+    padding-bottom:[footer-height]
+}

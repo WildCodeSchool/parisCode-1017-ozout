@@ -24,6 +24,11 @@
     overflow: hidden;
     text-align: center;
 }
+
+.confirmed{
+    margin-top: 40vh; /* poussé de la moitié de hauteur de viewport */
+    transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+}
 .connexion-btn{
     margin-top:2%;
 }
@@ -32,6 +37,16 @@
 }
 
 footer {
-    position: sticky;
-    margin-top: 3vw;
+    position: absolute;
+    /*margin-top: 3vw;
+    width:100%;*/
+    left: 0 ; right: 0; bottom: 0;
+    height:[footer-height]
+}
+
+html { height: 100%; }
+body {
+    min-height:100%;
+    position:relative;
+    padding-bottom:[footer-height]
 }

@@ -33,6 +33,12 @@ services:
             arguments:
                 $targetDir: '%pictures_directory%'
 
+    user.picture_uploading:
+        class: AppBundle\EventListener\PictureUploadingListener
+        arguments: ['@router', '@AppBundle\Service\FileUploader']
+        tags:
+            - { name: kernel.event_suscriber}
+
     app.form.registration:
         class: AppBundle\Form\RegistrationType
         tags:

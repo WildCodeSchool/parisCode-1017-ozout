@@ -1,15 +1,14 @@
 .login-container {
     padding: 30px;
-    max-width: 350px;
+    max-width: 500px;
     width: 100% !important;
     background-color: #F7F7F7;
     margin: 100px auto;
     border-radius: 2px;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     overflow: hidden;
-
 }
-.login-container h1 {
+.login-container h2 {
     text-align: center;
     font-size: 1.8em;
 
@@ -55,7 +54,7 @@
     text-shadow: 0 1px rgba(0,0,0,0.3);
     background-color: #357ae8;
 }
-.login-container a {
+.login-container .password {
     text-decoration: none;
     color: #666;
     font-weight: 400;
@@ -71,4 +70,12 @@
 .navbar-header{
     text-align: center;
     width: 100%;
+}
+
+.createaccount{
+    width: 100%;
+    margin-top: 3vh;
+}
+.divcreateaccount{
+    margin-top: 27%;
 }

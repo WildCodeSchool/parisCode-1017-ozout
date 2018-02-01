@@ -13,6 +13,24 @@
     margin-left:1vw;
 }
 
+.login-container {
+    padding: 30px;
+    max-width: 600px;
+    width: 100% !important;
+    background-color: #F7F7F7;
+    margin: 100px auto;
+    border-radius: 2px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    text-align: center;
+}
+.connexion-btn{
+    margin-top:2%;
+}
+.notyet{
+    margin-bottom: 4%;
+}
+
 footer {
     position: sticky;
     margin-top: 3vw;

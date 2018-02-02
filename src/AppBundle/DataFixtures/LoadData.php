@@ -101,7 +101,6 @@ class LoadData extends Fixture
                 ->setCity($faker->city)
                 ->setZipcode($faker->postcode)
                 ->setTargetMoney($faker->numberBetween($min = 1, $max = 90000))
-                ->setDeadline($faker->dateTimeBetween($startDate = 'now', $endDate = '+1 years', $timezone = null))
                 ->setMaxPeople($faker->numberBetween($min = 1, $max = 250))
                 ->setEventDescription($faker->text($maxNbChars = 300))
                 ->setIsPrivate($faker->boolean($chanceOfGettingTrue = 20))

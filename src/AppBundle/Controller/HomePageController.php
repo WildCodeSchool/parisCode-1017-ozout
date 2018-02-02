@@ -28,15 +28,16 @@ class HomePageController extends Controller
      */
     public function showHomePageAction() {
        $em = $this->getDoctrine()->getManager();
-        $events = $em->getRepository('AppBundle:Event')->findAll();
+        $eventsCreator = $em->getRepository('AppBundle:Event')->getEventByUserCreator($this->getUser());
+        $eventsParticipate = $em->getRepository('AppBundle:Event')->getEventByUserParticipate($this->getUser());
 
         // replace this example code with whatever you need
         return $this->render(
             'user/home/index.html.twig', [
-                'events' =>$events,
+                'eventsCreator' =>$eventsCreator,
+                'eventsParticipate' =>$eventsParticipate,
             ]
         );
-
 
     }
 }

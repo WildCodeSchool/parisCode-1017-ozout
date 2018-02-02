@@ -51,6 +51,13 @@ class Reservation
     private $moneyGiven;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="isCreator", type="boolean")
+     */
+    private $isCreator;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="doParticipate", type="boolean")
@@ -185,5 +192,29 @@ class Reservation
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set isCreator.
+     *
+     * @param bool $isCreator
+     *
+     * @return Reservation
+     */
+    public function setIsCreator($isCreator)
+    {
+        $this->isCreator = $isCreator;
+
+        return $this;
+    }
+
+    /**
+     * Get isCreator.
+     *
+     * @return bool
+     */
+    public function getIsCreator()
+    {
+        return $this->isCreator;
     }
 }

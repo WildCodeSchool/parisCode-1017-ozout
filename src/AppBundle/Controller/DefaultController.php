@@ -23,7 +23,7 @@ class DefaultController extends Controller
         $events = $em->getRepository('AppBundle:Event')->getAllNotPrivateEvent();
 
         return $this->render(
-            'user/default/index.html.twig', [
+            'default/index.html.twig', [
             'events' =>$events,
             ]
         );
@@ -37,7 +37,7 @@ class DefaultController extends Controller
      */
     public function contactShowAction()
     {
-        return $this->render('user/default/contact.html.twig');
+        return $this->render('default/contact.html.twig');
     }
 
     /**
@@ -48,6 +48,6 @@ class DefaultController extends Controller
      */
     public function aboutShowAction()
     {
-        return $this->render('user/default/about.html.twig');
+        return $this->render('default/about.html.twig');
     }
 }

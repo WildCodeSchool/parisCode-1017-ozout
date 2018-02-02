@@ -1,12 +1,14 @@
-{% extends 'user/default/layout.html.twig' %}
+{% extends 'base.html.twig' %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.print.css" media="print">
     <link href="{{ asset('assets/css/homepageC.css') }}" rel="stylesheet">
 {% endblock %}
+
 {% block body %}
 
-<body id="page-top">
+<section id="page-top">
 
 <!-- Header -->
 <div id="container_wrapper">
@@ -172,6 +174,7 @@
         })
     });
 </script>
+
     <script>
         function initMap(){
 

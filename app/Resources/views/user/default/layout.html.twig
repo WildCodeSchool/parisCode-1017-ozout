@@ -18,15 +18,22 @@
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="{{ url('about') }}">A propos d'Ozout</a>
                     </li>
+                    {% if app.user == null %}
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="{{ path('fos_user_registration_register') }}">Inscription</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="{{ path('fos_user_security_login') }}">Connexion</a>
                     </li>
+                        {% endif %}
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="{{ url('contact') }}">Contact</a>
                     </li>
+                    {% if app.user == true %}
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{ url('fos_user_security_logout') }}">Logout</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

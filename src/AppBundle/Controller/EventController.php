@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Event;
+use AppBundle\Entity\Reservation;
 use AppBundle\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -62,6 +63,15 @@ class EventController extends Controller
 
             $fileUploader->upload($event->getPicture());
 
+            $reservation = new Reservation();
+            $reservation->setDate(new \DateTime());
+            $reservation->setDoParticipate(true);
+            $reservation->setEvent($event);
+            $reservation->setIsCreator(true);
+            $reservation->setUser($this->getUser());
+            $reservation->setMoneyGiven(0);
+
+            $em->persist($reservation);
             $em->persist($event);
             $em->flush();
 

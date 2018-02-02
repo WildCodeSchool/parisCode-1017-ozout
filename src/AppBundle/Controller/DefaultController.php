@@ -20,7 +20,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $events = $em->getRepository('AppBundle:Event')->findAll();
+        $events = $em->getRepository('AppBundle:Event')->findBy(array('isPrivate' => false));
 
         return $this->render(
             'user/default/index.html.twig', [

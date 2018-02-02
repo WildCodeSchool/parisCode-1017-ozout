@@ -39,4 +39,15 @@ class DefaultController extends Controller
     {
         return $this->render('user/default/contact.html.twig');
     }
+
+    /**
+     * Send to About Page
+     *
+     * @Route("/about", name="about")
+     * @Method("GET")
+     */
+    public function aboutShowAction()
+    {
+        return $this->render('user/default/about.html.twig');
+    }
 }

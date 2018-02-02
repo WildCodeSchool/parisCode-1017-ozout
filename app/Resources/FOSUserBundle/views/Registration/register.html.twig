@@ -5,8 +5,25 @@
     <link href="{{ asset('assets/css/register.css') }}" rel="stylesheet">
 {% endblock %}
 
+{% block body %}
+
+<div class="connected">
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+    <a href="{{ path('fos_user_security_logout') }}">
+        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+    </a>
+</div>
+{% else %}
+<div class="login-container">
+    <h2>Déjà un compte OzOut ? </h2>
+    <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary text-uppercase btn-header connexion-btn">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+    {% endif %}
+</div>
 {% block fos_user_content %}
     <div class="container">
+        <h2 class="">Pas encore de compte ?</h2>
+        <h4 class="notyet">A vous de jouer !</h4>
         {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
         {{ form_widget(form) }}
         <div>
@@ -17,47 +34,6 @@
 
 {% endblock fos_user_content %}
 
-{% block footer %}
+{% endblock body %}
 
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <ul class="list-inline quicklinks">
-                        <li class="list-inline-item">
-                            <a href="#">Privacy Policy</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">Terms of Use</a>
-                        </li>
-                    </ul>
-                </div>
 
-                <div class="col-md-4">
-                    <ul class="list-inline social-buttons">
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fa fa-linkedin"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <span class="copyright">Contact</span>
-                </div>
-
-            </div>
-        </div>
-    </footer>
-
-{% endblock %}

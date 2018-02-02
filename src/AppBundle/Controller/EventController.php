@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Event;
 use AppBundle\Entity\Reservation;
+use AppBundle\Entity\User;
 use AppBundle\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -144,12 +145,13 @@ class EventController extends Controller
      * @Route("/delete/{id}", name="event_delete")
      * @Method("GET")
      */
-    public function deleteAction(Event $event, FileUploader $fileUploader)
+    public function deleteAction(Event $event, Reservation $reservation, FileUploader $fileUploader)
     {
 
             $em = $this->getDoctrine()->getManager();
 
             $em->remove($event);
+            $em->remove($reservation);
 
             $fileUploader->remove($event->getPicture());
 

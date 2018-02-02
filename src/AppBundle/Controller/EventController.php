@@ -149,7 +149,6 @@ class EventController extends Controller
     {
 
             $em = $this->getDoctrine()->getManager();
-
             $em->remove($event);
             $em->remove($reservation);
 

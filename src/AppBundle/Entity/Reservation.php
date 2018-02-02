@@ -13,6 +13,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 class Reservation
 {
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+        $this->doParticipate = true;
+    }
+
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Event", inversedBy="reservations"))
      * @ORM\JoinColumn(nullable=false)
@@ -31,7 +38,7 @@ class Reservation
 
     /**
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", inversedBy="reservations"))
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="reservations"))
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -63,6 +70,7 @@ class Reservation
      * @ORM\Column(name="doParticipate", type="boolean")
      */
     private $doParticipate;
+
 
     /**
      * Get id.
@@ -120,6 +128,30 @@ class Reservation
     public function getMoneyGiven()
     {
         return $this->moneyGiven;
+    }
+
+    /**
+     * Set isCreator.
+     *
+     * @param bool $isCreator
+     *
+     * @return Reservation
+     */
+    public function setIsCreator($isCreator)
+    {
+        $this->isCreator = $isCreator;
+
+        return $this;
+    }
+
+    /**
+     * Get isCreator.
+     *
+     * @return bool
+     */
+    public function getIsCreator()
+    {
+        return $this->isCreator;
     }
 
     /**
@@ -192,29 +224,5 @@ class Reservation
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * Set isCreator.
-     *
-     * @param bool $isCreator
-     *
-     * @return Reservation
-     */
-    public function setIsCreator($isCreator)
-    {
-        $this->isCreator = $isCreator;
-
-        return $this;
-    }
-
-    /**
-     * Get isCreator.
-     *
-     * @return bool
-     */
-    public function getIsCreator()
-    {
-        return $this->isCreator;
     }
 }

@@ -12,6 +12,16 @@ use AppBundle\Entity\User;
  */
 class EventRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getAllNotPrivateEvent(){
+        $qb = $this->createQueryBuilder('e');
+        $qb->select('e')
+            ->join('e.picture', 'p')
+            ->addSelect('p')
+            ->where('e.isPrivate = false');
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function getEventByUserCreator(User $user){
         $qb = $this->createQueryBuilder('e');
         $qb->select('e')

@@ -35,24 +35,9 @@ services:
 
     user.picture_uploading:
         class: AppBundle\EventListener\PictureUploadingListener
-        arguments: ['@router', '@AppBundle\Service\FileUploader']
+        arguments: ['@AppBundle\Service\FileUploader']
         tags:
             - { name: kernel.event_suscriber}
-
-    app.form.registration:
-        class: AppBundle\Form\RegistrationType
-        tags:
-            - { name: form.type, alias: app_user_registration }
-
-    app.form.profile:
-        class: AppBundle\Form\ProfileType
-        tags:
-            - { name: form.type, alias: app_user_profile }
-
-    # add more services, or override services that need manual wiring
-    # AppBundle\upload\ExampleService:
-    #     arguments:
-    #         $someArgument: 'some_value'
 
 
 

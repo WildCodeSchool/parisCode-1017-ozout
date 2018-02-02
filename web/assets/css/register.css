@@ -9,8 +9,8 @@
 
 .connected{
     margin-top: 20px;
-    margin-bottom: 20px;
     margin-left:1vw;
+    margin-left: 0;
 }
 
 .register-container {
@@ -47,10 +47,10 @@
     margin-bottom: 4%;
 }
 
-footer {
+/*footer {
     position: absolute;
-    /*margin-top: 3vw;
-    width:100%;*/
+    !*margin-top: 3vw;
+    width:100%;*!
     left: 0 ; right: 0; bottom: 0;
     height:[footer-height]
 }
@@ -61,7 +61,7 @@ body {
     position:relative;
     line-height: 2;
     padding-bottom:[footer-height]
-}
+}*/
 
 .password legend{
     display: none;

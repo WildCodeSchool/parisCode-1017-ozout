@@ -21,7 +21,7 @@
     {% endif %}
 </div>
 {% block fos_user_content %}
-    <div class="container register-container-create ">
+    <div class="register-container-create ">
         <h2 class="">Pas encore de compte ?</h2>
         <h4 class="notyet">A vous de jouer !</h4>
         {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}

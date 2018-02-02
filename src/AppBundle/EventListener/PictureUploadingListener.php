@@ -34,6 +34,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
         {
             return array(
                 FOSUserEvents::REGISTRATION_SUCCESS => 'onPictureUploadingSuccess',
+                FOSUserEvents::PROFILE_EDIT_SUCCESS => 'onPictureUploadingSuccess',
             );
         }
 

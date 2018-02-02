@@ -75,7 +75,7 @@ class EventController extends Controller
             $em->persist($event);
             $em->flush();
 
-            return $this->redirectToRoute('event_show', array('id' => $event->getId()));
+            return $this->redirectToRoute('home_connected');
         }
 
         return $this->render(

@@ -13,18 +13,27 @@
 
             <div class="fos_user_user_show">
 
-                    <nav class="menu">
-                        <ul class="nav">
-                            <li><span class="fa fa-user"></span> Mon Profil</li>
-                        </ul>
-                    </nav>
-
-                    <div class="profile-picture">
-                        <img class="img-profile" src="https://image.noelshack.com/fichiers/2018/04/4/1516918074-sub6a3ff0-58d8b70b540f3-gkykh-880.jpg" alt="">
+                        <img class="profile" src="{{ asset('uploads/pictures/'~ user.picture.namePicture) }}">
                     </div>
+
+        <div class="profile-picture">
+
+            <nav class="menu">
+                <ul class="nav">
+                    <li><span class="fa fa-user"></span> Mon Profil</li>
+                </ul>
+            </nav>
 
                     <table class="table">
                         <tbody>
+                            <tr>
+                                <td>{{ 'Prénom' }}</td>
+                                <td>{{ user.nameuser }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'Nom' }}</td>
+                                <td>{{ user.surnameuser }}</td>
+                            </tr>
                             <tr>
                                 <td>{{ 'profile.show.username'|trans }}</td>
                                 <td>{{ user.username }}</td>
@@ -32,6 +41,10 @@
                             <tr>
                                 <td>{{ 'profile.show.email'|trans }}</td>
                                 <td>{{ user.email }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'Date de naissance' }}</td>
+                                <td>{{ user.dateOfBirth |date('d-m-Y')}}</td>
                             </tr>
                         </tbody>
                     </table>

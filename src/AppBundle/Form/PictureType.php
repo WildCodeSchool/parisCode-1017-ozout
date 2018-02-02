@@ -25,7 +25,8 @@ class PictureType extends AbstractType
                 )
             );
             
-    }/**
+    }
+    /**
       * {@inheritdoc}
       */
     public function configureOptions(OptionsResolver $resolver)

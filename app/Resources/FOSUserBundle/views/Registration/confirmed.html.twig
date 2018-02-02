@@ -8,8 +8,15 @@
 {% block fos_user_content %}
 <div class="login-container confirmed">
     <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-    {% if targetUrl %}
-    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
-    {% endif %}
+    <p>Vous allez être redirigé automatiquement vers la page d'accueil</p>
 </div>
 {% endblock fos_user_content %}
+
+{% block javascripts %}
+    <script>
+        window.setTimeout(function() {
+            window.location.href = '{{ path('home_connected') }}';
+        }, 3000);
+
+    </script>
+{% endblock %}

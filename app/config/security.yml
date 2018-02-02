@@ -10,9 +10,6 @@ security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory: ~
-
         fos_userbundle:
             id: fos_user.user_provider.username
 
@@ -47,5 +44,6 @@ security:
         - { path: ^/home, role: ROLE_USER }
         - { path: ^/event, role: ROLE_USER }
         - { path: ^/logout, role: ROLE_USER }
+        - { path: ^/reservation, role: ROLE_USER }
 
 

@@ -20,12 +20,10 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
      */
     class PictureUploadingListener implements EventSubscriberInterface
     {
-        private $router;
         private $uploader;
 
-        public function __construct(UrlGeneratorInterface $router, FileUploader $uploader)
+        public function __construct(FileUploader $uploader)
         {
-            $this->router = $router;
             $this->uploader= $uploader;
         }
 

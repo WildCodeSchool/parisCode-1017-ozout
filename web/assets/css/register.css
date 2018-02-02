@@ -13,9 +13,20 @@
     margin-left:1vw;
 }
 
-.login-container {
+.register-container {
     padding: 30px;
     max-width: 600px;
+    width: 100% !important;
+    background-color: #F7F7F7;
+    margin: 100px auto;
+    border-radius: 2px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    text-align: center;
+}
+.register-container-create {
+    padding: 30px;
+    max-width: 700px;
     width: 100% !important;
     background-color: #F7F7F7;
     margin: 100px auto;
@@ -48,5 +59,23 @@ html { height: 100%; }
 body {
     min-height:100%;
     position:relative;
+    line-height: 2;
     padding-bottom:[footer-height]
+}
+
+.password legend{
+    display: none;
+}
+.birthdate_field{
+    margin-bottom: 2%;
+}
+.birthdate_field legend{
+    font-size: 1rem;
+    line-height: 2;
+}
+.birthdate_field .form-inline{
+    display: inline;
+}
+.form-control-file{
+    margin-left: 33%;
 }

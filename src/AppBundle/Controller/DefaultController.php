@@ -2,11 +2,9 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Event;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
 
 
 class DefaultController extends Controller
@@ -21,12 +19,12 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $events = $em->getRepository('AppBundle:Event')->getAllNotPrivateEvent();
+        $reviews = $em->getRepository('AppBundle:Review')->findAll();
 
-        return $this->render(
-            'default/index.html.twig', [
-            'events' =>$events,
-            ]
-        );
+        return $this->render('default/index.html.twig', array(
+            'events' => $events,
+            'reviews' => $reviews
+        ));
     }
 
     /**

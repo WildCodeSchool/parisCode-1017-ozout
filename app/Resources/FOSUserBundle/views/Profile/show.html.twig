@@ -6,53 +6,117 @@
 {% endblock %}
 
 {% block fos_user_content %}
+    <div class="container profile-page">
+    <header>
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </header>
 
-    <div class="profile-container">
-
-        <h1>Mes informations</h1>
-
-            <div class="fos_user_user_show">
-                <img class="profile" src="{{ asset('uploads/pictures/'~ user.picture.namePicture) }}">
+    <main>
+    <div class="row">
+        <div class="left col-lg-4">
+            <div class="photo-left">
+                 <img class="photo" src="{{ asset('uploads/pictures/'~ user.picture.namePicture) }}">
             </div>
+            <h4 class="name">{{ user.nameuser }}</h4>
+            <p class="info">{{ user.surnameuser }}</p>
+            <p class="info">{{ user.username }}</p>
+            <p class="info">{{ user.email }}</p>
+            <p class="info">{{ user.dateOfBirth |date('d-m-Y')}}</p>
 
-        <div class="profile-picture">
 
-            <nav class="menu">
-                <ul class="nav">
-                    <li><span class="fa fa-user"></span> Mon Profil</li>
-                </ul>
-            </nav>
-
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>{{ 'Prénom' }}</td>
-                                <td>{{ user.nameuser }}</td>
-                            </tr>
-                            <tr>
-                                <td>{{ 'Nom' }}</td>
-                                <td>{{ user.surnameuser }}</td>
-                            </tr>
-                            <tr>
-                                <td>{{ 'profile.show.username'|trans }}</td>
-                                <td>{{ user.username }}</td>
-                            </tr>
-                            <tr>
-                                <td>{{ 'profile.show.email'|trans }}</td>
-                                <td>{{ user.email }}</td>
-                            </tr>
-                            <tr>
-                                <td>{{ 'Date de naissance' }}</td>
-                                <td>{{ user.dateOfBirth |date('d-m-Y')}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div class="profile-edit">
-                        <a href="{{ path('fos_user_profile_edit') }}"> Mettre à jour mes informations </a>
-                    </div>
-
-            </div>
+        <p class="desc">Salut {{ user.nameuser }}.</p>
+        <div class="social">
+            <p class="info">Invite tes ami.e.s !</p>
+            <i class="fa fa-facebook-square" aria-hidden="true"></i>
+            <i class="fa fa-twitter-square" aria-hidden="true"></i>
+        </div>
     </div>
+
+        <div class="right col-lg-8">
+            <ul class="nav">
+                <li>Mes évènements</li>
+                <li>Mes évènements à venir</li>
+            </ul>
+
+
+            <div class="row gallery">
+                <div class="col-md-4">
+                    <img src="https://image.noelshack.com/fichiers/2017/38/2/1505774813-photo4.jpg"/>
+                </div>
+                <div class="col-md-4">
+                    <img src="https://image.noelshack.com/fichiers/2017/38/2/1505774814-photo5.jpg"/>
+                </div>
+                <div class="col-md-4">
+                    <img src="https://image.noelshack.com/fichiers/2017/38/2/1505774814-photo6.jpg"/>
+                </div>
+                <div class="col-md-4">
+                    <img src="https://image.noelshack.com/fichiers/2017/38/2/1505774817-photo1.jpg"/>
+                </div>
+                <div class="col-md-4">
+                    <img src="https://image.noelshack.com/fichiers/2017/38/2/1505774815-photo2.jpg"/>
+                </div>
+                <div class="col-md-4">
+                    <img src="https://image.noelshack.com/fichiers/2017/38/2/1505774816-photo3.jpg"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    </main>
+    </div>
+    {#{% for event in eventsCreator %}#}
+        {#<div class="col-md-4 col-sm-6 portfolio-item thumb-post">#}
+            {#<a class="portfolio-link" data-toggle="modal" href="#portfolioModal1{{ event.id }}">#}
+                {#<div class="portfolio-hover">#}
+                    {#<div class="portfolio-hover-content">#}
+                        {#<i class="fa fa-plus fa-3x"></i>#}
+                    {#</div>#}
+                {#</div>#}
+                {#<img class="img-fluid" src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="{{ event.title }}">#}
+            {#</a>#}
+            {#<div class="portfolio-caption">#}
+                {#<h4>{{ event.title }}</h4>#}
+                {#<p class="text-muted">{{ event.city }} </p>#}
+                {#<p class="text-muted">{{ event.targetMoney }} </p>#}
+            {#</div>#}
+        {#</div>#}
+    {#{% endfor %}#}
+
+    {#<div class="profile-container">#}
+        {#<h3 align="center"><span class="fa fa-user"></span> Mon Profil</h3>#}
+        {#<div class="fos_user_user_show" align="center">#}
+            {#<img class="profile" src="{{ asset('uploads/pictures/'~ user.picture.namePicture) }}">#}
+        {#</div>#}
+
+        {#<div class="profile-picture">#}
+            {#<table class="table">#}
+                {#<tbody>#}
+                    {#<tr>#}
+                        {#<td>{{ 'Prénom' }}</td>#}
+                        {#<td>{{ user.nameuser }}</td>#}
+                    {#</tr>#}
+                    {#<tr>#}
+                        {#<td>{{ 'Nom' }}</td>#}
+                        {#<td>{{ user.surnameuser }}</td>#}
+                    {#</tr>#}
+                    {#<tr>#}
+                        {#<td>{{ 'profile.show.username'|trans }}</td>#}
+                        {#<td>{{ user.username }}</td>#}
+                    {#</tr>#}
+                    {#<tr>#}
+                        {#<td>{{ 'profile.show.email'|trans }}</td>#}
+                        {#<td>{{ user.email }}</td>#}
+                    {#</tr>#}
+                    {#<tr>#}
+                        {#<td>{{ 'Date de naissance' }}</td>#}
+                        {#<td>{{ user.dateOfBirth |date('d-m-Y')}}</td>#}
+                    {#</tr>#}
+                {#</tbody>#}
+            {#</table>#}
+
+            {#<div class="profile-edit">#}
+                {#<a href="{{ path('fos_user_profile_edit') }}"> Mettre à jour mes informations </a>#}
+            {#</div>#}
+        {#</div>#}
+    {#</div>#}
 
 {% endblock fos_user_content %}

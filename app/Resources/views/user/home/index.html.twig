@@ -3,20 +3,18 @@
 {% block stylesheets %}
     <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.print.css" media="print">
-    <link href="{{ asset('assets/css/homepageC.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
 
-<section id="page-top">
-
 <!-- Header -->
+    <div class="container">
 <div id="container_wrapper">
     <div class="row"><!--main row-->
     <div class="col-lg-8">
 
 <!-- Portfolio Grid -->
-<section class="bg-light" id="portfolio">
+<section class="bg-light homepage-connected" id="portfolio">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -150,12 +148,12 @@
             </div>
         </div>
     </div>
+    </div>
 {% endfor %}
 
 {% endblock %}
 {% block javascripts %}
-<script src="{{ asset('assets/js/moment.js') }}">
-</script>
+<script src="{{ asset('assets/js/moment.js') }}"></script>
 <script src="{{ asset('assets/js/fullcalendar.js') }}"></script>
 <script src="{{ asset('assets/js/langFullcalendar.js') }}"></script>
 

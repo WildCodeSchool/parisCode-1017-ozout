@@ -17,15 +17,15 @@
 
             <!-- Custom styles -->
             <link href="{{ asset('assets/css/agency.min.css') }}" rel="stylesheet">
-            <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-            <link href="{{ asset('assets/css/createEvent.css') }}" rel="stylesheet">
+            <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 
             {% block stylesheets %}
             {% endblock %}
 
     </head>
 
-    <body>
+
+
     {% block nav %}
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -56,6 +56,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link js-scroll-trigger" href="{{ url('fos_user_security_logout') }}">Logout</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link js-scroll-trigger" href="{{ url('home_connected') }}">Mes évènements</a>
                             </li>
                         {% endif %}
                         <li class="nav-item">
@@ -90,19 +93,19 @@
 
                     <div class="col-md-4">
                         <ul class="list-inline social-buttons">
-                            <li class="list-inline-item">
+                            <li class="list-inline-item twitter">
                                 <a href="#">
                                     <i class="fa fa-twitter"></i>
                                 </a>
                             </li>
-                            <li class="list-inline-item">
+                            <li class="list-inline-item facebook">
                                 <a href="#">
                                     <i class="fa fa-facebook"></i>
                                 </a>
                             </li>
-                            <li class="list-inline-item">
+                            <li class="list-inline-item instagram">
                                 <a href="#">
-                                    <i class="fa fa-linkedin"></i>
+                                    <i class="fa fa-instagram"></i>
                                 </a>
                             </li>
                         </ul>
@@ -126,6 +129,9 @@
         <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
         <!-- Custom scripts for this template -->
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPoRjII2N8Ce3xXg3hRshEikPWbDMlGNY&callback=initMap">
+        </script>
         <script src="{{ asset('assets/js/agency.js') }}"></script>
         <script src="{{ asset('assets/js/main.js') }}"></script>
 

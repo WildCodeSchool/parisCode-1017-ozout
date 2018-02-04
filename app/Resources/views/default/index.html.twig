@@ -1,9 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
 <body id="page-top">
-
 <!-- Header -->
 <header class="masthead">
     <div class="container">
@@ -19,14 +17,12 @@
 <section class="bg-light" id="portfolio">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading text-uppercase">Top 10 des événements en cours</h2>
-
+            <div class="col-lg-12">
+                <h2 class="section-heading text-uppercase" align="center">Top des événements en cours</h2>
                 {% if app.user == null %}
                     <h3 class="section-subheading text-muted">Connectez-vous pour voir les événements proches de vous.</h3>
                     <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header" href="{{ path('fos_user_security_login') }}">Se connecter</a>
                 {% endif %}
-
             </div>
         </div>
         <div class="row">
@@ -57,8 +53,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading text-uppercase">A propos d'Ozout</h2>
-                <h3 class="section-subheading text-muted">Vidéo Gif à fournir.</h3>
+                <h2 class="section-heading text-uppercase">À propos d'Ozout</h2>
+                {#<h3 class="section-subheading text-muted">Vidéo Gif à fournir.</h3>#}
             </div>
         </div>
         <div class="row text-center">
@@ -100,83 +96,37 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4">
-                <div class="team-member">
-                    <img class="mx-auto rounded-circle" src="img/team/1.jpg" alt="">
-                    <h4>Kay Garland</h4>
-                    <p class="text-muted">Lead Designer</p>
-                    <ul class="list-inline social-buttons">
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fa fa-linkedin"></i>
-                            </a>
-                        </li>
-                    </ul>
+            {% set first = reviews[1] %}
+            {% set second = reviews[2] %}
+            {% set third = reviews[3] %}
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="" alt="">
+                        <h4>{{ first.user }}</h4>
+                        <p class="text-muted">{{ first.comment }}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="team-member">
-                    <img class="mx-auto rounded-circle" src="img/team/2.jpg" alt="">
-                    <h4>Larry Parker</h4>
-                    <p class="text-muted">Lead Marketer</p>
-                    <ul class="list-inline social-buttons">
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fa fa-linkedin"></i>
-                            </a>
-                        </li>
-                    </ul>
+
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="" alt="">
+                        <h4>{{ second.user }}</h4>
+                        <p class="text-muted">{{ second.comment }}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="team-member">
-                    <img class="mx-auto rounded-circle" src="img/team/3.jpg" alt="">
-                    <h4>Diana Pertersen</h4>
-                    <p class="text-muted">Lead Developer</p>
-                    <ul class="list-inline social-buttons">
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fa fa-linkedin"></i>
-                            </a>
-                        </li>
-                    </ul>
+
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="" alt="">
+                        <h4>{{ third.user }}</h4>
+                        <p class="text-muted">{{ third.comment }}</p>
+                    </div>
                 </div>
-            </div>
         </div>
-        <div class="row">
-            <div class="col-lg-8 mx-auto text-center">
-                <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+            <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
         </div>
     </div>
 </section>

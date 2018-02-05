@@ -1,0 +1,132 @@
+/** GENERAL **/
+
+ul {
+    list-style: none;
+}
+
+.thumb-post img {
+    object-fit: cover; /* Do not scale the image */
+    object-position: center; /* Center the image within the element */
+    width: 100%;
+    max-height: 250px;
+}
+
+/*header.masthead .intro-text {*/
+    /*padding-top: 400px;*/
+    /*padding-bottom: 200px;*/
+/*}*/
+
+.btn-header {
+    margin-bottom: 20px !important;
+    width:100%;
+}
+
+footer {
+    background-color: #212529;
+}
+
+ul.social-buttons li.twitter a{
+    background-color: #00aced;
+}
+ul.social-buttons li.twitter a:hover{
+    background-color: #00aced;
+}
+ul.social-buttons li.facebook a{
+    background-color: #3c51a0;
+}
+ul.social-buttons li.facebook a:hover{
+    background-color: #3b5998;
+}
+ul.social-buttons li.instagram a{
+    background-color: #8a3ab9;
+}
+
+.modal {
+    width: 80%;
+    height: 90%;
+    top:5%;
+    left: 10%
+}
+
+a.logo{
+    font-size: 2em;
+}
+
+#services{
+    background: url('../img/backgroundBlur.png')center 0 no-repeat fixed !important;
+}
+
+.homepage-connected{
+    background-color: transparent !important;
+}
+
+
+
+/**************************************** ÉVÈNEMENTS ****************************************************/
+/** 1- Page New Event
+    2_ Page Show Event
+    3_ Page Edit Event
+    4_ Page INDEX
+
+
+/** 1_'new.html.twig'***************************************************         1_PAGE CREATE NEW EVENT**/
+
+.formCreateEvent {
+    text-align:center;
+}
+
+/** 2_'show.html.twig'***************************************************        2_PAGE SHOW EVENT**/
+.formShowEvent {
+    margin-top: 150px;
+}
+
+/** 1_'edit.html.twig'***************************************************        3_PAGE EDIT EVENT**/
+.formEditEvent {
+    margin-top: 150px;
+}
+
+/** 1_'index.html.twig'**************************************************        4_PAGE INDEX EVENT**/
+.formIndexEvent {
+    margin-top: 150px;
+}
+
+img {
+    max-width: 100%;
+}
+
+
+/**************************************** REGISTER ****************************************************/
+
+/** 'register.html.twig'***************************************************         1_REGISTER USER**/
+
+.register {
+    margin-top: 120px;
+    text-align: center;
+}
+
+.imgTable{
+    width: 50%;
+}
+
+.register-container {
+    padding: 30px;
+    max-width: 800px;
+    width: 100% !important;
+    background-color: #F7F7F7;
+    margin: 100px auto;
+    border-radius: 3px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.hregister {
+    color: #111;
+}
+
+label {
+    color: #111;
+}
+
+legend {
+    color: #111;
+}

@@ -27,7 +27,7 @@ class HomePageController extends Controller
      * @Method("GET")
      */
     public function showHomePageAction() {
-       $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $eventsCreator = $em->getRepository('AppBundle:Event')->getEventByUserCreator($this->getUser());
         $eventsParticipate = $em->getRepository('AppBundle:Event')->getEventByUserParticipate($this->getUser());
 

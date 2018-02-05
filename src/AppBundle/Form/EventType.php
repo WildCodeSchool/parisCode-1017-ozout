@@ -33,7 +33,7 @@ class EventType extends AbstractType
                 'category', EntityType::class, array(
                 'class' => Category::class,
                 'choice_label' => 'nameCategory',
-                'label' => 'Catégorie '
+                'label' => 'Choisir une catégorie'
                 )
             )
             ->add(
@@ -68,7 +68,7 @@ class EventType extends AbstractType
             )
             ->add(
                 'isPrivate', CheckboxType::class, array(
-                'label' => 'l\'événement est privé',
+                'label' => 'L\'événement est privé',
                 'mapped' => true,
                 'required' => false
                 )

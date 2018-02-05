@@ -21,10 +21,10 @@
   });
 
   // Activate scrollspy to add active class to navbar items on scroll
-  $('body').scrollspy({
-    target: '#mainNav',
-    offset: 54
-  });
+  // $('body').scrollspy({
+  //   target: '#mainNav',
+  //   offset: 54
+  // });
 
   // Collapse Navbar
   var navbarCollapse = function() {
@@ -47,4 +47,5 @@
     $(".navbar").removeClass("d-none");
   })
 
-})(jQuery); // End of use strict
+})(jQuery);
+// End of use strict

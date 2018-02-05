@@ -1,10 +1,63 @@
-{% extends 'base.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% extends "@FOSUser/layout.html.twig" %}
+
+{#{% extends 'base.html.twig' %}#}
+
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/css/moneyreservation.css') }}" rel="stylesheet">
+{% endblock %}
 
 {% block body %}
-    <h1>Reservation creation</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
-{% endblock %}
+    <form class="contribute">
+
+        <div class="login-container">
+
+            <div class="title">{{ reservation.event.title }}
+            </div>
+
+            <div class="owner"><p>Organisé par ...</p>
+            </div>
+
+
+            <div class="row">
+                <div class=" objectif col-md-6">
+                    <p>Objectif à atteindre : {{ reservation.event.targetMoney }} euros </p>
+                    <p>Somme récoltée : {{ reservation.event.onGoingMoney}} euros </p>
+                </div>
+
+                <div class=" other col-md-6">
+                    <p>Jours restants : ... </p>
+                    <p>Nombre de participants : ...</p>
+                </div>
+            </div>
+
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">60%
+                </div>
+            </div>
+
+            <div class="description">
+            <p>{{ reservation.event.eventDescription}}</p>
+            </div>
+
+            <p> Oz É en un clic !</p >
+
+            <form>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type="submit" value="Participer" class="btn btn-primary btn-xl text-uppercase btn-header"/>
+            {{ form_end(form) }}
+            </form>
+
+            <p> Masquez, si vous le souhaitez, votre identité et/ou le montant de votre participation.</p >
+            <p> Invitez vos amis à participer</p >
+
+        </div>
+
+    </div>
+
+{% endblock body %}
+
+

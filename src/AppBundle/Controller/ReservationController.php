@@ -25,6 +25,7 @@ class ReservationController extends Controller
         $reservation = new Reservation();
         $reservation->setEvent($event);
         $reservation->setUser($currentUser);
+        $reservation->setMoneyGiven(0);
         $reservation->setIsCreator(false);
 
         $form = $this->createForm(ReservationType::class, $reservation);

@@ -6,7 +6,10 @@
     background-color: #fff;
     box-shadow: 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
 }
-
+header {
+    background-image: url('../img/OzOut.png');
+    height: 250px;
+}
 @media (max-width:800px) {
     header {
         height: 150px;
@@ -38,7 +41,6 @@ main {
 
 .name {
     margin-top: 20px;
-    font-family: "Open Sans";
     font-weight: 600;
     font-size: 18pt;
     color: #777;

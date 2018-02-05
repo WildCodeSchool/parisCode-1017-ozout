@@ -7,6 +7,15 @@
 {% endblock %}
 
 {% block body %}
+<body id="page-top">
+<!-- Header -->
+<header class="masthead">
+    <div class="container">
+        <div class="intro-text">
+            <div class="intro-lead-in"><a class="navbar-brand logo" href="{{ path('homepage') }}"> OzOut</a></div>
+        </div>
+    </div>
+</header>
 
     <section class="bg-light" id="portfolio">
         <div class="container">
@@ -78,55 +87,55 @@
 
 {% endblock %}
 
-{% block javascripts %}
-    <script src="{{ asset('assets/js/moment.js') }}">
-    </script>
-    <script src="{{ asset('assets/js/fullcalendar.js') }}">
-    </script>
+{#{% block javascripts %}#}
+    {#<script src="{{ asset('assets/js/moment.js') }}">#}
+    {#</script>#}
+    {#<script src="{{ asset('assets/js/fullcalendar.js') }}">#}
+    {#</script>#}
 
-    <script>
-        $(document).ready(function () {
-            $('#calendar').fullCalendar({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,basicWeek,basicDay'
-                },
-                navLinks: true, // can click day/week names to navigate views
-                eventLimit: true, // allow "more" link when too many events
-                events: "{{ path('event_api') }}"
-            })
-        });
-    </script>
+    {#<script>#}
+        {#$(document).ready(function () {#}
+            {#$('#calendar').fullCalendar({#}
+                {#header: {#}
+                    {#left: 'prev,next today',#}
+                    {#center: 'title',#}
+                    {#right: 'month,basicWeek,basicDay'#}
+                {#},#}
+                {#navLinks: true, // can click day/week names to navigate views#}
+                {#eventLimit: true, // allow "more" link when too many events#}
+                {#events: "{{ path('event_api') }}"#}
+            {#})#}
+        {#});#}
+    {#</script>#}
 
-    <script>
-        function initMap() {
+    {#<script>#}
+        {#function initMap() {#}
 
-            var options = {
-                zoom: 10,
-                center: {lat: 48.856614, lng: 2.3522219000000177}
-            };
+            {#var options = {#}
+                {#zoom: 10,#}
+                {#center: {lat: 48.856614, lng: 2.3522219000000177}#}
+            {#};#}
 
-            var map = new google.maps.Map(document.getElementById('map'), options);
-
-
-            var markers = JSON.parse(document.querySelector('#markers_locations').value);
-
-            console.info(markers);
-
-            markers.map(function (marker) {
-                new google.maps.Marker({
-                    map: map,
-                    position: {lat: marker.lat, lng: marker.lng}
-                })
-            });
+            {#var map = new google.maps.Map(document.getElementById('map'), options);#}
 
 
-        }
-    </script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPoRjII2N8Ce3xXg3hRshEikPWbDMlGNY&callback=initMap">
-    </script>
-{% endblock %}
+            {#var markers = JSON.parse(document.querySelector('#markers_locations').value);#}
+
+            {#console.info(markers);#}
+
+            {#markers.map(function (marker) {#}
+                {#new google.maps.Marker({#}
+                    {#map: map,#}
+                    {#position: {lat: marker.lat, lng: marker.lng}#}
+                {#})#}
+            {#});#}
+
+
+        {#}#}
+    {#</script>#}
+    {#<script async defer#}
+            {#src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPoRjII2N8Ce3xXg3hRshEikPWbDMlGNY&callback=initMap">#}
+    {#</script>#}
+{#{% endblock %}#}
 
 

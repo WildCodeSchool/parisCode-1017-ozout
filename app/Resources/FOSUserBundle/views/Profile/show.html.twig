@@ -7,116 +7,247 @@
 
 {% block fos_user_content %}
     <div class="container profile-page">
-    <header>
-        <i class="fa fa-bars" aria-hidden="true"></i>
-    </header>
+        <header></header>
+        <main>
+            <div class="row">
+                <div class="left col-lg-3">
+                    <div class="photo-left">
+                        <img class="photo" src="{{ asset('uploads/pictures/'~ user.picture.namePicture) }}">
+                    </div>
+                    <h4 class="name">{{ user.nameuser }}</h4>
+                    <p class="info">{{ user.surnameuser }}</p>
+                    <p class="info">{{ user.username }}</p>
+                    <p class="info">{{ user.email }}</p>
+                    <p class="info">{{ user.dateOfBirth |date('d-m-Y') }}</p>
+                    <p class="desc">Salut {{ user.nameuser }}.</p>
+                    <div class="social">
+                        <p class="info">Invite tes ami.e.s !</p>
+                        <i class="fa fa-facebook-square" aria-hidden="true"></i>
+                        <i class="fa fa-twitter-square" aria-hidden="true"></i>
+                    </div>
+                    <a href="{{ path('fos_user_profile_edit', {'id': user.id}) }}">Modifier mes informations</a>
+                </div>
 
-    <main>
-    <div class="row">
-        <div class="left col-lg-4">
-            <div class="photo-left">
-                 <img class="photo" src="{{ asset('uploads/pictures/'~ user.picture.namePicture) }}">
+                <div class="right col-lg-9">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#eventcreate" role="tab"
+                               aria-controls="home" aria-selected="true">Les évènements crées</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#participation" role="tab"
+                               aria-controls="profile" aria-selected="false">Participations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#pastevent" role="tab"
+                               aria-controls="contact" aria-selected="false">Évènements passés</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="myTabContent">
+
+                        <div class="tab-pane fade show active" id="eventcreate" role="tabpanel" aria-labelledby="eventcreate-tab">
+                            <section class="bg-light" id="portfolio">
+                                <div class="container">
+                                    <div class="row gallery">
+                                        {% for reservation in user.reservations %}
+                                            {% if reservation.isCreator == true %}
+                                                <div class="col-md-5 portfolio-item thumb-post">
+                                                    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1{{ reservation.event.id }}">
+                                                        <div class="portfolio-hover">
+                                                            <div class="portfolio-hover-content">
+                                                                <i class="fa fa-plus fa-3x"></i>
+                                                            </div>
+                                                        </div>
+                                                        <img class="img-fluid" src="{{ asset('uploads/pictures/'~ reservation.event.picture.namePicture) }}"
+                                                             alt="{{ reservation.event.title }}">
+                                                    </a>
+                                                    <div class="portfolio-caption">
+                                                        <h4>{{ reservation.event.title }}</h4>
+                                                        <p class="text-muted">{{ reservation.event.city }} </p>
+                                                        <p class="text-muted">{{ reservation.event.targetMoney }} </p>
+                                                    </div>
+                                                    <a href="{{ path('event_edit', {'id': reservation.event.id}) }}"
+                                                       class="btn btn-primary">Modifier l'évènement</a>
+                                                    <a class="btn btn-primary" href="{{ path('event_delete', {'id': reservation.event.id}) }}">Supprimer</a>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        {% for reservation in user.reservations %}
+                            <div class="portfolio-modal modal fade" id="portfolioModal1{{ reservation.event.id }}" tabindex="-1" role="dialog"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="close-modal" data-dismiss="modal">
+                                            <div class="lr">
+                                                <div class="rl"></div>
+                                            </div>
+                                        </div>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-8 mx-auto">
+                                                    <div class="modal-body">
+                                                        <h2 class="text-uppercase">{{ reservation.event.title }}</h2>
+                                                        <a class="item-intro text-muted"></a>
+                                                        <p>{{ reservation.event.eventDescription }}</p>
+                                                        <p>{{ reservation.event.deadline|date ("d/m/Y") }}</p>
+                                                        <p>{{ reservation.event.city }}</p>
+                                                        <img src="{{ asset('uploads/pictures/'~ reservation.event.picture.namePicture) }}"
+                                                             alt="eventimg">
+                                                        <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                            Fermer
+                                                        </button>
+                                                        <a href="{{ path('event_edit', {'id': reservation.event.id}) }}"
+                                                           class="btn btn-primary">Modifier l'évènement</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        <div class="tab-pane fade show" id="participation" role="tabpanel" aria-labelledby="participation-tab">
+                            <section class="bg-light" id="portfolio">
+                                <div class="container">
+                                    <div class="row gallery">
+                                        {% for reservation in user.reservations %}
+                                            {% if reservation.doParticipate == true %}
+                                                <div class="col-md-6 portfolio-item thumb-post">
+                                                    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal2{{ reservation.event.id }}">
+                                                        <div class="portfolio-hover">
+                                                            <div class="portfolio-hover-content">
+                                                                <i class="fa fa-plus fa-3x"></i>
+                                                            </div>
+                                                        </div>
+                                                        <img class="img-fluid" src="{{ asset('uploads/pictures/'~ reservation.event.picture.namePicture) }}"
+                                                             alt="{{ reservation.event.title }}">
+                                                    </a>
+                                                    <div class="portfolio-caption">
+                                                        <h4>{{ reservation.event.title }}</h4>
+                                                        <p class="text-muted">{{ reservation.event.city }} </p>
+                                                        <p class="text-muted">{{ reservation.event.targetMoney }} </p>
+                                                    </div>
+                                                    <a href="#"
+                                                       class="btn btn-primary">Se désinscrire</a>
+                                                </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        {% for reservation in user.reservations %}
+                            <div class="portfolio-modal modal fade" id="portfolioModal2{{ reservation.event.id }}" tabindex="-1" role="dialog"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="close-modal" data-dismiss="modal">
+                                            <div class="lr">
+                                                <div class="rl"></div>
+                                            </div>
+                                        </div>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-8 mx-auto">
+                                                    <div class="modal-body">
+                                                        <h2 class="text-uppercase">{{ reservation.event.title }}</h2>
+                                                        <a class="item-intro text-muted"></a>
+                                                        <p>{{ reservation.event.eventDescription }}</p>
+                                                        <p>{{ reservation.event.deadline|date ("d/m/Y") }}</p>
+                                                        <p>{{ reservation.event.city }}</p>
+                                                        <img src="{{ asset('uploads/pictures/'~ reservation.event.picture.namePicture) }}"
+                                                             alt="eventimg">
+                                                        <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                            Fermer
+                                                        </button>
+                                                        {#<a href="{{ path('', {'id': reservation.event.id}) }}"#}
+                                                           {#class="btn btn-primary">Se désinscrire</a>#}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    <div class="tab-pane fade" id="pastevent" role="tabpanel" aria-labelledby="pastevent-tab">
+                        <section class="bg-light" id="portfolio">
+                            <div class="container">
+                                <div class="row gallery">
+                                    {% for reservation in user.reservations %}
+                                        {% if reservation.doParticipate == true and reservation.event.start|date('m/d/y') < 'now'|date('m/d/y') %}
+                                            <div class="col-md-6 portfolio-item thumb-post">
+                                                <a class="portfolio-link" data-toggle="modal" href="#portfolioModal3{{ reservation.event.id }}">
+                                                    <div class="portfolio-hover">
+                                                        <div class="portfolio-hover-content">
+                                                            <i class="fa fa-plus fa-3x"></i>
+                                                        </div>
+                                                    </div>
+                                                    <img class="img-fluid" src="{{ asset('uploads/pictures/'~ reservation.event.picture.namePicture) }}"
+                                                         alt="{{ reservation.event.title }}">
+                                                </a>
+                                                <div class="portfolio-caption">
+                                                    <h4>{{ reservation.event.title }}</h4>
+                                                    <p class="text-muted">{{ reservation.event.city }} </p>
+                                                    <p class="text-muted">{{ reservation.event.targetMoney }} </p>
+                                                </div>
+                                                <a href="{{ path('review_new', {'id': reservation.event.id}) }}"
+                                                   class="btn btn-primary">Ajouter un commentaire</a>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    {% for reservation in user.reservations %}
+                        <div class="portfolio-modal modal fade" id="portfolioModal3{{ reservation.event.id }}" tabindex="-1" role="dialog"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="close-modal" data-dismiss="modal">
+                                        <div class="lr">
+                                            <div class="rl"></div>
+                                        </div>
+                                    </div>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-8 mx-auto">
+                                                <div class="modal-body">
+                                                    <h2 class="text-uppercase">{{ reservation.event.title }}</h2>
+                                                    <a class="item-intro text-muted"></a>
+                                                    <p>{{ reservation.event.eventDescription }}</p>
+                                                    <p>{{ reservation.event.deadline|date ("d/m/Y") }}</p>
+                                                    <p>{{ reservation.event.city }}</p>
+                                                    <img src="{{ asset('uploads/pictures/'~ reservation.event.picture.namePicture) }}"
+                                                         alt="eventimg">
+                                                    <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                                        <i class="fa fa-times"></i>
+                                                        Fermer
+                                                    </button>
+                                                    <a href="{{ path('review_new', {'id': reservation.event.id}) }}"
+                                                       class="btn btn-primary">Ajouter un commentaire</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
             </div>
-            <h4 class="name">{{ user.nameuser }}</h4>
-            <p class="info">{{ user.surnameuser }}</p>
-            <p class="info">{{ user.username }}</p>
-            <p class="info">{{ user.email }}</p>
-            <p class="info">{{ user.dateOfBirth |date('d-m-Y')}}</p>
-
-
-        <p class="desc">Salut {{ user.nameuser }}.</p>
-        <div class="social">
-            <p class="info">Invite tes ami.e.s !</p>
-            <i class="fa fa-facebook-square" aria-hidden="true"></i>
-            <i class="fa fa-twitter-square" aria-hidden="true"></i>
-        </div>
+        </main>
     </div>
-
-        <div class="right col-lg-8">
-            <ul class="nav">
-                <li>Mes évènements</li>
-                <li>Mes évènements à venir</li>
-            </ul>
-
-
-            <div class="row gallery">
-                <div class="col-md-4">
-                    <img src="https://image.noelshack.com/fichiers/2017/38/2/1505774813-photo4.jpg"/>
-                </div>
-                <div class="col-md-4">
-                    <img src="https://image.noelshack.com/fichiers/2017/38/2/1505774814-photo5.jpg"/>
-                </div>
-                <div class="col-md-4">
-                    <img src="https://image.noelshack.com/fichiers/2017/38/2/1505774814-photo6.jpg"/>
-                </div>
-                <div class="col-md-4">
-                    <img src="https://image.noelshack.com/fichiers/2017/38/2/1505774817-photo1.jpg"/>
-                </div>
-                <div class="col-md-4">
-                    <img src="https://image.noelshack.com/fichiers/2017/38/2/1505774815-photo2.jpg"/>
-                </div>
-                <div class="col-md-4">
-                    <img src="https://image.noelshack.com/fichiers/2017/38/2/1505774816-photo3.jpg"/>
-                </div>
-            </div>
-        </div>
-    </div>
-    </main>
-    </div>
-    {#{% for event in eventsCreator %}#}
-        {#<div class="col-md-4 col-sm-6 portfolio-item thumb-post">#}
-            {#<a class="portfolio-link" data-toggle="modal" href="#portfolioModal1{{ event.id }}">#}
-                {#<div class="portfolio-hover">#}
-                    {#<div class="portfolio-hover-content">#}
-                        {#<i class="fa fa-plus fa-3x"></i>#}
-                    {#</div>#}
-                {#</div>#}
-                {#<img class="img-fluid" src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="{{ event.title }}">#}
-            {#</a>#}
-            {#<div class="portfolio-caption">#}
-                {#<h4>{{ event.title }}</h4>#}
-                {#<p class="text-muted">{{ event.city }} </p>#}
-                {#<p class="text-muted">{{ event.targetMoney }} </p>#}
-            {#</div>#}
-        {#</div>#}
-    {#{% endfor %}#}
-
-    {#<div class="profile-container">#}
-        {#<h3 align="center"><span class="fa fa-user"></span> Mon Profil</h3>#}
-        {#<div class="fos_user_user_show" align="center">#}
-            {#<img class="profile" src="{{ asset('uploads/pictures/'~ user.picture.namePicture) }}">#}
-        {#</div>#}
-
-        {#<div class="profile-picture">#}
-            {#<table class="table">#}
-                {#<tbody>#}
-                    {#<tr>#}
-                        {#<td>{{ 'Prénom' }}</td>#}
-                        {#<td>{{ user.nameuser }}</td>#}
-                    {#</tr>#}
-                    {#<tr>#}
-                        {#<td>{{ 'Nom' }}</td>#}
-                        {#<td>{{ user.surnameuser }}</td>#}
-                    {#</tr>#}
-                    {#<tr>#}
-                        {#<td>{{ 'profile.show.username'|trans }}</td>#}
-                        {#<td>{{ user.username }}</td>#}
-                    {#</tr>#}
-                    {#<tr>#}
-                        {#<td>{{ 'profile.show.email'|trans }}</td>#}
-                        {#<td>{{ user.email }}</td>#}
-                    {#</tr>#}
-                    {#<tr>#}
-                        {#<td>{{ 'Date de naissance' }}</td>#}
-                        {#<td>{{ user.dateOfBirth |date('d-m-Y')}}</td>#}
-                    {#</tr>#}
-                {#</tbody>#}
-            {#</table>#}
-
-            {#<div class="profile-edit">#}
-                {#<a href="{{ path('fos_user_profile_edit') }}"> Mettre à jour mes informations </a>#}
-            {#</div>#}
-        {#</div>#}
-    {#</div>#}
 
 {% endblock fos_user_content %}

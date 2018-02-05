@@ -76,7 +76,7 @@ class EventController extends Controller
             $em->persist($event);
             $em->flush();
 
-            return $this->redirectToRoute('home_connected');
+            return $this->redirectToRoute('profile');
         }
 
         return $this->render(

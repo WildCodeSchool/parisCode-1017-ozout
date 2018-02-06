@@ -17,8 +17,16 @@
                     <p class="moneyGiven">Limite de participation à a cagnotte: {{ reservation.event.deadline|date("d/m/Y") }} </p>
                     {#<p>Nombre de participants : {{ total reservation }}</p>#}
                 </div>
-                <div>
-                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">60%</div>
+
+                <div class="progress">
+                    <div
+                            class="progress-bar progress-bar-striped active"
+                            role="progressbar"
+                            aria-valuenow="{{ progress }}"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                            style="width: {{ progress ~ '%' }}">{{ progress ~ ' %' }}
+                    </div>
                 </div>
 
                 <div>

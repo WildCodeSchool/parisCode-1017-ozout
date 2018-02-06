@@ -47,6 +47,8 @@ class Event implements JsonSerializable
         $this->reviews = new \Doctrine\Common\Collections\ArrayCollection();
         $this->start = new \DateTime();
         $this->deadline = new \DateTime();
+        $this->onGoingMoney = 0;
+        $this->isValid = false;
     }
 
     //CLI auto-generated code
@@ -182,8 +184,12 @@ class Event implements JsonSerializable
      */
     private $eventDescription;
 
-
-
+    /**
+     * @var
+     *
+     * @ORM\Column(name="is_valid", type="integer")
+     */
+    private $isValid;
 
     /**
      * Get id.
@@ -625,5 +631,21 @@ class Event implements JsonSerializable
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getisValid()
+    {
+        return $this->isValid;
+    }
+
+    /**
+     * @param mixed $isValid
+     */
+    public function setIsValid($isValid)
+    {
+        $this->isValid = $isValid;
     }
 }

@@ -184,7 +184,7 @@
                             <div class="container">
                                 <div class="row gallery">
                                     {% for reservation in user.reservations %}
-                                        {% if reservation.doParticipate == true and reservation.event.start|date('m/d/y') < 'now'|date('m/d/y') %}
+                                        {% if reservation.doParticipate == true and reservation.event.start|date('d/m/y') < 'now'|date('d/m/y') %}
                                             <div class="col-md-6 portfolio-item thumb-post">
                                                 <a class="portfolio-link" data-toggle="modal" href="#portfolioModal3{{ reservation.event.id }}">
                                                     <div class="portfolio-hover">

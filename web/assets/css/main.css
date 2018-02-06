@@ -42,7 +42,7 @@ ul.social-buttons li.instagram a{
 }
 
 .modal {
-    width: 80%;
+    width: 70%;
     height: 90%;
     top:5%;
     left: 10%
@@ -55,11 +55,6 @@ a.logo{
 #services{
     background: url('../img/backgroundBlur.png')center 0 no-repeat fixed !important;
 }
-
-.homepage-connected{
-    background-color: transparent !important;
-}
-
 
 
 /**************************************** ÉVÈNEMENTS ****************************************************/

@@ -27,6 +27,7 @@
         </div>
         <div class="row">
                 {% for event in events %}
+                {% if event.isPrivate == false and event.start|date('m/d/y') > 'now'|date('m/d/y') %}
                     <div class="col-md-4 col-sm-6 portfolio-item thumb-post">
                         <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1{{ event.id }}">
                             <div class="portfolio-hover">
@@ -39,10 +40,41 @@
                         <div class="portfolio-caption">
                             <h4>{{ event.title }}</h4>
                             <p class="text-muted">{{ event.city }} </p>
+                            <p class="text-muted">{{ event.zipcode }} </p>
+                        </div>
+                    </div>
+
+                {% endif %}
+                {% endfor %}
+        </div>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading text-uppercase">Événements privés en cours</h2>
+            </div>
+        </div>
+        <div class="row">
+            {% for event in events %}
+                {% if event.start|date('m/d/y') > 'now'|date('m/d/y') %}
+                    <div class="col-md-4 col-sm-6 portfolio-item thumb-post">
+                        <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1{{ event.id }}">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content">
+                                    <i class="fa fa-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}"
+                                 alt="{{ event.title }}">
+                        </a>
+                        <div class="portfolio-caption">
+                            <h4>{{ event.title }}</h4>
+                            <p class="text-muted">{{ event.city }} </p>
                             <p class="text-muted">{{ event.targetMoney }} </p>
                         </div>
                     </div>
-                {% endfor %}
+                {% endif %}
+            {% endfor %}
+            {% endif %}
         </div>
     </div>
 
@@ -95,32 +127,38 @@
             </div>
         </div>
         <div class="row">
-            {% set first = reviews[1] %}
-            {% set second = reviews[2] %}
-            {% set third = reviews[3] %}
+            {% for review in reviews if review.score > 3 %}
+            {#{% set first = reviews[1] %}#}
+            {#{% set second = reviews[2] %}#}
+            {#{% set third = reviews[3] %}#}
                 <div class="col-sm-4">
                     <div class="team-member">
-                        <img class="mx-auto rounded-circle" src="" alt="">
-                        <h4>{{ first.user }}</h4>
-                        <p class="text-muted">{{ first.comment }}</p>
-                    </div>
-                </div>
+                        {#<img class="mx-auto rounded-circle" src="" alt="">#}
+                        <img class="userreview" src="{{ asset('uploads/pictures/'~ review.user.picture.namePicture) }}">
+                        <h5>{{ review.user.username }}</h5>
+                        <p>Son commentaire :</p>
+                        <p>{{ review.score }} / 5<br>
+                           {{ review.comment }}</p>
 
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img class="mx-auto rounded-circle" src="" alt="">
-                        <h4>{{ second.user }}</h4>
-                        <p class="text-muted">{{ second.comment }}</p>
                     </div>
                 </div>
+            {% endfor %}
 
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img class="mx-auto rounded-circle" src="" alt="">
-                        <h4>{{ third.user }}</h4>
-                        <p class="text-muted">{{ third.comment }}</p>
-                    </div>
-                </div>
+                {#<div class="col-sm-4">#}
+                    {#<div class="team-member">#}
+                        {#<img class="mx-auto rounded-circle" src="" alt="">#}
+                        {#<h4>{{ second.user }}</h4>#}
+                        {#<p class="text-muted">{{ second.comment }}</p>#}
+                    {#</div>#}
+                {#</div>#}
+
+                {#<div class="col-sm-4">#}
+                    {#<div class="team-member">#}
+                        {#<img class="mx-auto rounded-circle" src="" alt="">#}
+                        {#<h4>{{ third.user }}</h4>#}
+                        {#<p class="text-muted">{{ third.comment }}</p>#}
+                    {#</div>#}
+                {#</div>#}
         </div>
     </div>
     <div class="row">
@@ -145,11 +183,17 @@
                     <div class="col-lg-8 mx-auto">
                         <div class="modal-body">
                             <h2 class="text-uppercase">{{ event.title }}</h2>
-                            <a class="item-intro text-muted"></a>
-                            <p>{{ event.eventDescription }}</p>
-                            <p>{{ event.deadline|date ("d/m/Y")}}</p>
-                            <p>{{ event.city }}</p>
                             <img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="eventimg">
+                            <p>{{ event.eventDescription }} <br>
+                                Le {{ event.start|date('d/m/Y') }} <br> à {{ event.city }} <br>
+                                La cagnotte à atteindre est de : {{ event.targetMoney }} <br>
+                                avant le {{ event.deadline|date ("d/m/Y")}}<br>
+                                Adresse :<br>
+                                {{ event.adress }}, {{ event.zipcode }} {{ event.city }}<br>
+                                Maximum d'invités : {{ event.maxPeople }}<br>
+                                Cagnotte en cours : {{ event.onGoingMoney }} </p>
+                            <a href="{{ path('reservation_create', {'id': event.id}) }}"
+                               class="btn btn-primary">S'inscrire à l'évènement</a>
                             <button class="btn btn-primary" data-dismiss="modal" type="button">
                                 <i class="fa fa-times"></i>
                                 Fermer</button>

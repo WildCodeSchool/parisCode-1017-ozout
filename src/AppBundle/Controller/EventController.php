@@ -76,7 +76,7 @@ class EventController extends Controller
             $em->persist($event);
             $em->flush();
 
-            return $this->redirectToRoute('profile');
+            return $this->redirectToRoute('fos_user_profile_show');
         }
 
         return $this->render(

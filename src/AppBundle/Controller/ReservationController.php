@@ -38,7 +38,7 @@ class ReservationController extends Controller
 
             $this->addFlash('successMsg', "Inscription confirmée");
 
-            return $this->redirectToRoute('home_connected');
+            return $this->redirectToRoute('fos_user_profile_show');
         }
 
         return $this->render('reservation/new.html.twig', array(

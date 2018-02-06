@@ -10,18 +10,5 @@ namespace AppBundle\Repository;
  */
 class ReservationRepository extends \Doctrine\ORM\EntityRepository
 {
-//    /**
-//     * Get all moneyGiven by event_id
-//     */
-//    public function findByOnGoingMoney($event_id, $moneyGiven){
-//
-//        $qb = $this->createQueryBuilder('t');
-//
-//        $qb->select('t.moneyGiven')
-//            ->where('t.id = :id')
-//            ->setParameter('event_id', $event_id)
-//        ;
-//
-//        return $qb->getQuery()->getSingleResult();
-//    }
+
 }

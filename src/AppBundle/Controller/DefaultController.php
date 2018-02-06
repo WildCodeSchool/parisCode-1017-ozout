@@ -19,8 +19,11 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $events = $em->getRepository('AppBundle:Event')->getAllNotPrivateEvent();
-        $reviews = $em->getRepository('AppBundle:Review')->findAll();
-
+        $reviews = $em->getRepository('AppBundle:Review')->findBy(
+            array(),
+            array(),
+            3
+        );
         return $this->render('default/index.html.twig', array(
             'events' => $events,
             'reviews' => $reviews

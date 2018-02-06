@@ -27,10 +27,22 @@ class ReservationController extends Controller
         $reservation->setUser($currentUser);
         $reservation->setIsCreator(false);
 
+        $progress = floor($event->getOnGoingMoney() / $event->getTargetMoney() * 100);
+
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
+
+            $event->setOnGoingMoney(
+                $event->getOnGoingMoney() + $reservation->getMoneyGiven()
+            );
+
+            // TODO: add css to notify if event is valid or not valid
+            if ($event->getOnGoingMoney() == $event->getTargetMoney()){
+                $event->setIsValid(true);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($reservation);
             $em->flush();
@@ -42,7 +54,8 @@ class ReservationController extends Controller
 
         return $this->render('reservation/new.html.twig', array(
             'reservation' => $reservation,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'progress' => $progress
         ));
     }
 }

@@ -170,15 +170,22 @@
                             <h2 class="text-uppercase">{{ event.title }}</h2>
                             <img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="eventimg">
                             <p>{{ event.eventDescription }} <br>
-                                Le {{ event.start|date('d/m/Y') }} <br> à {{ event.city }} <br>
-                                La cagnotte à atteindre est de : {{ event.targetMoney }} <br>
-                                avant le {{ event.deadline|date ("d/m/Y")}}<br>
+                                Le {{ event.start|date('d/m/Y, h:i') }}<br>
                                 Adresse :<br>
                                 {{ event.adress }}, {{ event.zipcode }} {{ event.city }}<br>
+                                La cagnotte à atteindre est de : {{ event.targetMoney ~ '€' }}
+                                avant le {{ event.deadline|date ("d/m/Y")}}<br>
                                 Maximum d'invités : {{ event.maxPeople }}<br>
-                                Cagnotte en cours : {{ event.onGoingMoney }} </p>
-                            <a href="{{ path('reservation_create', {'id': event.id}) }}"
-                               class="btn btn-primary">S'inscrire à l'évènement</a>
+                                Cagnotte en cours : {{ event.onGoingMoney ~ '€' }}
+                            </p>
+
+                            {% if event.nbPeopleParticipate >= event.maxPeople %}
+                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                    Evènement complet</button>
+                            {% else %}
+                                <a href="{{ path('reservation_create', {'id': event.id}) }}"
+                                   class="btn btn-primary">S'inscrire à l'évènement</a>
+                            {% endif %}
                             <button class="btn btn-primary" data-dismiss="modal" type="button">
                                 <i class="fa fa-times"></i>
                                 Fermer</button>

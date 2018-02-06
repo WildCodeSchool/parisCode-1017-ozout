@@ -192,6 +192,13 @@ class Event implements JsonSerializable
     private $isValid;
 
     /**
+     * @var $nbPeopleParticipate
+     *
+     * @ORM\Column(name="nb_people_participate", type="integer")
+     */
+    private $nbPeopleParticipate;
+
+    /**
      * Get id.
      *
      * @return int
@@ -647,5 +654,21 @@ class Event implements JsonSerializable
     public function setIsValid($isValid)
     {
         $this->isValid = $isValid;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNbPeopleParticipate()
+    {
+        return $this->nbPeopleParticipate;
+    }
+
+    /**
+     * @param mixed $nbPeopleParticipate
+     */
+    public function setNbPeopleParticipate($nbPeopleParticipate)
+    {
+        $this->nbPeopleParticipate = $nbPeopleParticipate;
     }
 }

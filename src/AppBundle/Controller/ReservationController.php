@@ -37,6 +37,9 @@ class ReservationController extends Controller
             $event->setOnGoingMoney(
                 $event->getOnGoingMoney() + $reservation->getMoneyGiven()
             );
+            $event->setNbPeopleParticipate(
+                $event->getNbPeopleParticipate() + 1
+            );
 
             // TODO: add css to notify if event is valid or not valid
             if ($event->getOnGoingMoney() == $event->getTargetMoney()){

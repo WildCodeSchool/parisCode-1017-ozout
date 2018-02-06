@@ -141,8 +141,9 @@ legend {
     display: inline;
 }
 .form-control-file{
-    margin-left: 26%;
+    margin-left: 25%;
     color: black;
+    width: 24vw;
 }
 .btn-create{
     margin-top:2%;

@@ -1,0 +1,68 @@
+.login-container {
+    padding: 30px;
+    max-width: 800px;
+    width: 100% !important;
+    background-color: #F7F7F7;
+    margin: 100px auto;
+    border-radius: 2px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    text-align: center;
+}
+
+html { height: 100%;
+}
+
+body {
+    min-height:100%;
+    position:relative;
+    background-image:url(../img/background.png);
+    background-size: 100%;
+    padding-bottom: 3em;
+}
+
+.title {
+    font-size:30px;
+}
+
+.owner{
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+.description{
+
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: justify;
+}
+
+.progress{
+    margin: 30px ;
+}
+
+.objectif {
+    text-align: left;
+    padding-left: 60px;
+}
+
+.other{
+    text-align: left;
+    padding-left: 60px;
+
+}
+
+.navbar-header{
+    text-align: center;
+    width: 100%;
+}
+
+footer {
+    position: absolute;
+    /*margin-top: 3vw;
+    width:100%;*/
+    left: 0 ; right: 0; bottom: 0;
+
+}
+
+

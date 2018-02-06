@@ -1,77 +1,27 @@
 {% trans_default_domain 'FOSUserBundle' %}
 {% extends "@FOSUser/layout.html.twig" %}
 
-{% block stylesheets %}
-    <link href="{{ asset('assets/css/register.css') }}" rel="stylesheet">
-{% endblock %}
 
 {% block body %}
 
-<div class="connected">
-    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-    {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-    <a href="{{ path('fos_user_security_logout') }}">
-        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-    </a>
-</div>
-{% else %}
-<div class="register-container">
-    <h2>Déjà un compte OzOut ? </h2>
-    <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary text-uppercase btn-header connexion-btn">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-    {% endif %}
-</div>
-{% block fos_user_content %}
-    <div class="register-container-create ">
-        <h2 class="">Pas encore de compte ?</h2>
-        <h4 class="notyet">A vous de jouer !</h4>
-        {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-
-        <div>
-            {{ form_label(form.nameUser) }}
-            {{ form_widget(form.nameUser) }}
-            {{ form_errors(form.nameUser) }}
-        </div>
-        <div>
-            {{ form_label(form.surnameUser) }}
-            {{ form_widget(form.surnameUser) }}
-            {{ form_errors(form.surnameUser) }}
-        </div>
-        <div>
-            {{ form_label(form.username) }}
-            {{ form_widget(form.username) }}
-            {{ form_errors(form.username) }}
-        </div>
-        <div>
-            {{ form_label(form.email) }}
-            {{ form_widget(form.email) }}
-            {{ form_errors(form.email) }}
-        </div>
-        <div class="password">
-            {{ form_label(form.plainPassword) }}
-            {{ form_widget(form.plainPassword) }}
-            {{ form_errors(form.plainPassword) }}
-        </div>
-        <div class="birthdate_field">
-            {{ form_label(form.dateOfBirth) }}
-            {{ form_widget(form.dateOfBirth) }}
-            {{ form_errors(form.dateOfBirth) }}
-        </div>
-
-        <div>
-            {{ form_label(form.picture) }}
-            {{ form_widget(form.picture) }}
-            {{ form_errors(form.picture) }}
-        </div>
-
-
-        <img width="200" id="previewPictureProfil" src="#" alt="">
-        <div>
-            <input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-primary btn-xl text-uppercase btn-header"/>
-        </div>
-        {{ form_end(form) }}
+<body id="page-top">
+<header class="masthead">
+    <div class="container">
+            <div class="row">
+                <div class="register-container">
+                    <h2 class="hregister">Pas encore de compte ?</h2>
+                    <h4 class="hregister">A vous de jouer !</h4>
+                    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+                    {{ form_widget(form) }}
+                    <img width="200" id="previewPictureProfil" src="#" alt="">
+                    <div>
+                        <input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-primary btn-xl text-uppercase btn-header"/>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
     </div>
-
-{% endblock fos_user_content %}
+</header>
 
 {% endblock body %}
 

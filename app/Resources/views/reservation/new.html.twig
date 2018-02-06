@@ -1,39 +1,40 @@
 {% extends 'base.html.twig' %}
-
 {% block body %}
-<div class="contribute">
-    <div class="moneyGiven-container">
-        <div class="title">{{ reservation.event.title }}</div>
-        {#<div class="owner">
-            <p>Organisé par {{ reservation.isCreator }}</p>
-        </div>#}
+<header class="masthead">
+    <div class="container">
         <div class="row">
-            <div class=" objectif col-md-6">
-                <p>Objectif à atteindre : {{ reservation.event.targetMoney }} euros </p>
-                <p>Somme récoltée : {{ reservation.event.onGoingMoney}} euros </p>
-            </div>
+            <div class="register-container">
+                <div>
+                    <h1 class="titleMoneyGiven">{{ reservation.event.title }}</h1>
+                    <p class="moneyGiven">Organisé par {{ reservation.isCreator }}</p>
+                </div>
+                <div>
+                    <p class="moneyGiven">Objectif à atteindre : {{ reservation.event.targetMoney }} euros </p>
+                    <p class="moneyGiven">Somme récoltée : {{ reservation.event.onGoingMoney}} euros </p>
+                </div>
 
-            <div class=" other col-md-6">
-                <p>Limite de participation à a cagnotte: {{ reservation.event.deadline|date("d/m/Y") }} </p>
-                {#<p>Nombre de participants : {{ total reservation }}</p>#}
+                <div>
+                    <p class="moneyGiven">Limite de participation à a cagnotte: {{ reservation.event.deadline|date("d/m/Y") }} </p>
+                    {#<p>Nombre de participants : {{ total reservation }}</p>#}
+                </div>
+                <div>
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">60%</div>
+                </div>
+
+                <div>
+                    <p class="moneyGiven">{{ reservation.event.eventDescription}}</p>
+                </div>
+
+                <div>
+                    <h2 class="titleMoneyGiven">Combien veux-tu donner ?</h2>
+
+                    {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        <input type="submit" value="Participer" class="btn btn-primary btn-xl text-uppercase btn-header createaccount" />
+                    {{ form_end(form) }}
+                </div>
             </div>
         </div>
-
-        <div class="progress">
-            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">60%
-            </div>
-        </div>
-
-        <div class="description">
-            <p>{{ reservation.event.eventDescription}}</p>
-        </div>
-
-        <h1>Combien tu donnes ?</h1>
-
-        {{ form_start(form) }}
-            {{ form_widget(form) }}
-            <input type="submit" value="Participer" />
-        {{ form_end(form) }}
     </div>
-</div>
+</header>
 {% endblock %}

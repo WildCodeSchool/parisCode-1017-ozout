@@ -127,6 +127,7 @@ legend {
     color: #111;
 }
 
+/* Register Form */
 .password legend{
     display: none;
 }
@@ -147,4 +148,11 @@ legend {
 }
 .btn-create{
     margin-top:2%;
+}
+
+/* Page Register/confirmed */
+
+.confirmed{
+    margin-top: 40vh;
+    transform: translateY(-50%);
 }

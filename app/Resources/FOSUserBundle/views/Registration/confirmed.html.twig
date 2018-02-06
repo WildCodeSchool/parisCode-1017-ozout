@@ -1,9 +1,5 @@
-{% extends "@FOSUser/layout.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
-
-{% block stylesheets %}
-    <link href="{{ asset('assets/css/register.css') }}" rel="stylesheet">
-{% endblock %}
+{% extends "@FOSUser/layout.html.twig" %}
 
 {% block fos_user_content %}
 <div class="login-container confirmed">
@@ -13,10 +9,10 @@
 {% endblock fos_user_content %}
 
 {% block javascripts %}
-    <script>
+    {#<script>
         window.setTimeout(function() {
             window.location.href = '{{ path('fos_user_profile_show') }}';
         }, 3000);
 
-    </script>
+    </script>#}
 {% endblock %}

@@ -1,10 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Reservation creation</h1>
+<div class="contribute">
+    <div class="moneyGiven-container">
+        <div class="title">{{ reservation.event.title }}</div>
+        {#<div class="owner">
+            <p>Organisé par {{ reservation.isCreator }}</p>
+        </div>#}
+        <div class="row">
+            <div class=" objectif col-md-6">
+                <p>Objectif à atteindre : {{ reservation.event.targetMoney }} euros </p>
+                <p>Somme récoltée : {{ reservation.event.onGoingMoney}} euros </p>
+            </div>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+            <div class=" other col-md-6">
+                <p>Limite de participation à a cagnotte: {{ reservation.event.deadline|date("d/m/Y") }} </p>
+                {#<p>Nombre de participants : {{ total reservation }}</p>#}
+            </div>
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">60%
+            </div>
+        </div>
+
+        <div class="description">
+            <p>{{ reservation.event.eventDescription}}</p>
+        </div>
+
+        <h1>Combien tu donnes ?</h1>
+
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type="submit" value="Participer" />
+        {{ form_end(form) }}
+    </div>
+</div>
 {% endblock %}

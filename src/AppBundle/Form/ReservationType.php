@@ -16,7 +16,7 @@ class ReservationType extends AbstractType
     {
         $builder
             ->add('moneyGiven', MoneyType::class, array(
-                // TODO: Add label
+                'label'=> false
             ));
     }
 

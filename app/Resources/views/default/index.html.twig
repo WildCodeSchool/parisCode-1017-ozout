@@ -182,6 +182,9 @@
                             {% if event.nbPeopleParticipate >= event.maxPeople %}
                                 <button class="btn btn-primary" data-dismiss="modal" type="button">
                                     Evènement complet</button>
+                            {% elseif event.userParticipate is defined %}
+                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                    Vous participez déjà à l'évènement</button>
                             {% else %}
                                 <a href="{{ path('reservation_create', {'id': event.id}) }}"
                                    class="btn btn-primary">S'inscrire à l'évènement</a>

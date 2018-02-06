@@ -4,7 +4,6 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Event;
 use AppBundle\Entity\Reservation;
-use AppBundle\Entity\User;
 use AppBundle\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -31,6 +30,17 @@ class EventController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $events = $em->getRepository('AppBundle:Event')->findAll();
+
+        if ($this->getUser() != null){
+            $reservations = $em->getRepository(Reservation::class)->getIdEventReservationByUser($this->getUser());
+            foreach ($events as $key => $event){
+                foreach ($reservations as $reservation){
+                    if (in_array($event->getId(), $reservation)){
+                        $event->userParticipate = true;
+                    }
+                }
+            }
+        }
 
         return $this->render(
             'event/index.html.twig', array(

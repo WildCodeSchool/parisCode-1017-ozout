@@ -17,15 +17,17 @@
             <div class="offset-md-3 col-md-6">
             {{ form_start(edit_form) }}
                 {{ form_widget(edit_form) }}
-                <input type="submit" value="Edit" class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header"/>
-            {{ form_end(edit_form) }}
+                <div class="row">
+                    <input type="submit" value="Edit" class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header"/>
+                {{ form_end(edit_form) }}
+                    <a class="btn btn-danger btn-xs text-uppercase je-scroll-trigger btn-header" href="{{ path('event_delete', {'id': event.id}) }}">Supprimer</a>
+                </div>
+                <div class="row">
+                <div class="offset-md-3 col-md-6">
+                    <a class="btn btn-primary btn-lg text-uppercase js-scroll-trigger btn-header" href="{{ path('event_index') }}">Back to the list</a>
+                </div>
+                </div>
             </div>
-        <div align="center">
-            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header" href="{{ path('event_index') }}">Back to the list</a>
-        </div>
-        <div class="col-md-1">
-            <a class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header" href="{{ path('event_delete', {'id': event.id}) }}">Supprimer</a>
-        </div>
     </div>
 </section>
 {% endblock %}

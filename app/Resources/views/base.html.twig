@@ -63,6 +63,15 @@
         </nav>
     {% endblock %}
 
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }} alert alert-success">
+                    <strong>{{ message }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
 
         {% block body %}
         {% endblock %}

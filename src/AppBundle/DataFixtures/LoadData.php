@@ -106,6 +106,7 @@ class LoadData extends Fixture
                 ->setIsPrivate($faker->boolean($chanceOfGettingTrue = 20))
                 ->setPicture($picture)
                 ->setStart($faker->dateTimeBetween('+1 month', '+10 month', null))
+                ->setNbPeopleParticipate($faker->numberBetween($min = 1, $max = 250))
             ;
 
 

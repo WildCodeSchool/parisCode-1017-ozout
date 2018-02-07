@@ -49,6 +49,7 @@ class Event implements JsonSerializable
         $this->deadline = new \DateTime();
         $this->onGoingMoney = 0;
         $this->isValid = false;
+        $this->nbPeopleParticipate=0;
     }
 
     //CLI auto-generated code
@@ -190,6 +191,13 @@ class Event implements JsonSerializable
      * @ORM\Column(name="is_valid", type="integer")
      */
     private $isValid;
+
+    /**
+     * @var $nbPeopleParticipate
+     *
+     * @ORM\Column(name="nb_people_participate", type="integer")
+     */
+    private $nbPeopleParticipate;
 
     /**
      * Get id.
@@ -647,5 +655,21 @@ class Event implements JsonSerializable
     public function setIsValid($isValid)
     {
         $this->isValid = $isValid;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNbPeopleParticipate()
+    {
+        return $this->nbPeopleParticipate;
+    }
+
+    /**
+     * @param mixed $nbPeopleParticipate
+     */
+    public function setNbPeopleParticipate($nbPeopleParticipate)
+    {
+        $this->nbPeopleParticipate = $nbPeopleParticipate;
     }
 }

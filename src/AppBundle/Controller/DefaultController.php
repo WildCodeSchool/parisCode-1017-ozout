@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Reservation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -19,6 +20,18 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $events = $em->getRepository('AppBundle:Event')->getAllNotPrivateEvent();
+
+        if ($this->getUser() != null){
+            $reservations = $em->getRepository(Reservation::class)->getIdEventReservationByUser($this->getUser());
+            foreach ($events as $key => $event){
+                foreach ($reservations as $reservation){
+                    if (in_array($event->getId(), $reservation)){
+                        $event->userParticipate = true;
+                    }
+                }
+            }
+        }
+
         $reviews = $em->getRepository('AppBundle:Review')->findBy(
             array(),
             array(),

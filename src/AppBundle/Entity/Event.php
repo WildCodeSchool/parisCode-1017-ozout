@@ -49,6 +49,7 @@ class Event implements JsonSerializable
         $this->deadline = new \DateTime();
         $this->onGoingMoney = 0;
         $this->isValid = false;
+        $this->nbPeopleParticipate=0;
     }
 
     //CLI auto-generated code

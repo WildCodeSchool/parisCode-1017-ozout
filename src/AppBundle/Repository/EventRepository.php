@@ -22,7 +22,7 @@ class EventRepository extends \Doctrine\ORM\EntityRepository
             ->addSelect('p')
             ->where('e.isPrivate = false')
             ->orderBy('e.start', 'ASC')
-            ->setMaxResults(10);
+            ->setMaxResults(9);
         ;
 
         return $qb->getQuery()->getResult();

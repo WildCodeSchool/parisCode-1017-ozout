@@ -53,7 +53,7 @@ a.logo{
 }
 
 #services{
-    background: url('../img/backgroundBlur.png')center 0 no-repeat fixed !important;
+    background-color: #000000;
 }
 
 
@@ -154,4 +154,58 @@ legend {
 
 .previewImage{
     margin-bottom: 30px;
+}
+
+.btnconnectHome{
+    width: 20% !important;
+
+}
+
+.h3Home{
+    margin-bottom: 20px !important;
+}
+
+.h2apropos{
+    margin-bottom: 20px !important;
+    color: #fff;
+}
+
+/*.h2apropos {*/
+    /*margin-bottom: 35px !important;*/
+/*}*/
+
+.step {
+    margin-top: 30px !important;
+    position: relative;
+}
+
+/** VIDEO HOME PAGE **/
+
+
+/*!*.video-background {*!*/
+    /*!*background: #000;*!*/
+    /*!*position: fixed;*!*/
+    /*!*top: 0; right: 0; bottom: 0; left: 0;*!*/
+    /*!*z-index: -99;*!*/
+/*!*}*!*/
+
+/*.video-foreground,*/
+/*.video-background iframe {*/
+    /*!*position: absolute;*!*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*pointer-events: none;*/
+/*}*/
+
+.bgvid {
+    /*position: relative;*/
+    min-width: 100%;
+    height: auto;
+    object-fit: fill;
+}
+
+.service-heading{
+    color: #fff;
 }

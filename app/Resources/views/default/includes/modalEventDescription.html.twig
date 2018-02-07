@@ -1,0 +1,44 @@
+<div class="portfolio-modal modal fade" id="portfolioModal1{{ event.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl"></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="modal-body">
+                            <h2 class="text-uppercase">{{ event.title }}</h2>
+                            <img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="eventimg">
+                            <p>{{ event.eventDescription }} <br>
+                                Le {{ event.start|date('d/m/Y, h:i') }}<br>
+                                Adresse :<br>
+                                {{ event.adress }}, {{ event.zipcode }} {{ event.city }}<br>
+                                La cagnotte à atteindre est de : {{ event.targetMoney ~ '€' }}
+                                avant le {{ event.deadline|date ("d/m/Y")}}<br>
+                                Maximum d'invités : {{ event.maxPeople }}<br>
+                                Cagnotte en cours : {{ event.onGoingMoney ~ '€' }}
+                            </p>
+
+                            {% if event.nbPeopleParticipate >= event.maxPeople %}
+                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                    Evènement complet</button>
+                            {% elseif event.userParticipate is defined %}
+                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                    Vous participez déjà à l'évènement</button>
+                            {% else %}
+                                <a href="{{ path('reservation_create', {'id': event.id}) }}"
+                                   class="btn btn-primary">S'inscrire à l'évènement</a>
+                            {% endif %}
+                            <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                <i class="fa fa-times"></i>
+                                Fermer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

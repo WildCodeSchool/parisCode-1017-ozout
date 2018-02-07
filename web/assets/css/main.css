@@ -56,7 +56,10 @@ a.logo{
     background-color: #000000;
 }
 
-
+#searchFormEvent{
+    width: 100%;
+    margin-bottom: 30px;
+}
 /**************************************** ÉVÈNEMENTS ****************************************************/
 /** 1- Page New Event
     2_ Page Show Event

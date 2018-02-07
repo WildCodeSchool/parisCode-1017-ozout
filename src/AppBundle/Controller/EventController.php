@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Event;
 use AppBundle\Entity\Reservation;
+use AppBundle\Form\SearchType;
 use AppBundle\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -29,25 +30,43 @@ class EventController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $events = $em->getRepository('AppBundle:Event')->findAll();
+        $events = $em->getRepository('AppBundle:Event')->getAllNotPrivateEvent($this->getUser(), null);
+
+        $form = $this->createForm(SearchType::class, null, array(
+            'action' => $this->generateUrl('result_search'),
+            'method' => "post",
+            'attr' => array(
+                'id' => "searchFormEvent",
+            )
+        ));
 
         if ($this->getUser() != null){
             $reservations = $em->getRepository(Reservation::class)->getIdEventReservationByUser($this->getUser());
-            foreach ($events as $key => $event){
-                foreach ($reservations as $reservation){
-                    if (in_array($event->getId(), $reservation)){
-                        $event->userParticipate = true;
-                    }
-                }
-            }
+            $this->setReservation($events['public'], $reservations);
+            $this->setReservation($events['private'], $reservations);
         }
 
         return $this->render(
             'event/index.html.twig', array(
             'events' => $events,
-            'events_json' => json_encode($events)
+            'events_json' => json_encode($events),
+            'formSearch' => $form->createView()
             )
         );
+    }
+
+    /**
+     * @param $events
+     * @param $reservations
+     */
+    private function setReservation($events, $reservations){
+        foreach ($events as $key => $event){
+            foreach ($reservations as $reservation){
+                if (in_array($event->getId(), $reservation)){
+                    $event->userParticipate = true;
+                }
+            }
+        }
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Reservation;
+use AppBundle\Form\SearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -19,17 +20,20 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $events = $em->getRepository('AppBundle:Event')->getAllNotPrivateEvent();
+        $events = $em->getRepository('AppBundle:Event')->getAllNotPrivateEvent($this->getUser(), 9);
+
+        $form = $this->createForm(SearchType::class, null, array(
+            'action' => $this->generateUrl('result_search'),
+            'method' => "post",
+            'attr' => array(
+                'id' => "searchFormEvent",
+            )
+        ));
 
         if ($this->getUser() != null){
             $reservations = $em->getRepository(Reservation::class)->getIdEventReservationByUser($this->getUser());
-            foreach ($events as $key => $event){
-                foreach ($reservations as $reservation){
-                    if (in_array($event->getId(), $reservation)){
-                        $event->userParticipate = true;
-                    }
-                }
-            }
+            $this->setReservation($events['public'], $reservations);
+            $this->setReservation($events['private'], $reservations);
         }
 
         $reviews = $em->getRepository('AppBundle:Review')->findBy(
@@ -39,8 +43,23 @@ class DefaultController extends Controller
         );
         return $this->render('default/index.html.twig', array(
             'events' => $events,
-            'reviews' => $reviews
+            'reviews' => $reviews,
+            'formSearch' => $form->createView()
         ));
+    }
+
+    /**
+     * @param $events
+     * @param $reservations
+     */
+    private function setReservation($events, $reservations){
+        foreach ($events as $key => $event){
+            foreach ($reservations as $reservation){
+                if (in_array($event->getId(), $reservation)){
+                    $event->userParticipate = true;
+                }
+            }
+        }
     }
 
     /**

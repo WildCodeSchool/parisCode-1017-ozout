@@ -1,0 +1,207 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<body id="page-top">
+<!-- Header -->
+<header class="masthead">
+    <div class="container">
+        <div class="intro-text">
+            <div class="intro-lead-in">Créé ton événement !</div>
+            <div class="intro-heading text-uppercase">Tout simplement. </div>
+            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">En savoir plus</a>
+        </div>
+    </div>
+</header>
+
+<!-- Portfolio Grid -->
+<section class="bg-light" id="portfolio">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="section-heading text-uppercase" align="center">Top des événements en cours</h2>
+                {% if app.user == null %}
+                    <h3 class="section-subheading text-muted">Connecte toi pour voir les événements privés de tes ami.e.s.</h3>
+                    <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header" href="{{ path('fos_user_security_login') }}">Se connecter</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+                {% for event in events %}
+                {% if event.isPrivate == false and event.start|date('m/d/y') > 'now'|date('m/d/y') %}
+                    <div class="col-md-4 col-sm-6 portfolio-item thumb-post">
+                        <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1{{ event.id }}">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content">
+                                    <i class="fa fa-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="{{ event.title }}">
+                        </a>
+                        <div class="portfolio-caption">
+                            <h4>{{ event.title }}</h4>
+                            <p class="text-muted">{{ event.city }} </p>
+                            <p class="text-muted">{{ event.zipcode }} </p>
+                        </div>
+                    </div>
+
+                {% endif %}
+                {% endfor %}
+        </div>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading text-uppercase">Événements privés en cours</h2>
+            </div>
+        </div>
+        <div class="row">
+            {% for event in events %}
+                {% if event.start|date('m/d/y') > 'now'|date('m/d/y') %}
+                    <div class="col-md-4 col-sm-6 portfolio-item thumb-post">
+                        <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1{{ event.id }}">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content">
+                                    <i class="fa fa-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}"
+                                 alt="{{ event.title }}">
+                        </a>
+                        <div class="portfolio-caption">
+                            <h4>{{ event.title }}</h4>
+                            <p class="text-muted">{{ event.city }} </p>
+                            <p class="text-muted">{{ event.targetMoney }} </p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+</section>
+
+<!-- About OzOut -->
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading text-uppercase">À propos d'Ozout</h2>
+                {#<h3 class="section-subheading text-muted">Vidéo Gif à fournir.</h3>#}
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-4">
+            <span class="fa-stack fa-4x">
+              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+              <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+            </span>
+                <h4 class="service-heading">Facile</h4>
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+            </div>
+            <div class="col-md-4">
+            <span class="fa-stack fa-4x">
+              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+              <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+            </span>
+                <h4 class="service-heading">Rapide</h4>
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+            </div>
+            <div class="col-md-4">
+            <span class="fa-stack fa-4x">
+              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+              <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
+            </span>
+                <h4 class="service-heading">Intelligent</h4>
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Avis -->
+<section class="bg-light" id="team">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading text-uppercase">Les avis des utilisateurs d'OzOut</h2>
+            </div>
+        </div>
+        <div class="row">
+            {% for review in reviews if review.score >= 3 %}
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <img class="userreview" src="{{ asset('uploads/pictures/'~ review.user.picture.namePicture) }}">
+                        <h5>{{ review.user.username }}</h5>
+                        <p>Son commentaire :</p>
+                        {% if review.score == 4 %}
+                            <span data-score="5">★</span><span data-score="4">★</span><span class="active" data-score="3">★</span><span data-score="2">★</span>
+                            {% elseif review.score == 5 %}
+                                <span data-score="5">★</span><span data-score="4">★</span><span class="active" data-score="3">★</span><span data-score="2">★</span><span data-score="1">★</span>
+                            {% else %}
+                            <span data-score="5">★</span><span data-score="4">★</span><span class="active" data-score="3">★</span>
+                          {% endif %}
+                           <p>{{ review.comment }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+            <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Modal Event/Description-->
+{% for event in events %}
+<div class="portfolio-modal modal fade" id="portfolioModal1{{ event.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl"></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="modal-body">
+                            <h2 class="text-uppercase">{{ event.title }}</h2>
+                            <img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="eventimg">
+                            <p>{{ event.eventDescription }} <br>
+                                Le {{ event.start|date('d/m/Y, h:i') }}<br>
+                                Adresse :<br>
+                                {{ event.adress }}, {{ event.zipcode }} {{ event.city }}<br>
+                                La cagnotte à atteindre est de : {{ event.targetMoney ~ '€' }}
+                                avant le {{ event.deadline|date ("d/m/Y")}}<br>
+                                Maximum d'invités : {{ event.maxPeople }}<br>
+                                Cagnotte en cours : {{ event.onGoingMoney ~ '€' }}
+                            </p>
+
+                            {% if event.nbPeopleParticipate >= event.maxPeople %}
+                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                    Evènement complet</button>
+                            {% elseif event.userParticipate is defined %}
+                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                    Vous participez déjà à l'évènement</button>
+                            {% else %}
+                                <a href="{{ path('reservation_create', {'id': event.id}) }}"
+                                   class="btn btn-primary">S'inscrire à l'évènement</a>
+                            {% endif %}
+                            <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                <i class="fa fa-times"></i>
+                                Fermer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
+{% block javascripts %}
+    <!-- Custom scripts for this template -->
+    <script src="{{ asset('assets/js/review.js') }}"></script>
+{% endblock %}

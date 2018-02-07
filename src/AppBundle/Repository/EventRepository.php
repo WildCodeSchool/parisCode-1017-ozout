@@ -12,23 +12,36 @@ use AppBundle\Entity\User;
  */
 class EventRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @return mixed
+     */
     public function getAllNotPrivateEvent(){
         $qb = $this->createQueryBuilder('e');
         $qb->select('e')
             ->join('e.picture', 'p')
             ->addSelect('p')
-            ->where('e.isPrivate = false');
+            ->where('e.isPrivate = false')
+            ->orderBy('e.start', 'ASC')
+            ->setMaxResults(9);
+        ;
 
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return mixed
+     */
     public function getEventByUserCreator(User $user){
         $qb = $this->createQueryBuilder('e');
         $qb->select('e')
             ->join('e.reservations', 'r')
             ->where('r.user = :user')
             ->andWhere('r.isCreator = true')
-            ->setParameter('user', $user->getId());
+            ->setParameter('user', $user->getId())
+            ->orderBy('e.start', 'ASC')
+        ;
 
         return $qb->getQuery()->getResult();
     }

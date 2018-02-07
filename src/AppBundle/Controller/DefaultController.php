@@ -2,11 +2,10 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Event;
+use AppBundle\Entity\Reservation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
 
 
 class DefaultController extends Controller
@@ -22,11 +21,26 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $events = $em->getRepository('AppBundle:Event')->getAllNotPrivateEvent();
 
-        return $this->render(
-            'user/default/index.html.twig', [
-            'events' =>$events,
-            ]
+        if ($this->getUser() != null){
+            $reservations = $em->getRepository(Reservation::class)->getIdEventReservationByUser($this->getUser());
+            foreach ($events as $key => $event){
+                foreach ($reservations as $reservation){
+                    if (in_array($event->getId(), $reservation)){
+                        $event->userParticipate = true;
+                    }
+                }
+            }
+        }
+
+        $reviews = $em->getRepository('AppBundle:Review')->findBy(
+            array(),
+            array(),
+            3
         );
+        return $this->render('default/index.html.twig', array(
+            'events' => $events,
+            'reviews' => $reviews
+        ));
     }
 
     /**
@@ -37,7 +51,7 @@ class DefaultController extends Controller
      */
     public function contactShowAction()
     {
-        return $this->render('user/default/contact.html.twig');
+        return $this->render('default/contact.html.twig');
     }
 
     /**
@@ -48,6 +62,6 @@ class DefaultController extends Controller
      */
     public function aboutShowAction()
     {
-        return $this->render('user/default/about.html.twig');
+        return $this->render('default/about.html.twig');
     }
 }

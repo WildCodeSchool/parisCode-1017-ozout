@@ -1,26 +1,33 @@
-{% extends 'user/default/layout.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-
-<div class="container formEditEvent">
-    <h1 align="center">Event edit</h1>
-
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header"/>
-    {{ form_end(edit_form) }}
-
-
-
-    <div align="center">
-        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header" href="{{ path('event_index') }}">Back to the list</a>
+<body id="page-top">
+<!-- Header -->
+<header class="masthead">
+    <div class="container">
+        <div class="intro-text">
+            <div class="intro-lead-in"><a class="navbar-brand logo" href="{{ path('homepage') }}"> OzOut</a></div>
+        </div>
     </div>
+</header>
 
-    <div class="col-md-1">
-
-        <a class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header" href="{{ path('event_delete', {'id': event.id}) }}">Supprimer</a>
-
+<section class="bg-light" id="portfolio">
+    <div class="container formCreateEvent">
+        <h1 align="center">Modifier l'évènement</h1>
+            <div class="offset-md-3 col-md-6">
+            {{ form_start(edit_form) }}
+                {{ form_widget(edit_form) }}
+                <div class="row">
+                    <input type="submit" value="Edit" class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header"/>
+                {{ form_end(edit_form) }}
+                    <a class="btn btn-danger btn-xs text-uppercase je-scroll-trigger btn-header" href="{{ path('event_delete', {'id': event.id}) }}">Supprimer</a>
+                </div>
+                <div class="row">
+                <div class="offset-md-3 col-md-6">
+                    <a class="btn btn-primary btn-lg text-uppercase js-scroll-trigger btn-header" href="{{ path('event_index') }}">Back to the list</a>
+                </div>
+                </div>
+            </div>
     </div>
-
-</div>
+</section>
 {% endblock %}

@@ -1,128 +1,182 @@
-{% extends 'user/default/layout.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.print.css" media="print">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.print.css"
+          media="print">
 {% endblock %}
 
 {% block body %}
+<body id="page-top">
+<!-- Header -->
+<header class="masthead">
+    <div class="container">
+        <div class="intro-text">
+            <div class="intro-lead-in"><a class="navbar-brand logo" href="{{ path('homepage') }}"> OzOut</a></div>
+        </div>
+    </div>
+</header>
 
-    <div class="container formCreateEvent">
-
-            <h1 class="center">Events list</h1>
-
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Adress</th>
-                    <th>Datetime</th>
-                    <th>Targetmoney</th>
-                    <th>Deadline</th>
-                    <th>Isprivate</th>
-                    <th>Image</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for event in events %}
-                <tr>
-                    <td><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.id }}</a></td>
-                    <td>{{ event.title }}</td>
-                    <td>{{ event.adress }}</td>
-                    <td>{% if event.start %}{{ event.start|date('Y-m-d H:i:s') }}{% endif %}</td>
-                    <td>{{ event.targetMoney }}</td>
-                    <td>{% if event.deadline %}{{ event.deadline|date('Y-m-d H:i:s') }}{% endif %}</td>
-                    <td>{% if event.isPrivate %}Yes{% else %}No{% endif %}</td>
-                    <td><img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt=""> </td>
-
-                    <td>
-                        <div class="row">
-                            <div class="col-md-4">
-                            <a class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header" href="{{ path('event_show', { 'id': event.id }) }}">show</a>
+    <section class="bg-light" id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading text-uppercase">Événements publics en cours</h2>
+                </div>
+            </div>
+            <div class="row">
+                {% for event in events %}
+                {% if event.start|date('m/d/y') > 'now'|date('m/d/y') and event.isPrivate == false %}
+                    <div class="col-md-4 col-sm-6 portfolio-item thumb-post">
+                        <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1{{ event.id }}">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content">
+                                    <i class="fa fa-plus fa-3x"></i>
+                                </div>
                             </div>
-                            <div class="offset-md-2 col-md-4">
-                            <a class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header" href="{{ path('event_edit', { 'id': event.id }) }}">edit</a>
+                            <img class="img-fluid" src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}"
+                                 alt="{{ event.title }}">
+                        </a>
+                        <div class="portfolio-caption">
+                            <h4>{{ event.title }}</h4>
+                            <p class="text-muted">{{ event.city }} </p>
+                            <p class="text-muted">{{ event.targetMoney }} </p>
+                        </div>
+                    </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading text-uppercase">Événements privés en cours</h2>
+                    </div>
+                </div>
+                <div class="row">
+                {% for event in events %}
+                    {% if event.start|date('m/d/y') > 'now'|date('m/d/y') %}
+                        <div class="col-md-4 col-sm-6 portfolio-item thumb-post">
+                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1{{ event.id }}">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content">
+                                        <i class="fa fa-plus fa-3x"></i>
+                                    </div>
+                                </div>
+                                <img class="img-fluid" src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}"
+                                     alt="{{ event.title }}">
+                            </a>
+                            <div class="portfolio-caption">
+                                <h4>{{ event.title }}</h4>
+                                <p class="text-muted">{{ event.city }} </p>
+                                <p class="text-muted">{{ event.targetMoney }} </p>
                             </div>
                         </div>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-
-
-        <div align="center">
-                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header" href="{{ path('event_new') }}">Create a new event</a>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            </div>
         </div>
+    </section>
 
-        <div id='calendar'></div>
+    <!-- Modal Event/Description-->
+{% for event in events %}
+<div class="portfolio-modal modal fade" id="portfolioModal1{{ event.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl"></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="modal-body">
+                            <h2 class="text-uppercase">{{ event.title }}</h2>
+                            <img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="eventimg">
+                            <p>{{ event.eventDescription }} <br>
+                                Le {{ event.start|date('d/m/Y, h:i') }}<br>
+                                Adresse :<br>
+                                {{ event.adress }}, {{ event.zipcode }} {{ event.city }}<br>
+                                La cagnotte à atteindre est de : {{ event.targetMoney ~ '€' }}
+                                avant le {{ event.deadline|date ("d/m/Y")}}<br>
+                                Maximum d'invités : {{ event.maxPeople }}<br>
+                                Cagnotte en cours : {{ event.onGoingMoney ~ '€' }}
+                            </p>
 
-        <section class="map">
+                            {% if event.nbPeopleParticipate >= event.maxPeople %}
+                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                    Evènement complet</button>
+                            {% elseif event.userParticipate is defined %}
+                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                    Vous participez déjà à l'évènement</button>
+                            {% else %}
+                                <a href="{{ path('reservation_create', {'id': event.id}) }}"
+                                   class="btn btn-primary">S'inscrire à l'évènement</a>
+                            {% endif %}
+                            <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                <i class="fa fa-times"></i>
+                                Fermer</button>
 
-            <h1>Map</h1>
-
-            <div id="map" style="height:400px; width: 100%;"></div>
-
-        </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <input id="markers_locations" type="hidden" value='{{ events_json }}' />
-
-
-
+</div>
+{% endfor %}
 {% endblock %}
 
-{% block javascripts %}
-    <script src="{{ asset('assets/js/moment.js') }}">
-    </script>
-    <script src="{{ asset('assets/js/fullcalendar.js') }}">
-    </script>
+{#{% block javascripts %}#}
+    {#<script src="{{ asset('assets/js/moment.js') }}">#}
+    {#</script>#}
+    {#<script src="{{ asset('assets/js/fullcalendar.js') }}">#}
+    {#</script>#}
 
-    <script>
-        $(document).ready(function() {
-            $('#calendar').fullCalendar({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,basicWeek,basicDay'
-                },
-                navLinks: true, // can click day/week names to navigate views
-                eventLimit: true, // allow "more" link when too many events
-                events: "{{ path('event_api') }}"
-            })
-        });
-    </script>
+    {#<script>#}
+        {#$(document).ready(function () {#}
+            {#$('#calendar').fullCalendar({#}
+                {#header: {#}
+                    {#left: 'prev,next today',#}
+                    {#center: 'title',#}
+                    {#right: 'month,basicWeek,basicDay'#}
+                {#},#}
+                {#navLinks: true, // can click day/week names to navigate views#}
+                {#eventLimit: true, // allow "more" link when too many events#}
+                {#events: "{{ path('event_api') }}"#}
+            {#})#}
+        {#});#}
+    {#</script>#}
 
-    <script>
-        function initMap(){
+    {#<script>#}
+        {#function initMap() {#}
 
-            var options = {
-                zoom:10,
-                center:{lat:48.856614,lng:2.3522219000000177}
-            };
+            {#var options = {#}
+                {#zoom: 10,#}
+                {#center: {lat: 48.856614, lng: 2.3522219000000177}#}
+            {#};#}
 
-            var map = new google.maps.Map(document.getElementById('map'), options);
-
-
-            var markers = JSON.parse(document.querySelector('#markers_locations').value);
-
-            console.info(markers);
-
-            markers.map(function(marker){
-                new google.maps.Marker ({
-                    map : map,
-                    position :{lat:marker.lat, lng:marker.lng}
-                })
-            });
+            {#var map = new google.maps.Map(document.getElementById('map'), options);#}
 
 
-        }
-    </script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPoRjII2N8Ce3xXg3hRshEikPWbDMlGNY&callback=initMap">
-    </script>
-{% endblock %}
+            {#var markers = JSON.parse(document.querySelector('#markers_locations').value);#}
+
+            {#console.info(markers);#}
+
+            {#markers.map(function (marker) {#}
+                {#new google.maps.Marker({#}
+                    {#map: map,#}
+                    {#position: {lat: marker.lat, lng: marker.lng}#}
+                {#})#}
+            {#});#}
+
+
+        {#}#}
+    {#</script>#}
+    {#<script async defer#}
+            {#src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPoRjII2N8Ce3xXg3hRshEikPWbDMlGNY&callback=initMap">#}
+    {#</script>#}
+{#{% endblock %}#}
 
 

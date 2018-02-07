@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -68,6 +69,7 @@ class User extends BaseUser
      *
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Picture", cascade={"all"})
      * @ORM\JoinColumn(nullable=true)
+     * @Assert\Valid()
      */
     private $picture;
 
@@ -84,6 +86,13 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", cascade={"all"}, mappedBy="user")
      */
     private $reservations;
+
+    /**
+     * @var boolean
+     *
+     * Define if current user particpate to event
+     */
+    public $userParticipate;
 
     /**
      * Set nameUser.

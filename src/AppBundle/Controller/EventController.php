@@ -31,6 +31,17 @@ class EventController extends Controller
 
         $events = $em->getRepository('AppBundle:Event')->findAll();
 
+        if ($this->getUser() != null){
+            $reservations = $em->getRepository(Reservation::class)->getIdEventReservationByUser($this->getUser());
+            foreach ($events as $key => $event){
+                foreach ($reservations as $reservation){
+                    if (in_array($event->getId(), $reservation)){
+                        $event->userParticipate = true;
+                    }
+                }
+            }
+        }
+
         return $this->render(
             'event/index.html.twig', array(
             'events' => $events,
@@ -75,7 +86,7 @@ class EventController extends Controller
             $em->persist($event);
             $em->flush();
 
-            return $this->redirectToRoute('event_show', array('id' => $event->getId()));
+            return $this->redirectToRoute('fos_user_profile_show');
         }
 
         return $this->render(
@@ -144,12 +155,12 @@ class EventController extends Controller
      * @Route("/delete/{id}", name="event_delete")
      * @Method("GET")
      */
-    public function deleteAction(Event $event, FileUploader $fileUploader)
+    public function deleteAction(Event $event, Reservation $reservation, FileUploader $fileUploader)
     {
 
             $em = $this->getDoctrine()->getManager();
-
             $em->remove($event);
+            $em->remove($reservation);
 
             $fileUploader->remove($event->getPicture());
 

@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block body %}
+<header class="masthead">
 <div class="container formCreateEvent">
-
-    <h1 align="center">Déposer un avis</h1>
-
+    <h1 align="center">Laisser un commentaire</h1>
+    <h2 align="center"></h2>
     {{ form_start(form) }}
 
     <div>
@@ -44,9 +44,8 @@
     <div align="center">
         <a href="{{ path('review_index') }}" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header">Retour à la liste des avis</a>
     </div>
-
-
 </div>
+</header>
 {% endblock %}
 {% block javascripts %}
     <!-- Custom scripts for this template -->

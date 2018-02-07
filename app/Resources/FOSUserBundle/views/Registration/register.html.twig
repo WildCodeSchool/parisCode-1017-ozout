@@ -1,9 +1,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
 {% extends "@FOSUser/layout.html.twig" %}
 
-
 {% block body %}
-
 <header class="masthead">
     <div class="container">
             <div class="row">
@@ -43,7 +41,6 @@
                         {{ form_widget(form.dateOfBirth) }}
                         {{ form_errors(form.dateOfBirth) }}
                     </div>
-
                     <div>
                         {{ form_label(form.picture) }}
                         {{ form_widget(form.picture) }}

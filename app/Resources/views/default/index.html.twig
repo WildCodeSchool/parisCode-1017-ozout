@@ -127,38 +127,23 @@
             </div>
         </div>
         <div class="row">
-            {% for review in reviews if review.score > 3 %}
-            {#{% set first = reviews[1] %}#}
-            {#{% set second = reviews[2] %}#}
-            {#{% set third = reviews[3] %}#}
+            {% for review in reviews if review.score >= 3 %}
                 <div class="col-sm-4">
                     <div class="team-member">
-                        {#<img class="mx-auto rounded-circle" src="" alt="">#}
                         <img class="userreview" src="{{ asset('uploads/pictures/'~ review.user.picture.namePicture) }}">
                         <h5>{{ review.user.username }}</h5>
                         <p>Son commentaire :</p>
-                        <p>{{ review.score }} / 5<br>
-                           {{ review.comment }}</p>
-
+                        {% if review.score == 4 %}
+                            <span data-score="5">★</span><span data-score="4">★</span><span class="active" data-score="3">★</span><span data-score="2">★</span>
+                            {% elseif review.score == 5 %}
+                                <span data-score="5">★</span><span data-score="4">★</span><span class="active" data-score="3">★</span><span data-score="2">★</span><span data-score="1">★</span>
+                            {% else %}
+                            <span data-score="5">★</span><span data-score="4">★</span><span class="active" data-score="3">★</span>
+                          {% endif %}
+                           <p>{{ review.comment }}</p>
                     </div>
                 </div>
             {% endfor %}
-
-                {#<div class="col-sm-4">#}
-                    {#<div class="team-member">#}
-                        {#<img class="mx-auto rounded-circle" src="" alt="">#}
-                        {#<h4>{{ second.user }}</h4>#}
-                        {#<p class="text-muted">{{ second.comment }}</p>#}
-                    {#</div>#}
-                {#</div>#}
-
-                {#<div class="col-sm-4">#}
-                    {#<div class="team-member">#}
-                        {#<img class="mx-auto rounded-circle" src="" alt="">#}
-                        {#<h4>{{ third.user }}</h4>#}
-                        {#<p class="text-muted">{{ third.comment }}</p>#}
-                    {#</div>#}
-                {#</div>#}
         </div>
     </div>
     <div class="row">
@@ -185,15 +170,25 @@
                             <h2 class="text-uppercase">{{ event.title }}</h2>
                             <img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="eventimg">
                             <p>{{ event.eventDescription }} <br>
-                                Le {{ event.start|date('d/m/Y') }} <br> à {{ event.city }} <br>
-                                La cagnotte à atteindre est de : {{ event.targetMoney }} <br>
-                                avant le {{ event.deadline|date ("d/m/Y")}}<br>
+                                Le {{ event.start|date('d/m/Y, h:i') }}<br>
                                 Adresse :<br>
                                 {{ event.adress }}, {{ event.zipcode }} {{ event.city }}<br>
+                                La cagnotte à atteindre est de : {{ event.targetMoney ~ '€' }}
+                                avant le {{ event.deadline|date ("d/m/Y")}}<br>
                                 Maximum d'invités : {{ event.maxPeople }}<br>
-                                Cagnotte en cours : {{ event.onGoingMoney }} </p>
-                            <a href="{{ path('reservation_create', {'id': event.id}) }}"
-                               class="btn btn-primary">S'inscrire à l'évènement</a>
+                                Cagnotte en cours : {{ event.onGoingMoney ~ '€' }}
+                            </p>
+
+                            {% if event.nbPeopleParticipate >= event.maxPeople %}
+                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                    Evènement complet</button>
+                            {% elseif event.userParticipate is defined %}
+                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                    Vous participez déjà à l'évènement</button>
+                            {% else %}
+                                <a href="{{ path('reservation_create', {'id': event.id}) }}"
+                                   class="btn btn-primary">S'inscrire à l'évènement</a>
+                            {% endif %}
                             <button class="btn btn-primary" data-dismiss="modal" type="button">
                                 <i class="fa fa-times"></i>
                                 Fermer</button>
@@ -205,4 +200,8 @@
     </div>
 </div>
 {% endfor %}
+{% endblock %}
+{% block javascripts %}
+    <!-- Custom scripts for this template -->
+    <script src="{{ asset('assets/js/review.js') }}"></script>
 {% endblock %}

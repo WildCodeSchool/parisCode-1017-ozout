@@ -88,6 +88,13 @@ class User extends BaseUser
     private $reservations;
 
     /**
+     * @var boolean
+     *
+     * Define if current user particpate to event
+     */
+    public $userParticipate;
+
+    /**
      * Set nameUser.
      *
      * @param string $nameUser

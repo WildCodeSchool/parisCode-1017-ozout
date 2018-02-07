@@ -163,3 +163,14 @@ legend {
     color: #fed136;
     font-weight: bold;
 }
+
+/** Reservation => moneyGiven **/
+
+.moneyGiven {
+    color: #111;
+    font-size: 1em;
+}
+
+.titleMoneyGiven {
+    color: #111;
+}

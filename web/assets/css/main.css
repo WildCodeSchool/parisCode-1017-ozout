@@ -116,6 +116,7 @@ img {
 
 .hregister {
     color: #111;
+    margin-bottom: 4%;
 }
 
 label {
@@ -126,7 +127,42 @@ legend {
     color: #111;
 }
 
+/* Register Form */
+.password legend{
+    display: none;
+}
+.birthdate_field{
+    margin-bottom: 2%;
+}
+.birthdate_field legend{
+    font-size: 1rem;
+    line-height: 2;
+}
+.birthdate_field .form-inline{
+    display: inline;
+}
+.form-control-file{
+    margin-left: 25%;
+    color: black;
+    width: 24vw;
+}
+.btn-create{
+    margin-top:2%;
+}
 
+/* Page Register/confirmed */
+
+.confirmed{
+    margin-top: 40vh;
+    transform: translateY(-50%);
+    text-align: center;
+    color: black;
+}
+
+.confirmed span {
+    color: #fed136;
+    font-weight: bold;
+}
 
 /** Reservation => moneyGiven **/
 

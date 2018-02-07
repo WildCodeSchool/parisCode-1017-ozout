@@ -18,6 +18,10 @@ $("#appbundle_event_picture_pictureUpload").change(function() {
     readURL(this, "#previewPictureEvent");
 });
 
+$("#appbundle_event_picture_pictureUpload").change(function() {
+    readURL(this, "#previewPictureEditEvent");
+});
+
 
 
 

@@ -155,4 +155,11 @@ legend {
 .confirmed{
     margin-top: 40vh;
     transform: translateY(-50%);
+    text-align: center;
+    color: black;
+}
+
+.confirmed span {
+    color: #fed136;
+    font-weight: bold;
 }

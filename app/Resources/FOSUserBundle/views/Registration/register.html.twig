@@ -13,7 +13,7 @@
                     <h4 class="hregister">A vous de jouer !</h4>
                     {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
                     {{ form_widget(form) }}
-                    <img width="200" id="previewPictureProfil" src="#" alt="">
+                    <img width="200" id="previewPictureProfil" src="#" alt="userprofil" class="previewImage">
                     <div>
                         <input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-primary btn-xl text-uppercase btn-header"/>
                     </div>

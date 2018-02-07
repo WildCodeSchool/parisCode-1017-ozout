@@ -126,8 +126,6 @@ legend {
     color: #111;
 }
 
-
-
 /** Reservation => moneyGiven **/
 
 .moneyGiven {
@@ -137,4 +135,23 @@ legend {
 
 .titleMoneyGiven {
     color: #111;
+}
+
+.connectedLight {
+    background: rgb(66, 183, 42);
+    border-radius: 50%;
+    display: inline-block;
+    height: 9px;
+    margin-left: 4px;
+    width: 9px;
+}
+
+.userreview{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.previewImage{
+    margin-bottom: 30px;
 }

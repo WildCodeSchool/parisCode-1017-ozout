@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -68,6 +69,7 @@ class User extends BaseUser
      *
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Picture", cascade={"all"})
      * @ORM\JoinColumn(nullable=true)
+     * @Assert\Valid()
      */
     private $picture;
 

@@ -46,14 +46,14 @@
                                 <a class="nav-link js-scroll-trigger" href="{{ path('fos_user_registration_register') }}">Inscription</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger" href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i> Login</a>
+                                <a class="nav-link js-scroll-trigger" href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i> Se connecter</a>
                             </li>
                         {% else %}
                             <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger" href="{{ path('fos_user_profile_show') }}">Profil</a>
+                                <a class="nav-link js-scroll-trigger" href="{{ path('fos_user_profile_show') }}">Profil <span class="connectedLight"></span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger" href="{{ url('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> Logout</a>
+                                <a class="nav-link js-scroll-trigger" href="{{ url('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> Se deconnecter</a>
                             </li>
 
                         {% endif %}

@@ -30,6 +30,11 @@ class EventType extends AbstractType
                 )
             )
             ->add(
+                'start', DateTimeType::class, array(
+                    'label' => 'Date de l\'évènement'
+                )
+            )
+            ->add(
                 'category', EntityType::class, array(
                 'class' => Category::class,
                 'choice_label' => 'nameCategory',
@@ -47,13 +52,13 @@ class EventType extends AbstractType
                 )
             )
             ->add(
-                'city', TextType::class, array(
-                'label' => 'Ville'
+                'zipcode', IntegerType::class, array(
+                    'label' => 'Code Postal'
                 )
             )
             ->add(
-                'zipcode', IntegerType::class, array(
-                'label' => 'Code Postal'
+                'city', TextType::class, array(
+                'label' => 'Ville'
                 )
             )
             ->add(
@@ -62,8 +67,8 @@ class EventType extends AbstractType
                 )
             )
             ->add(
-                'start', DateTimeType::class, array(
-                'label' => 'Date limite de participation'
+                'deadline', DateTimeType::class, array(
+                    'label' => 'Date limite de participation à la cagnotte'
                 )
             )
             ->add(

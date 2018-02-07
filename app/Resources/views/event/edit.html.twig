@@ -18,6 +18,7 @@
             {{ form_start(edit_form) }}
                 {{ form_widget(edit_form) }}
                 <div class="row">
+                    <img width="200" id="previewPictureEditEvent" src="#" alt="">
                     <input type="submit" value="Edit" class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header"/>
                 {{ form_end(edit_form) }}
                     <a class="btn btn-danger btn-xs text-uppercase je-scroll-trigger btn-header" href="{{ path('event_delete', {'id': event.id}) }}">Supprimer</a>

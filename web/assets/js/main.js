@@ -13,3 +13,16 @@ function readURL(input, insertDiv) {
 $("#fos_user_registration_form_picture_pictureUpload").change(function() {
     readURL(this, "#previewPictureProfil");
 });
+
+$("#appbundle_event_picture_pictureUpload").change(function() {
+    readURL(this, "#previewPictureEvent");
+});
+
+$("#appbundle_event_picture_pictureUpload").change(function() {
+    readURL(this, "#previewPictureEditEvent");
+});
+
+
+
+
+

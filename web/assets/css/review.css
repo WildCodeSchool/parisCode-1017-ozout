@@ -1,34 +1,6 @@
 /*Permet de voir les étoiles*/
 @charset "UTF-8";
 
-/*main*/
-/*body h1 {*/
-    /*text-align: center;*/
-    /*color: black;*/
-    /*font-family: "Arial", arial, sans-serif;*/
-/*}*/
-
-/*body h5 {*/
-    /*font-family: 'Roboto Slab','Helvetica Neue',Helvetica,Arial,sans-serif;*/
-    /*font-size: 1rem;*/
-    /*font-weight: 400;*/
-    /*line-height: 1.5;*/
-    /*color: #212529;*/
-    /*text-align: left;*/
-/*}*/
-/*body section {*/
-    /*background: white;*/
-    /*!*margin: auto;*!*/
-    /*width: 400px;*/
-   /*!* height: 200px;*!*/
-    /*padding-top: 5px;*/
-    /*padding-bottom: 15px;*/
-/*}*/
-/*footer {*/
-    /*position: absolute;*/
-    /*bottom:0;*/
-    /*width:100%;*/
-/*}*/
 /*section rating-score*/
 .rating {
     /*margin: auto;*/
@@ -52,9 +24,7 @@
     position: absolute;
     color: #fed300;
 }
-/*.btn-header {*/
-    /*margin-top: 20px;*/
-/*}*/
+
 #rating {
     display: none;
 }

@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -30,6 +31,11 @@ class EventType extends AbstractType
                 )
             )
             ->add(
+                'start', DateTimeType::class, array(
+                    'label' => 'Date de l\'évènement'
+                )
+            )
+            ->add(
                 'category', EntityType::class, array(
                 'class' => Category::class,
                 'choice_label' => 'nameCategory',
@@ -37,7 +43,7 @@ class EventType extends AbstractType
                 )
             )
             ->add(
-                'eventDescription', TextType::class, array(
+                'eventDescription', TextareaType::class, array(
                 'label' => 'Description'
                 )
             )
@@ -47,13 +53,13 @@ class EventType extends AbstractType
                 )
             )
             ->add(
-                'city', TextType::class, array(
-                'label' => 'Ville'
+                'zipcode', IntegerType::class, array(
+                    'label' => 'Code Postal'
                 )
             )
             ->add(
-                'zipcode', IntegerType::class, array(
-                'label' => 'Code Postal'
+                'city', TextType::class, array(
+                'label' => 'Ville'
                 )
             )
             ->add(
@@ -62,8 +68,8 @@ class EventType extends AbstractType
                 )
             )
             ->add(
-                'start', DateTimeType::class, array(
-                'label' => 'Date limite de participation'
+                'deadline', DateTimeType::class, array(
+                    'label' => 'Date limite de participation à la cagnotte'
                 )
             )
             ->add(

@@ -74,7 +74,7 @@ class ApiController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
-            $events = $em->getRepository(Event::class)->getAllNotPrivateEvent($this->getUser(), $location, $end);
+            $events = $em->getRepository(Event::class)->getAllNotPrivateEvent($this->getUser(), null, $location, $end);
 
             $response = array(
                 'eventDescription' => $this->renderView('default/includes/cardEventRender.html.twig', array(

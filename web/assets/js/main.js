@@ -31,7 +31,6 @@ $(document).ready(function() {
                 data: {"location" : location, "end": dateEnd},
                 dataType: "json",
                 success: function (response) {
-                    console.log($("#modalResultPrivateAndPublic").html());
                     $("#modalResultPrivateAndPublic").html(response.eventModal);
                     $("#eventResultPrivateAndPublic").html(response.eventDescription);
                 }

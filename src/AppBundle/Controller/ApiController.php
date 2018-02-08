@@ -2,8 +2,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Event;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SensioLabs\Security\Exception\HttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -56,5 +60,34 @@ class ApiController extends Controller
         $jsonEvents = $serializer->serialize($events, 'json');
 
         return new Response($jsonEvents);
+    }
+
+    /**
+     * @Route("/resultsearch", name="result_search")
+     *
+     * @Method("POST")
+     */
+    public function renderResultAction(Request $request){
+        if ($request->isXmlHttpRequest()){
+            $location = strtolower(str_replace(", France", "", $request->get('location')));
+            $end = new \DateTime($request->get('end'));
+
+            $em = $this->getDoctrine()->getManager();
+
+            $events = $em->getRepository(Event::class)->getAllNotPrivateEvent($this->getUser(), null, $location, $end);
+
+            $response = array(
+                'eventDescription' => $this->renderView('default/includes/cardEventRender.html.twig', array(
+                    'events' => $events
+                )),
+                'eventModal' => $this->renderView('default/includes/modalEventRender.html.twig', array(
+                    'events' => $events
+                ))
+            );
+
+            return new JsonResponse($response);
+        } else{
+            throw new HttpException("error call method", 500);
+        }
     }
 }

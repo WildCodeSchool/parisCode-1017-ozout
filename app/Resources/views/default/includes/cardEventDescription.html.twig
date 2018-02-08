@@ -1,0 +1,16 @@
+<div class="col-md-4 col-sm-6 portfolio-item thumb-post">
+    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1{{ event.id }}">
+        <div class="portfolio-hover">
+            <div class="portfolio-hover-content">
+                <i class="fa fa-plus fa-3x"></i>
+            </div>
+        </div>
+        <img class="img-fluid" src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}"
+             alt="{{ event.title }}">
+    </a>
+    <div class="portfolio-caption">
+        <h4>{{ event.title }}</h4>
+        <p class="text-muted">{{ event.city }} </p>
+        <p class="text-muted">{{ event.targetMoney }} </p>
+    </div>
+</div>

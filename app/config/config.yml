@@ -77,11 +77,17 @@ fos_user:
     service:
         mailer: fos_user.mailer.twig_swift
     from_email:
-        address: "%mailer_user%"
-        sender_name: "%mailer_user%"
+        address: "bonjour@ozout.fr"
+        sender_name: "OzOut"
+    resetting:
+        email:
+            template: email/password_resetting.email.twig
     registration:
         form:
             type: AppBundle\Form\RegistrationType
+        confirmation:
+            enabled: true
+            template: FOSUserBundle:Registration:email.txt.twig
     profile:
         form:
             type: AppBundle\Form\ProfileType

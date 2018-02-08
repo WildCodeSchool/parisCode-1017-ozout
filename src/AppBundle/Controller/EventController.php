@@ -12,7 +12,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\GoogleMap;
 
-
 /**
  * Event controller.
  *
@@ -79,6 +78,7 @@ class EventController extends Controller
     {
         $event = new Event();
         $form = $this->createForm('AppBundle\Form\EventType', $event);
+        $user = $this->getUser();
 
         $form->handleRequest($request);
 
@@ -104,6 +104,21 @@ class EventController extends Controller
             $em->persist($reservation);
             $em->persist($event);
             $em->flush();
+
+            /* Send Message */
+            $message = (new \Swift_Message())
+                ->setSubject('Nouvel Evénement OzOut')
+                ->setFrom($this->getParameter('mailer_user'))
+                ->setTo($user->getEmail())
+                ->setBody(
+                    $this->renderView('email/mailNewEvent.html.twig', array(
+                            'event' => $event,
+                            'user' => $user
+                        )
+                    ),
+                    'text/html'
+                );
+            $this->get('mailer')->send($message);
 
             return $this->redirectToRoute('fos_user_profile_show');
         }
@@ -167,7 +182,6 @@ class EventController extends Controller
             )
         );
     }
-
     /**
      * Deletes an event entity.
      *
@@ -176,7 +190,6 @@ class EventController extends Controller
      */
     public function deleteAction(Event $event, Reservation $reservation, FileUploader $fileUploader)
     {
-
             $em = $this->getDoctrine()->getManager();
             $em->remove($event);
             $em->remove($reservation);
@@ -187,6 +200,4 @@ class EventController extends Controller
 
         return $this->redirectToRoute('event_index');
     }
-
-
 }

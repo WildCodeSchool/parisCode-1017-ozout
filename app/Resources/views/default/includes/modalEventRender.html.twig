@@ -1,0 +1,7 @@
+{% for event in events.public %}
+    {% include ('default/includes/modalEventDescription.html.twig') %}
+{% endfor %}
+
+{% for event in events.private %}
+    {% include ('default/includes/modalEventDescription.html.twig') %}
+{% endfor %}

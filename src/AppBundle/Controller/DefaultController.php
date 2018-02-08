@@ -64,4 +64,15 @@ class DefaultController extends Controller
     {
         return $this->render('default/about.html.twig');
     }
+
+    /**
+     * Send to CGV Page
+     *
+     * @Route("/cgv", name="cgv")
+     * @Method("GET")
+     */
+    public function cgvShowAction()
+    {
+        return $this->render('default/cgv.html.twig');
+    }
 }

@@ -13,19 +13,51 @@ use AppBundle\Entity\User;
 class EventRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
+     * @param null $location
+     * @param null $end
+     * @param User $user
+     * @param Int $maxResult
+     *
      * @return mixed
      */
-    public function getAllNotPrivateEvent(){
+    public function getAllNotPrivateEvent($user, $maxResult, $location = null, $end = null){
+        $parameters = array();
         $qb = $this->createQueryBuilder('e');
         $qb->select('e')
             ->join('e.picture', 'p')
             ->addSelect('p')
-            ->where('e.isPrivate = false')
+            ->where('e.start > :dateNow')
             ->orderBy('e.start', 'ASC')
-            ->setMaxResults(9);
+            ->setMaxResults($maxResult);
         ;
+        $parameters['dateNow'] = new \DateTime();
 
-        return $qb->getQuery()->getResult();
+        if ($user == null){
+            $qb->andWhere('e.isPrivate = false');
+        }
+        if ($location != null && $location != ''){
+            $qb->andWhere("LOWER(e.city) = :location");
+            $parameters['location'] = $location;
+        }
+        if ($end != null){
+            $qb->andWhere("e.deadline < :end");
+            $parameters['end'] = $end;
+        }
+
+        $qb->setParameters($parameters);
+        $results = $qb->getQuery()->getResult();
+        $events = array(
+            "public" => [],
+            "private" => []
+        );
+        foreach ($results as $result){
+            if ($result->getIsPrivate() == false){
+                $events['public'][] = $result;
+            } else {
+                $events['private'][] = $result;
+            }
+        }
+        return $events;
     }
 
     /**

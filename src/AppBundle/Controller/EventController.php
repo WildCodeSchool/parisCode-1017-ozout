@@ -78,6 +78,7 @@ class EventController extends Controller
     {
         $event = new Event();
         $form = $this->createForm('AppBundle\Form\EventType', $event);
+        $user = $this->getUser();
 
         $form->handleRequest($request);
 
@@ -108,10 +109,11 @@ class EventController extends Controller
             $message = (new \Swift_Message())
                 ->setSubject('Nouvel Evénement OzOut')
                 ->setFrom($this->getParameter('mailer_user'))
-                ->setTo($this->getParameter('mailer_to'))
+                ->setTo($user->getEmail())
                 ->setBody(
                     $this->renderView('email/mailNewEvent.html.twig', array(
                             'event' => $event,
+                            'user' => $user
                         )
                     ),
                     'text/html'

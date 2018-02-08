@@ -1,145 +1,86 @@
-
-
-{% block body %}
-    <header class="masthead">
-        <div class="container">
-            <div class="row">
-                <div class="register-container">
-                    <h1 align="center">Bravo {#{{ user.username }}#}!</h1>
-                    <h2 align="center">Ton événement a bien été créé.</h2>
-                    <p align="center">Voici les informations que tu as remplies.</p>
-                    <table class="table-hover" align="center">
-                        <tbody>
-                        <tr>
-                            <th>Nom de l'événement</th>
-                            <td>{{ event.title }}</td>
-                        </tr>
-                        <tr>
-                            <th>Date de l'événement</th>
-                            <td>{% if event.deadline %}{{ event.deadline|date('d-m-Y H:i:s') }}{% endif %}</td>
-                        </tr>
-                        <tr>
-                            <th>Catégorie</th>
-                            <td>{{ event.category }}</td>
-                        </tr>
-                        <tr>
-                            <th>Description</th>
-                            <td>{{ event.eventDescription }}</td>
-                        </tr>
-                        <tr>
-                            <th>Adresse</th>
-                            <td>{{ event.adress }}, {{ event.zipcode }} {{ event.city }}</td>
-                        </tr>
-                        <tr>
-                            <th>Montant de la cagnotte à atteindre</th>
-                            <td>{{ event.targetMoney }} €</td>
-                        </tr>
-                        <tr>
-                            <th>Date limite de participation à la cagnotte</th>
-                            <td>{% if event.start %}{{ event.start|date('Y-m-d H:i:s') }}{% endif %}</td>
-                        </tr>
-
-                        <tr>
-                            <th>L'événement est privé ?</th>
-                            <td>{% if event.isPrivate %}Oui{% else %}Non{% endif %}</td>
-                        </tr>
-                        <tr>
-                            <th>Participants (max.)</th>
-                            <td>{{ event.maxPeople}}</td>
-                        </tr>
-                        <tr>
-                            <th>Image</th>
-                            <td><img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="" width="400"> </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div align="center">
-                        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header" href="{{ path('event_index') }}">Retrouve ton événement sur OzOut !</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-{% endblock %}
-
-{#
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
-    <title>Un événement OzOut a été créé !</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Un événement OzOut a été créé !</title>
+        <style>
+            h1 {
+                color: #fed136;
+            }
+            th{
+                text-align: left;
+            }
+            a{
+                color: #fed136 !important;
+                text-decoration: none;
+                font-size: 1em;
+                text-align: left !important;
+            }
+            .container{
+               /* background-image: url("img/backgroundEmail.png");*/
+                background-color: #f7f7f7;
+                padding: 5vh;
+                width: 60vw;
+                height: 45vh;
+                border: 1px solid #f7f7f9;
+            }
+            table{
+                text-align: left;
+            }
+        </style>
+    </head>
     <body>
-        <header class="masthead">
-            <div class="container">
-                <div class="row">
-                    <div class="register-container">
-                        <h1 align="center">Bravo !</h1>
-                        <h2 align="center">Ton événement a bien été créé.</h2>
-                        <p align="center">Voici les informations que tu as remplies.</p>
-                        <table class="table-hover center">
-                            <tbody>
-                            <tr>
-                                <th>Nom de l'événement</th>
-                                <td>{{ event.title }}</td>
-                            </tr>
-                            <tr>
-                                <th>Date de l'événement</th>
-                                <td>{% if event.deadline %}{{ event.deadline|date('Y-m-d H:i:s') }}{% endif %}</td>
-                            </tr>
-                            <tr>
-                                <th>Catégorie</th>
-                                <td>{{ event.category }}</td>
-                            </tr>
-                            <tr>
-                                <th>Description</th>
-                                <td>{{ event.eventDescription }}</td>
-                            </tr>
-                            <tr>
-                                <th>Adresse</th>
-                                <td>{{ event.adress }}</td>
-                            </tr>
-                            <tr>
-                                <th>Ville</th>
-                                <td>{{ event.city }}</td>
-                            </tr>
-                            <tr>
-                                <th>Code Postal</th>
-                                <td>{{ event.zipcode }}</td>
-                            </tr>
-                            <tr>
-                                <th>Montant de la cagnotte à atteindre</th>
-                                <td>{{ event.targetMoney }} €</td>
-                            </tr>
-                            <tr>
-                                <th>Date limite de participation à la cagnotte</th>
-                                <td>{% if event.start %}{{ event.start|date('Y-m-d H:i:s') }}{% endif %}</td>
-                            </tr>
-
-                            <tr>
-                                <th>L'événement est privé ?</th>
-                                <td>{% if event.isPrivate %}Oui{% else %}Non{% endif %}</td>
-                            </tr>
-                            <tr>
-                                <th>Participants (max.)</th>
-                                <td>{{ event.maxPeople}}</td>
-                            </tr>
-                            <tr>
-                                <th>Image</th>
-                                <td><img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="" width="400"> </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div align="center">
-                            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header" href="{{ path('event_index') }}">Retrouve ton événement sur OzOut !</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+        <div class="container">
+            <h1 align="left">Bravo {{ user.username }} !</h1>
+            <h2 align="left">Ton événement <a href="{{ path('event_index') }}">OzOut </a>a bien été créé.</h2>
+            <p align="left">Voici les détails que tu as rempli...</p>
+            <table>
+                <tbody>
+                <tr>
+                    <th>Nom de l'événement</th>
+                    <td>{{ event.title }}</td>
+                </tr>
+                <tr>
+                    <th>Date de l'événement</th>
+                    <td>{% if event.deadline %}{{ event.deadline|date('d-m-Y H:i:s') }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Catégorie</th>
+                    <td>{{ event.category }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ event.eventDescription }}</td>
+                </tr>
+                <tr>
+                    <th>Adresse</th>
+                    <td>{{ event.adress }}, {{ event.zipcode }} {{ event.city }}</td>
+                </tr>
+                <tr>
+                    <th>Montant de la cagnotte à atteindre</th>
+                    <td>{{ event.targetMoney }} €</td>
+                </tr>
+                <tr>
+                    <th>Date limite de participation à la cagnotte</th>
+                    <td>{% if event.start %}{{ event.start|date('d-m-Y H:i:s') }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>L'événement est privé ?</th>
+                    <td>{% if event.isPrivate %}Oui{% else %}Non{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Participants (max.)</th>
+                    <td>{{ event.maxPeople}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="" width="400">
+        </div>
     </body>
-</html>#}
+</html>
+
+
+

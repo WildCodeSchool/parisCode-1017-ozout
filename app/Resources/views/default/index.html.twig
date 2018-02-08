@@ -5,9 +5,13 @@
 <header class="masthead">
     <div class="container">
         <div class="intro-text">
-            <div class="intro-lead-in">Créé ton événement !</div>
+            <div class="intro-lead-in">Créer son événement !</div>
             <div class="intro-heading text-uppercase">Tout simplement. </div>
             <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">En savoir plus</a>
+            <div class="animBallon">
+                <div><span class="ball">OzOut</span>
+                </div>
+            </div>
         </div>
     </div>
 </header>
@@ -186,7 +190,7 @@
                             </p>
 
                             {% if event.nbPeopleParticipate >= event.maxPeople %}
-                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                <button class="btn btn-danger closeEvent" data-dismiss="modal" type="button">
                                     Evènement complet</button>
                             {% elseif event.userParticipate is defined %}
                                 <button class="btn btn-primary" data-dismiss="modal" type="button">
@@ -207,7 +211,18 @@
 </div>
 {% endfor %}
 {% endblock %}
+
 {% block javascripts %}
+    <!----------------------------------------------Ballon-->
+    <script>
+        window.open = function() {};
+        window.print = function() {};
+        // Support hover state for mobile.
+        if (false) {
+            window.ontouchstart = function() {};
+        }
+    </script>
+    <!----------------------------------------------Ballon-->
     <!-- Custom scripts for this template -->
     <script src="{{ asset('assets/js/review.js') }}"></script>
 {% endblock %}

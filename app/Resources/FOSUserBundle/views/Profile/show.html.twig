@@ -7,7 +7,9 @@
 
 {% block fos_user_content %}
     <div class="container profile-page">
-        <header></header>
+        <header>
+
+        </header>
         <main>
             <div class="row">
                 <div class="left col-lg-3">
@@ -77,6 +79,7 @@
                                 </div>
                             </section>
                         </div>
+                        <!-- Modal -->
                         {% for reservation in user.reservations %}
                             <div class="portfolio-modal modal fade" id="portfolioModal1{{ reservation.event.id }}" tabindex="-1" role="dialog"
                                  aria-hidden="true">
@@ -185,7 +188,7 @@
                             <div class="container">
                                 <div class="row">
                                     {% for reservation in user.reservations %}
-                                        {% if reservation.doParticipate == true %}
+                                        {% if reservation.doParticipate == true and reservation.event.start|date('m/d/y') < 'now'|date('m/d/y') %}
                                             <div class="col-md-4 col-sm-6 portfolio-item thumb-post">
                                                 <a class="portfolio-link" data-toggle="modal" href="#portfolioModal3{{ reservation.event.id }}">
                                                     <div class="portfolio-hover">
@@ -229,7 +232,7 @@
                                                     <h2 class="text-uppercase">{{ reservation.event.title }}</h2>
                                                     <a class="item-intro text-muted"></a>
                                                     <p>{{ reservation.event.eventDescription }}</p>
-                                                    <p>{{ reservation.event.deadline|date ("d/m/Y") }}</p>
+                                                    <p>{{ reservation.event.start|date ("d/m/Y") }}</p>
                                                     <p>{{ reservation.event.city }}</p>
                                                     <img src="{{ asset('uploads/pictures/'~ reservation.event.picture.namePicture) }}"
                                                          alt="eventimg">

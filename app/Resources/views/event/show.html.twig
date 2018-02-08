@@ -15,6 +15,10 @@
                 <td>{{ event.title }}</td>
             </tr>
             <tr>
+                <th>Date limite de participation à la cagnotte</th>
+                <td>{% if event.start %}{{ event.start|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
                 <th>Catégorie</th>
                 <td>{{ event.category }}</td>
             </tr>
@@ -39,8 +43,8 @@
                 <td>{{ event.targetMoney }} €</td>
             </tr>
             <tr>
-                <th>Date limite de participation</th>
-                <td>{% if event.start %}{{ event.start|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <th>Date limite de participation à la cagnotte</th>
+                <td>{% if event.deadline %}{{ event.deadline|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>L'événement est privé ?</th>

@@ -105,7 +105,7 @@
                             </p>
 
                             {% if event.nbPeopleParticipate >= event.maxPeople %}
-                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                <button class="btn btn-danger closeEvent" data-dismiss="modal" type="button">
                                     Evènement complet</button>
                             {% elseif event.userParticipate is defined %}
                                 <button class="btn btn-primary" data-dismiss="modal" type="button">

@@ -343,3 +343,27 @@ legend {
     border-radius: 6px;
 }
 
+/**************************************** CGV ****************************************************/
+/**'cgv.html.twig'**/
+
+.cgv-container{
+
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.para-cgv{
+
+    text-align: justify;
+}
+
+.title-cgv{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.subtitle-cgv, .article-cgv{
+
+    padding-bottom: 30px;
+    padding-top: 30px;
+}

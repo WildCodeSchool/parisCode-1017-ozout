@@ -184,18 +184,67 @@ class EventController extends Controller
     /**
      * Deletes an event entity.
      *
-     * @Route("/delete/{id}", name="event_delete")
+     * @Route("/{id}/delete", name="event_delete")
      * @Method("GET")
+     * @param Event $event
+     * @param FileUploader $fileUploader
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction(Event $event, Reservation $reservation, FileUploader $fileUploader)
+    public function deleteAction(Event $event, FileUploader $fileUploader)
     {
             $em = $this->getDoctrine()->getManager();
             $em->remove($event);
-            $em->remove($reservation);
+
+            $reservations = $em->getRepository(Reservation::class)->findByEvent($event);
+            $participants = array();
+            foreach ($reservations as $key => $value){
+                if ($value->getIsCreator()){
+                    $creator = $value->getUser();
+                } else{
+                    $emails[] = $value->getUser()->getEmail();
+                    $participants = $value->getUser();
+                }
+            }
 
             $fileUploader->remove($event->getPicture());
 
             $em->flush();
+
+        /* Send Message Creator */
+        $message = (new \Swift_Message())
+            ->setSubject('L\'évènement' . " " . $event->getTitle() . 'a été annulé')
+            ->setFrom($this->getParameter('mailer_user'))
+            ->setTo($creator->getEmail())
+            ->setBody(
+                $this->renderView('email/mailDeleteCreatedEvent.html.twig', array(
+                        'event' => $event,
+                        'creator' => $creator,
+
+                    )
+                ),
+                'text/html'
+            );
+        $this->get('mailer')->send($message);
+
+        if (isset($emails)){
+
+            /* Send Message Participants */
+            $message = (new \Swift_Message())
+                ->setSubject('L\'évènement' . " " . $event->getTitle() . 'a été annulé')
+                ->setFrom($this->getParameter('mailer_user'))
+                ->setTo($emails)
+                ->setBody(
+                    $this->renderView('email/mailDeleteCreatedEventParticipants.html.twig', array(
+                            'event' => $event,
+                            'participants' => $participants,
+                            'creator' => $creator
+                        )
+                    ),
+                    'text/html'
+                );
+            $this->get('mailer')->send($message);
+        }
+
 
         return $this->redirectToRoute('event_index');
     }

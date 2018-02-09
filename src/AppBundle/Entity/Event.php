@@ -58,7 +58,7 @@ class Event implements JsonSerializable
      *
      * @var \AppBundle\Entity\Reservation $reservations
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="event", orphanRemoval=true, cascade={"all"})
      */
     private $reservations;
 

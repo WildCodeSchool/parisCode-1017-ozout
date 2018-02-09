@@ -189,6 +189,8 @@ class EventController extends Controller
      */
     public function deleteAction(Event $event, Reservation $reservation, FileUploader $fileUploader)
     {
+            $user = $this->getUser();
+            $reservation =$this->getReservation();
             $em = $this->getDoctrine()->getManager();
             $em->remove($event);
             $em->remove($reservation);
@@ -196,6 +198,22 @@ class EventController extends Controller
             $fileUploader->remove($event->getPicture());
 
             $em->flush();
+
+        /* Send Message */
+        $message = (new \Swift_Message())
+            ->setSubject('L\'évènement' . " " . $event->getTitle() . 'a été annulé')
+            ->setFrom($this->getParameter('mailer_user'))
+            ->setTo($user->getEmail())
+            ->setBody(
+                $this->renderView('email/mailDeleteCreatedEvent.html.twig', array(
+                        'event' => $event,
+                        'user' => $user,
+                        'reservation' => $reservation
+                    )
+                ),
+                'text/html'
+            );
+        $this->get('mailer')->send($message);
 
         return $this->redirectToRoute('event_index');
     }

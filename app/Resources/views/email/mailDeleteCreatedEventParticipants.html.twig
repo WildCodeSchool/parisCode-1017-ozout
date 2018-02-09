@@ -5,7 +5,7 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Evènement annulé !</title>
+        <title>Evénement annulé !</title>
         <style>
             h1 {
                 color: #fed136;
@@ -33,8 +33,9 @@
     </head>
     <body>
         <div class="container">
-            <h1 align="left">Hey {{ creator.username }} !</h1>
-            <h2 align="left">Nous avons bien pris en compte l'annulation de ton événement {{ event.title }}</h2>
+            <h1 align="left">Hey {{ participants.username }} !</h1>
+            <h2 align="left">{{ creator.username }} vient d'annuler l'événement {{ event.title }}</h2>
+            <p>Si tu as participé à une cagnotte, un remboursement te parviendra sous 48h.</p>
             <p>A très vite,</p>
             <p>L'Equipe <span><a href="{{ path('event_index') }}">OzOut </a></span></p>
         </div>

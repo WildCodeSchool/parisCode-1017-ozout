@@ -39,5 +39,9 @@ services:
         tags:
             - { name: kernel.event_suscriber}
 
+    twig.extension.intl:
+            class: Twig_Extensions_Extension_Intl
+            tags:
+                - { name: twig.extension }
 
 

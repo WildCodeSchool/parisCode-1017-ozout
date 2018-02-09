@@ -119,7 +119,6 @@ class EventController extends Controller
                     'text/html'
                 );
             $this->get('mailer')->send($message);
-
             return $this->redirectToRoute('fos_user_profile_show');
         }
 

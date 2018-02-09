@@ -5,7 +5,7 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Un événement OzOut a été créé !</title>
+        <title>Ton inscription à un événement OzOut</title>
         <style>
             h1 {
                 color: #fed136;
@@ -24,7 +24,7 @@
                 background-color: #f7f7f7;
                 padding: 5vh;
                 width: 60vw;
-                height: 45vh;
+                height: 30vh;
                 border: 1px solid #f7f7f9;
             }
             table{
@@ -39,22 +39,18 @@
     </head>
     <body>
         <div class="container">
-            <h1 align="left">Bravo {{ user.username }} !</h1>
-            <h2 align="left">Ton événement <a href="{{ path('event_index') }}">OzOut </a>a bien été créé.</h2>
-            <p align="left">Voici les détails que tu as rempli...</p>
+            <h1 align="left">Inscription bien enregistrée, {{ user.username }} !</h1>
+            <p align="left">Voici les détails de ta participation à l'événement <strong>{{ event.title }}</strong> :</p>
+            <img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="" width="400">
             <table>
                 <tbody>
-                <tr>
-                    <th>Nom de l'événement</th>
-                    <td>{{ event.title }}</td>
-                </tr>
+                {#<tr>
+                    <th>Organisateur</th>
+                    <td>{{ user.roles {{ reservation.isCreator }} }}</td>
+                </tr>#}
                 <tr>
                     <th>Date de l'événement</th>
                     <td>{% if event.deadline %}{{ event.deadline|localizeddate('none', 'none', null, null, 'EEEE d MMMM Y') }}{% endif %}</td>
-                </tr>
-                <tr>
-                    <th>Catégorie</th>
-                    <td>{{ event.category }}</td>
                 </tr>
                 <tr>
                     <th>Description</th>
@@ -65,25 +61,12 @@
                     <td>{{ event.adress }}, {{ event.zipcode }} {{ event.city }}</td>
                 </tr>
                 <tr>
-                    <th>Montant de la cagnotte à atteindre</th>
-                    <td>{{ event.targetMoney }} €</td>
-                </tr>
-                <tr>
-                    <th>Date limite de participation à la cagnotte</th>
-                    <td>{% if event.start %}{{ event.start|localizeddate('none', 'none', null, null, 'EEEE d MMMM Y')  }}{% endif %}</td>
-                </tr>
-                <tr>
-                    <th>L'événement est privé ?</th>
-                    <td>{% if event.isPrivate %}Oui{% else %}Non{% endif %}</td>
-                </tr>
-                <tr>
-                    <th>Participants (max.)</th>
-                    <td>{{ event.maxPeople}}</td>
+                    <th>Montant de ta participation à la cagnotte</th>
+                    <td>{{ reservation.moneyGiven }} €</td>
                 </tr>
                 </tbody>
             </table>
-            <img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="" width="400">
-            <p>A très vite,</p>
+            <p>A très bientôt,</p>
             <p>L'Equipe <span><a href="{{ path('event_index') }}">OzOut </a></span></p>
         </div>
     </body>

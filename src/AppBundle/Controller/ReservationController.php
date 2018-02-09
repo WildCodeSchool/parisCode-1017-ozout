@@ -52,6 +52,22 @@ class ReservationController extends Controller
 
             $this->addFlash('successMsg', "Inscription confirmée");
 
+            /* Send Message */
+            $message = (new \Swift_Message())
+                ->setSubject('Ton inscription à l\'évènement' . " " . $event->getTitle())
+                ->setFrom($this->getParameter('mailer_user'))
+                ->setTo($currentUser->getEmail())
+                ->setBody(
+                    $this->renderView('email/mailNewParticipation.html.twig', array(
+                            'event' => $event,
+                            'user' => $currentUser,
+                            'reservation' => $reservation
+                        )
+                    ),
+                    'text/html'
+                );
+            $this->get('mailer')->send($message);
+
             return $this->redirectToRoute('fos_user_profile_show');
         }
 

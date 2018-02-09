@@ -302,9 +302,6 @@ legend {
     }
 }
 
-
-
-
 .h3Home{
     margin-bottom: 20px !important;
 }
@@ -313,10 +310,6 @@ legend {
     margin-bottom: 20px !important;
     color: #fff;
 }
-
-/*.h2apropos {*/
-    /*margin-bottom: 35px !important;*/
-/*}*/
 
 .step {
     margin-top: 30px !important;
@@ -367,3 +360,11 @@ legend {
     padding-bottom: 30px;
     padding-top: 30px;
 }
+
+/**************************************** About / Contact ****************************************************/
+/**'about.html.twig'**/
+/**'contact.html.twig'**/
+.row-about-contact{
+    margin-top: 15vh;
+}
+

@@ -10,4 +10,13 @@ namespace AppBundle\Repository;
  */
 class ReservationRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getIdEventReservationByUser($user){
+        $qb = $this->createQueryBuilder('r');
+        $qb->join('r.event', 'e')
+            ->select('e.id')
+            ->where('r.user = :user')
+            ->setParameter('user', $user->getId())
+        ;
+        return $qb->getQuery()->getResult();
+    }
 }

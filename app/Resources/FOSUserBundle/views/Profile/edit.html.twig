@@ -1,18 +1,32 @@
 {% trans_default_domain 'FOSUserBundle' %}
 {% extends "@FOSUser/layout.html.twig" %}
 
-{% block stylesheets %}
-    <link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet">
-{% endblock %}
-
 {% block fos_user_content %}
-<div class="profile-container">
-    <h1>Mettre à jour mes informations</h1>
-    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+
+<header class="masthead">
+    <div class="container">
+        <div class="intro-text">
+            <div class="intro-lead-in"><a class="navbar-brand logo" href="{{ path('homepage') }}"> OzOut</a></div>
+        </div>
     </div>
-</div>
+</header>
+
+<section class="bg-light" id="portfolio">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading text-uppercase">Modifier mes informations</h2>
+            </div>
+        </div>
+        <div class="fos_user_user_show">
+            <img class="profile" src="{{ asset('uploads/pictures/' ~ form.vars['value'].picture.namePicture) }}">
+        </div>
+        {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+        {{ form_widget(form) }}
+        <div>
+            <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+        </div>
+    </div>
+</section>
     {{ form_end(form) }}
 {% endblock fos_user_content %}

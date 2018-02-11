@@ -33,15 +33,15 @@ services:
             arguments:
                 $targetDir: '%pictures_directory%'
 
-    app.form.registration:
-        class: AppBundle\Form\RegistrationType
+    user.picture_uploading:
+        class: AppBundle\EventListener\PictureUploadingListener
+        arguments: ['@AppBundle\Service\FileUploader']
         tags:
-            - { name: form.type, alias: app_user_registration }
+            - { name: kernel.event_suscriber}
 
-    # add more services, or override services that need manual wiring
-    # AppBundle\upload\ExampleService:
-    #     arguments:
-    #         $someArgument: 'some_value'
-
+    twig.extension.intl:
+            class: Twig_Extensions_Extension_Intl
+            tags:
+                - { name: twig.extension }
 
 

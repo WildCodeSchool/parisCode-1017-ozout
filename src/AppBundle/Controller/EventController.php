@@ -3,13 +3,14 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Event;
+use AppBundle\Entity\Reservation;
+use AppBundle\Form\SearchType;
 use AppBundle\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\GoogleMap;
-
 
 /**
  * Event controller.
@@ -28,14 +29,43 @@ class EventController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $events = $em->getRepository('AppBundle:Event')->findAll();
+        $events = $em->getRepository('AppBundle:Event')->getAllNotPrivateEvent($this->getUser(), null);
+
+        $form = $this->createForm(SearchType::class, null, array(
+            'action' => $this->generateUrl('result_search'),
+            'method' => "post",
+            'attr' => array(
+                'id' => "searchFormEvent",
+            )
+        ));
+
+        if ($this->getUser() != null){
+            $reservations = $em->getRepository(Reservation::class)->getIdEventReservationByUser($this->getUser());
+            $this->setReservation($events['public'], $reservations);
+            $this->setReservation($events['private'], $reservations);
+        }
 
         return $this->render(
             'event/index.html.twig', array(
             'events' => $events,
-            'events_json' => json_encode($events)
+            'events_json' => json_encode($events),
+            'formSearch' => $form->createView()
             )
         );
+    }
+
+    /**
+     * @param $events
+     * @param $reservations
+     */
+    private function setReservation($events, $reservations){
+        foreach ($events as $key => $event){
+            foreach ($reservations as $reservation){
+                if (in_array($event->getId(), $reservation)){
+                    $event->userParticipate = true;
+                }
+            }
+        }
     }
 
     /**
@@ -48,6 +78,7 @@ class EventController extends Controller
     {
         $event = new Event();
         $form = $this->createForm('AppBundle\Form\EventType', $event);
+        $user = $this->getUser();
 
         $form->handleRequest($request);
 
@@ -62,10 +93,33 @@ class EventController extends Controller
 
             $fileUploader->upload($event->getPicture());
 
+            $reservation = new Reservation();
+            $reservation->setDate(new \DateTime());
+            $reservation->setDoParticipate(true);
+            $reservation->setEvent($event);
+            $reservation->setIsCreator(true);
+            $reservation->setUser($this->getUser());
+            $reservation->setMoneyGiven(0);
+
+            $em->persist($reservation);
             $em->persist($event);
             $em->flush();
 
-            return $this->redirectToRoute('event_show', array('id' => $event->getId()));
+            /* Send Message */
+            $message = (new \Swift_Message())
+                ->setSubject('Nouvel Evénement OzOut')
+                ->setFrom($this->getParameter('mailer_user'))
+                ->setTo($user->getEmail())
+                ->setBody(
+                    $this->renderView('email/mailNewEvent.html.twig', array(
+                            'event' => $event,
+                            'user' => $user
+                        )
+                    ),
+                    'text/html'
+                );
+            $this->get('mailer')->send($message);
+            return $this->redirectToRoute('fos_user_profile_show');
         }
 
         return $this->render(
@@ -127,26 +181,71 @@ class EventController extends Controller
             )
         );
     }
-
     /**
      * Deletes an event entity.
      *
-     * @Route("/delete/{id}", name="event_delete")
+     * @Route("/{id}/delete", name="event_delete")
      * @Method("GET")
+     * @param Event $event
+     * @param FileUploader $fileUploader
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Event $event, FileUploader $fileUploader)
     {
-
             $em = $this->getDoctrine()->getManager();
-
             $em->remove($event);
+
+            $reservations = $em->getRepository(Reservation::class)->findByEvent($event);
+            $participants = array();
+            foreach ($reservations as $key => $value){
+                if ($value->getIsCreator()){
+                    $creator = $value->getUser();
+                } else{
+                    $emails[] = $value->getUser()->getEmail();
+                    $participants = $value->getUser();
+                }
+            }
 
             $fileUploader->remove($event->getPicture());
 
             $em->flush();
 
+        /* Send Message Creator */
+        $message = (new \Swift_Message())
+            ->setSubject('L\'évènement' . " " . $event->getTitle() . 'a été annulé')
+            ->setFrom($this->getParameter('mailer_user'))
+            ->setTo($creator->getEmail())
+            ->setBody(
+                $this->renderView('email/mailDeleteCreatedEvent.html.twig', array(
+                        'event' => $event,
+                        'creator' => $creator,
+
+                    )
+                ),
+                'text/html'
+            );
+        $this->get('mailer')->send($message);
+
+        if (isset($emails)){
+
+            /* Send Message Participants */
+            $message = (new \Swift_Message())
+                ->setSubject('L\'évènement' . " " . $event->getTitle() . 'a été annulé')
+                ->setFrom($this->getParameter('mailer_user'))
+                ->setTo($emails)
+                ->setBody(
+                    $this->renderView('email/mailDeleteCreatedEventParticipants.html.twig', array(
+                            'event' => $event,
+                            'participants' => $participants,
+                            'creator' => $creator
+                        )
+                    ),
+                    'text/html'
+                );
+            $this->get('mailer')->send($message);
+        }
+
+
         return $this->redirectToRoute('event_index');
     }
-
-
 }

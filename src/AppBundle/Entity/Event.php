@@ -23,30 +23,42 @@ class Event implements JsonSerializable
     }
 
     /**
+     * Specify data which should be serialized to JSON
+     *
+     * @link   http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since  5.4.0
+     */
+    public function jsonSerialize()
+    {
+        return [
+            "lat" => $this->latitude,
+            "lng" => $this->longitude
+        ];
+    }
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->reviews = new \Doctrine\Common\Collections\ArrayCollection();
         $this->start = new \DateTime();
         $this->deadline = new \DateTime();
+        $this->onGoingMoney = 0;
+        $this->isValid = false;
+        $this->nbPeopleParticipate=0;
     }
 
     //CLI auto-generated code
 
     /**
-     * @var \AppBundle\Entity\User $users
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Event", inversedBy="events")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $users;
-
-    /**
      *
      * @var \AppBundle\Entity\Reservation $reservations
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="event", orphanRemoval=true, cascade={"all"})
      */
     private $reservations;
 
@@ -173,6 +185,19 @@ class Event implements JsonSerializable
      */
     private $eventDescription;
 
+    /**
+     * @var
+     *
+     * @ORM\Column(name="is_valid", type="integer")
+     */
+    private $isValid;
+
+    /**
+     * @var $nbPeopleParticipate
+     *
+     * @ORM\Column(name="nb_people_participate", type="integer")
+     */
+    private $nbPeopleParticipate;
 
     /**
      * Get id.
@@ -283,11 +308,11 @@ class Event implements JsonSerializable
     /**
      * Set latitude.
      *
-     * @param float $latitude
+     * @param float|null $latitude
      *
      * @return Event
      */
-    public function setLatitude($latitude)
+    public function setLatitude($latitude = null)
     {
         $this->latitude = $latitude;
 
@@ -297,7 +322,7 @@ class Event implements JsonSerializable
     /**
      * Get latitude.
      *
-     * @return float
+     * @return float|null
      */
     public function getLatitude()
     {
@@ -307,11 +332,11 @@ class Event implements JsonSerializable
     /**
      * Set longitude.
      *
-     * @param float $longitude
+     * @param float|null $longitude
      *
      * @return Event
      */
-    public function setLongitude($longitude)
+    public function setLongitude($longitude = null)
     {
         $this->longitude = $longitude;
 
@@ -321,7 +346,7 @@ class Event implements JsonSerializable
     /**
      * Get longitude.
      *
-     * @return float
+     * @return float|null
      */
     public function getLongitude()
     {
@@ -403,11 +428,11 @@ class Event implements JsonSerializable
     /**
      * Set isPrivate.
      *
-     * @param bool $isPrivate
+     * @param bool|null $isPrivate
      *
      * @return Event
      */
-    public function setIsPrivate($isPrivate)
+    public function setIsPrivate($isPrivate = null)
     {
         $this->isPrivate = $isPrivate;
 
@@ -417,7 +442,7 @@ class Event implements JsonSerializable
     /**
      * Get isPrivate.
      *
-     * @return bool
+     * @return bool|null
      */
     public function getIsPrivate()
     {
@@ -427,11 +452,11 @@ class Event implements JsonSerializable
     /**
      * Set maxPeople.
      *
-     * @param int $maxPeople
+     * @param int|null $maxPeople
      *
      * @return Event
      */
-    public function setMaxPeople($maxPeople)
+    public function setMaxPeople($maxPeople = null)
     {
         $this->maxPeople = $maxPeople;
 
@@ -441,7 +466,7 @@ class Event implements JsonSerializable
     /**
      * Get maxPeople.
      *
-     * @return int
+     * @return int|null
      */
     public function getMaxPeople()
     {
@@ -451,11 +476,11 @@ class Event implements JsonSerializable
     /**
      * Set onGoingMoney.
      *
-     * @param int $onGoingMoney
+     * @param int|null $onGoingMoney
      *
      * @return Event
      */
-    public function setOnGoingMoney($onGoingMoney)
+    public function setOnGoingMoney($onGoingMoney = null)
     {
         $this->onGoingMoney = $onGoingMoney;
 
@@ -465,11 +490,35 @@ class Event implements JsonSerializable
     /**
      * Get onGoingMoney.
      *
-     * @return int
+     * @return int|null
      */
     public function getOnGoingMoney()
     {
         return $this->onGoingMoney;
+    }
+
+    /**
+     * Set eventDescription.
+     *
+     * @param string $eventDescription
+     *
+     * @return Event
+     */
+    public function setEventDescription($eventDescription)
+    {
+        $this->eventDescription = $eventDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get eventDescription.
+     *
+     * @return string
+     */
+    public function getEventDescription()
+    {
+        return $this->eventDescription;
     }
 
     /**
@@ -593,78 +642,34 @@ class Event implements JsonSerializable
     }
 
     /**
-     * Set eventDescription.
-     *
-     * @param string $eventDescription
-     *
-     * @return Event
+     * @return mixed
      */
-    public function setEventDescription($eventDescription)
+    public function getisValid()
     {
-        $this->eventDescription = $eventDescription;
-
-        return $this;
+        return $this->isValid;
     }
 
     /**
-     * Get eventDescription.
-     *
-     * @return string
+     * @param mixed $isValid
      */
-    public function getEventDescription()
+    public function setIsValid($isValid)
     {
-        return $this->eventDescription;
+        $this->isValid = $isValid;
     }
 
     /**
-     * Specify data which should be serialized to JSON
-     *
-     * @link   http://php.net/manual/en/jsonserializable.jsonserialize.php
-     * @return mixed data which can be serialized by <b>json_encode</b>,
-     * which is a value of any type other than a resource.
-     * @since  5.4.0
+     * @return mixed
      */
-    public function jsonSerialize()
+    public function getNbPeopleParticipate()
     {
-        return [
-            "lat" => $this->latitude,
-            "lng" => $this->longitude
-        ];
+        return $this->nbPeopleParticipate;
     }
 
     /**
-     * Add user.
-     *
-     * @param \AppBundle\Entity\Event $user
-     *
-     * @return Event
+     * @param mixed $nbPeopleParticipate
      */
-    public function addUser(\AppBundle\Entity\Event $user)
+    public function setNbPeopleParticipate($nbPeopleParticipate)
     {
-        $this->users[] = $user;
-
-        return $this;
-    }
-
-    /**
-     * Remove user.
-     *
-     * @param \AppBundle\Entity\Event $user
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
-     */
-    public function removeUser(\AppBundle\Entity\Event $user)
-    {
-        return $this->users->removeElement($user);
-    }
-
-    /**
-     * Get users.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsers()
-    {
-        return $this->users;
+        $this->nbPeopleParticipate = $nbPeopleParticipate;
     }
 }

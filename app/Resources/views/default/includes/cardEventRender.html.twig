@@ -1,0 +1,22 @@
+{% if events.private is empty and events.public is empty %}
+    <p class="text-center">Aucun évènement ne correspond à votre recherche</p>
+{% endif %}
+
+<div class="row">
+    {% for event in events.public %}
+        {% include ('default/includes/cardEventDescription.html.twig') %}
+    {% endfor %}
+</div>
+
+{% if events.private is not empty  %}
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Événements privés à venir</h2>
+        </div>
+    </div>
+{% endif %}
+<div class="row">
+    {% for event in events.private %}
+        {% include ('default/includes/cardEventDescription.html.twig') %}
+    {% endfor %}
+</div>

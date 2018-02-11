@@ -10,9 +10,6 @@ security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory: ~
-
         fos_userbundle:
             id: fos_user.user_provider.username
 
@@ -27,6 +24,7 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
+                default_target_path: /profile
 
             logout:       true
             anonymous:    true
@@ -43,3 +41,9 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/home, role: ROLE_USER }
+        - { path: ^/event, role: ROLE_USER }
+        - { path: ^/logout, role: ROLE_USER }
+        - { path: ^/reservation, role: ROLE_USER }
+
+

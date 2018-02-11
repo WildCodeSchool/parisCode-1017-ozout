@@ -55,8 +55,12 @@ class Picture
 
     /**
      * @var string $pictureUpload
-     * @Assert\NotBlank(message= "Merci d'uploader une image.")
-     * @Assert\File(mimeTypes={ "image/jpeg" })
+     * @Assert\NotBlank(message= "Vous n'avez pas choisi d'image ?")
+     * @Assert\File(
+     *     maxSize = "2097152",
+     *     maxSizeMessage = "Votre fichier est trop lourd, il doit être inférieur à 2Mo.",
+     *     mimeTypes = {"image/jpeg", "image/gif", "image/png"},
+     *     mimeTypesMessage = "Votre fichier doit être de type jpg, gif ou png")
      */
     private $pictureUpload;
 

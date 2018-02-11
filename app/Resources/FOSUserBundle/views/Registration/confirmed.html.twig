@@ -1,10 +1,25 @@
+{% trans_default_domain 'FOSUserBundle' %}
 {% extends "@FOSUser/layout.html.twig" %}
 
-{% trans_default_domain 'FOSUserBundle' %}
-
 {% block fos_user_content %}
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-    {% if targetUrl %}
-    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
-    {% endif %}
+<header class="masthead">
+    <div class="container">
+        <div class="row">
+            <div class="register-container confirmed">
+                <p>Bienvenue dans la communauté OzOut <span class="text-uppercase">{{ user.username }}</span> !</p>
+                <p>Tu vas être redirigé.e automatiquement vers ta page d'accueil dans 3....2....1...</p>
+            </div>
+        </div>
+    </div>
+</header>
+
 {% endblock fos_user_content %}
+
+{% block javascripts %}
+    <script>
+        window.setTimeout(function() {
+            window.location.href = '{{ path('fos_user_profile_show') }}';
+        }, 3000);
+
+    </script>
+{% endblock %}

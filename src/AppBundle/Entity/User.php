@@ -2,8 +2,10 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -20,6 +22,8 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+        $this->reservations = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     // CLI Auto-generated code
@@ -65,6 +69,7 @@ class User extends BaseUser
      *
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Picture", cascade={"all"})
      * @ORM\JoinColumn(nullable=true)
+     * @Assert\Valid()
      */
     private $picture;
 
@@ -76,33 +81,21 @@ class User extends BaseUser
     private $reviews;
 
     /**
-     * @var \AppBundle\Entity\Event $events
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Event", mappedBy="users")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $events;
-
-    /**
      * @var \AppBundle\Entity\Reservation $reservations
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", cascade={"all"}, mappedBy="reservations")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", cascade={"all"}, mappedBy="user")
      */
     private $reservations;
 
-
     /**
-     * Get id
+     * @var boolean
      *
-     * @return int
+     * Define if current user particpate to event
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    public $userParticipate;
 
     /**
-     * Set nameUser
+     * Set nameUser.
      *
      * @param string $nameUser
      *
@@ -116,7 +109,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get nameUser
+     * Get nameUser.
      *
      * @return string
      */
@@ -126,7 +119,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set surnameUser
+     * Set surnameUser.
      *
      * @param string $surnameUser
      *
@@ -140,7 +133,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get surnameUser
+     * Get surnameUser.
      *
      * @return string
      */
@@ -150,13 +143,13 @@ class User extends BaseUser
     }
 
     /**
-     * Set dateOfBirth
+     * Set dateOfBirth.
      *
-     * @param \DateTime $dateOfBirth
+     * @param \DateTime|null $dateOfBirth
      *
      * @return User
      */
-    public function setDateOfBirth($dateOfBirth)
+    public function setDateOfBirth($dateOfBirth = null)
     {
         $this->dateOfBirth = $dateOfBirth;
 
@@ -164,9 +157,9 @@ class User extends BaseUser
     }
 
     /**
-     * Get dateOfBirth
+     * Get dateOfBirth.
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getDateOfBirth()
     {
@@ -174,22 +167,28 @@ class User extends BaseUser
     }
 
     /**
-     * @return string
+     * Set role.
+     *
+     * @param string|null $role
+     *
+     * @return User
+     */
+    public function setRole($role = null)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * Get role.
+     *
+     * @return string|null
      */
     public function getRole()
     {
         return $this->role;
     }
-
-    /**
-     * @param string $role
-     */
-    public function setRole($role)
-    {
-        $this->role = $role;
-    }
-
-
 
     /**
      * Set picture.
@@ -249,42 +248,6 @@ class User extends BaseUser
     public function getReviews()
     {
         return $this->reviews;
-    }
-
-    /**
-     * Add event.
-     *
-     * @param \AppBundle\Entity\Event $event
-     *
-     * @return User
-     */
-    public function addEvent(\AppBundle\Entity\Event $event)
-    {
-        $this->events[] = $event;
-
-        return $this;
-    }
-
-    /**
-     * Remove event.
-     *
-     * @param \AppBundle\Entity\Event $event
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
-     */
-    public function removeEvent(\AppBundle\Entity\Event $event)
-    {
-        return $this->events->removeElement($event);
-    }
-
-    /**
-     * Get events.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getEvents()
-    {
-        return $this->events;
     }
 
     /**

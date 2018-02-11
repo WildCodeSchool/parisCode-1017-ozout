@@ -106,6 +106,21 @@ img {
 }
 
 
+/**************************************** FOSUSER /PROFILE ****************************************************/
+/** 1- Page Profile Edit
+
+
+/** 1_'Profile / edit.html.twig'***************************************************         1_PAGE PROFILE EDIT**/
+
+.fos_user_user_show .profile{
+    width: 25%;
+    border: 11px solid #fed136;
+    margin-bottom: 6vh;
+    margin-left: 37%;
+}
+
+
+
 /**************************************** REGISTER ****************************************************/
 
 /** 'register.html.twig'***************************************************         1_REGISTER USER**/

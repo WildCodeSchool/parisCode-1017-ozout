@@ -24,7 +24,7 @@ class SearchType extends AbstractType
             ->add('location', TextType::class, array(
                 'required' => false,
                 'attr' => array(
-                    'placeholder' => "Saississez un lieu"
+                    'placeholder' => "Saisis un lieu"
                 )
             ))
             ->add('dateEnd', DateType::class, array(
@@ -32,11 +32,11 @@ class SearchType extends AbstractType
                 'years' => range(date('Y'), date('Y')+10),
                 'months' => range(date('m'), 12),
                 'days' => range(date('d'), 31),
-                'placeholder' => "Choississez une date"
+                'placeholder' => "Choisis une date"
 
             ))
             ->add('submit', SubmitType::class, array(
-                'label' => "Rechercher les évènements"
+                'label' => "Rechercher les événements"
             ))
         ;
     }

@@ -27,10 +27,10 @@
                                     Evènement complet</button>
                             {% elseif event.userParticipate is defined %}
                                 <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                    Vous participez déjà à l'évènement</button>
+                                    Vous participez déjà à l'événement</button>
                             {% else %}
                                 <a href="{{ path('reservation_create', {'id': event.id}) }}"
-                                   class="btn btn-primary">S'inscrire à l'évènement</a>
+                                   class="btn btn-primary">S'inscrire à l'événement</a>
                             {% endif %}
                             <button class="btn btn-primary" data-dismiss="modal" type="button">
                                 <i class="fa fa-times"></i>

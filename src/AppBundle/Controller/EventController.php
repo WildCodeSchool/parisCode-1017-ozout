@@ -212,7 +212,7 @@ class EventController extends Controller
 
         /* Send Message Creator */
         $message = (new \Swift_Message())
-            ->setSubject('L\'évènement' . " " . $event->getTitle() . 'a été annulé')
+            ->setSubject('L\'évènement' . " " . $event->getTitle() . " ". 'a été annulé')
             ->setFrom($this->getParameter('mailer_user'))
             ->setTo($creator->getEmail())
             ->setBody(
@@ -230,7 +230,7 @@ class EventController extends Controller
 
             /* Send Message Participants */
             $message = (new \Swift_Message())
-                ->setSubject('L\'évènement' . " " . $event->getTitle() . 'a été annulé')
+                ->setSubject('L\'évènement' . " " . $event->getTitle() . " ". 'a été annulé')
                 ->setFrom($this->getParameter('mailer_user'))
                 ->setTo($emails)
                 ->setBody(

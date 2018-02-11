@@ -90,6 +90,11 @@ a.logo{
 .formEditEvent {
     margin-top: 150px;
 }
+.btn-edit{
+    width: 30%;
+    margin: 10%;
+    margin-top: 0;
+}
 
 /** 1_'index.html.twig'**************************************************        4_PAGE INDEX EVENT**/
 .formIndexEvent {
@@ -340,13 +345,11 @@ legend {
 /**'cgv.html.twig'**/
 
 .cgv-container{
-
     margin-top: 100px;
     margin-bottom: 100px;
 }
 
 .para-cgv{
-
     text-align: justify;
 }
 
@@ -356,7 +359,6 @@ legend {
 }
 
 .subtitle-cgv, .article-cgv{
-
     padding-bottom: 30px;
     padding-top: 30px;
 }
@@ -366,5 +368,9 @@ legend {
 /**'contact.html.twig'**/
 .row-about-contact{
     margin-top: 15vh;
+}
+
+#calendar h2 {
+    font-size: 15px;
 }
 

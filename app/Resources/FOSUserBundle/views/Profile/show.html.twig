@@ -16,25 +16,25 @@
                     <div class="photo-left">
                         <img class="photo" src="{{ asset('uploads/pictures/'~ user.picture.namePicture) }}">
                     </div>
-                    <h4 class="name">{{ user.nameuser }}</h4>
-                    <p class="info">{{ user.surnameuser }}</p>
-                    <p class="info">{{ user.username }}</p>
+                    <h4 class="name"> Salut {{ user.nameuser }}</h4>
+                    <p class="info">({{ user.username }} {{ user.surnameuser }})</p>
                     <p class="info">{{ user.email }}</p>
                     <p class="info">{{ user.dateOfBirth |date('d-m-Y') }}</p>
-                    <p class="desc">Salut {{ user.nameuser }}.</p>
                     <div class="social">
                         <p class="info">Invite tes ami.e.s !</p>
                         <i class="fa fa-facebook-square" aria-hidden="true"></i>
                         <i class="fa fa-twitter-square" aria-hidden="true"></i>
                     </div>
                     <a href="{{ path('fos_user_profile_edit', {'id': user.id}) }}">Modifier mes informations</a>
+                    <a href="{{ path('fos_user_security_logout', {'id': user.id}) }}">Me déconnecter</a>
+                    <a href="">Me désinscrire d'OzOut</a>
                 </div>
 
                 <div class="right col-lg-9">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#eventcreate" role="tab"
-                               aria-controls="home" aria-selected="true">Les évènements crées</a>
+                               aria-controls="home" aria-selected="true">Les événements créés</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#participation" role="tab"
@@ -42,7 +42,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="contact-tab" data-toggle="tab" href="#pastevent" role="tab"
-                               aria-controls="contact" aria-selected="false">Évènements passés</a>
+                               aria-controls="contact" aria-selected="false">Événements passés</a>
                         </li>
                     </ul>
 
@@ -69,9 +69,9 @@
                                                         <p class="text-muted">{{ reservation.event.city }} </p>
                                                         <p class="text-muted">{{ reservation.event.targetMoney }} </p>
                                                     </div>
-                                                    <a href="{{ path('event_edit', {'id': reservation.event.id}) }}"
-                                                       class="btn btn-primary">Modifier l'évènement</a>
+                                                    <a class="btn btn-primary" href="{{ path('event_edit', {'id': reservation.event.id}) }}">Modifier</a>
                                                     <a class="btn btn-primary" href="{{ path('event_delete', {'id': reservation.event.id}) }}">Supprimer</a>
+                                                    <a class="btn btn-primary" href="">Inviter</a>
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -106,7 +106,7 @@
                                                             Fermer
                                                         </button>
                                                         <a href="{{ path('event_edit', {'id': reservation.event.id}) }}"
-                                                           class="btn btn-primary">Modifier l'évènement</a>
+                                                           class="btn btn-primary">Modifier</a>
                                                         <a class="btn btn-primary" href="{{ path('event_delete', {'id': reservation.event.id}) }}">Supprimer</a>
                                                     </div>
                                                 </div>

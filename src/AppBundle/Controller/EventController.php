@@ -171,7 +171,7 @@ class EventController extends Controller
             }
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('event_edit', array('id' => $event->getId()));
+            return $this->redirectToRoute('fos_user_profile_show', array('id' => $event->getId()));
         }
 
         return $this->render(
@@ -246,6 +246,6 @@ class EventController extends Controller
         }
 
 
-        return $this->redirectToRoute('event_index');
+        return $this->redirectToRoute('fos_user_profile_show');
     }
 }

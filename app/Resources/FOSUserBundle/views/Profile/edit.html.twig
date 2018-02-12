@@ -14,7 +14,7 @@
 <section class="bg-light" id="portfolio">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center">
+            <div class="col-lg-12 text-center ">
                 <h2 class="section-heading text-uppercase">Modifier mes informations</h2>
             </div>
         </div>
@@ -23,6 +23,7 @@
         </div>
         {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
         {{ form_widget(form) }}
+        <img width="200" id="previewPictureProfil" src="#" alt="">
         <div>
             <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
         </div>

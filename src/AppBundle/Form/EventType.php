@@ -32,7 +32,7 @@ class EventType extends AbstractType
             )
             ->add(
                 'start', DateTimeType::class, array(
-                    'label' => 'Date de l\'évènement'
+                    'label' => 'Date de l\'événement'
                 )
             )
             ->add(

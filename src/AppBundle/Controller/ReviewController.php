@@ -50,7 +50,7 @@ class ReviewController extends Controller
             $em->persist($review);
             $em->flush();
 
-            return $this->redirectToRoute('review_show', array('id' => $review->getId()));
+            return $this->redirectToRoute('fos_user_profile_show', array('id' => $review->getId()));
         }
 
         return $this->render(

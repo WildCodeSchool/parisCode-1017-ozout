@@ -30,7 +30,7 @@ class RegistrationType extends AbstractType
                 'label' => 'Date de naissance'
             ))
             ->add('picture', PictureType::class, array(
-            'label'=> 'Votre photo',
+            'label'=> 'Ta photo',
             ))
         ;
     }

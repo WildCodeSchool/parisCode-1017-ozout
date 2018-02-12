@@ -66,8 +66,9 @@
                                                     </a>
                                                     <div class="portfolio-caption">
                                                         <h4>{{ reservation.event.title }}</h4>
-                                                        <p class="text-muted">{{ reservation.event.city }} </p>
-                                                        <p class="text-muted">{{ reservation.event.targetMoney }} </p>
+                                                        <p class="text-muted"> Où ? {{ reservation.event.city }} </p>
+                                                        <p class="text-muted"> Combien ? {{ reservation.event.targetMoney ~ ' €' }} </p>
+                                                        {#<p class="text-muted"> Participants : {{ user.reservation.doParticipate}} </p>#}
                                                     </div>
                                                     <a class="btn btn-primary" href="{{ path('event_edit', {'id': reservation.event.id}) }}">Modifier</a>
                                                     <a class="btn btn-primary" href="{{ path('event_delete', {'id': reservation.event.id}) }}">Supprimer</a>

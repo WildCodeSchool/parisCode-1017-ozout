@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Reservation;
+use AppBundle\Entity\User;
 use AppBundle\Form\SearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -94,4 +95,23 @@ class DefaultController extends Controller
     {
         return $this->render('default/cgv.html.twig');
     }
+
+    /**
+     * Deletes a user entity.
+     *
+     * @Route("/{id}/user/delete", name="user_delete")
+     * @Method("GET")
+     * @param User $user
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteAction(User $user )
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($user);
+        $em->flush($user);
+
+        return $this->redirectToRoute('homepage');
+    }
+
+
 }

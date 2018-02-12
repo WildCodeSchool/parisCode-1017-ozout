@@ -27,7 +27,7 @@
                     </div>
                     <a href="{{ path('fos_user_profile_edit', {'id': user.id}) }}">Modifier mes informations</a>
                     <a href="{{ path('fos_user_security_logout', {'id': user.id}) }}">Me déconnecter</a>
-                    <a href="{{ path('user_delete', {'id': user.id}) }}">Supprimer mon compte</a>
+                    <a href="{{ path('user_delete', {'id': user.id}) }}" onclick="return confirm('Es-tu certain de vouloir supprimer ton compte ?')">Supprimer mon compte</a>
                 </div>
 
                 <div class="right col-lg-9">

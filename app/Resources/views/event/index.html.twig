@@ -63,41 +63,28 @@
         <script src="{{ asset('assets/js/moment.js') }}"></script>
         <script src="{{ asset('assets/js/fullcalendar.js') }}"></script>
         <script src="{{ asset('assets/js/langFullcalendar.js') }}"></script>
+         <script src="{{ asset('assets/js/fr.js') }}"></script>
+
 
         <script>
             $(document).ready(function() {
                 $('#calendar').fullCalendar({
                     header: {
                         left: 'prev,next today',
-                        center: 'title',
                         right: 'month,basicWeek,basicDay'
                     },
-//            locale: 'fr',
+            locale: 'fr',
                     navLinks: true, // can click day/week names to navigate views
                     eventLimit: true, // allow "more" link when too many events
-                    events: "{{ path('event_api') }}"
-                })
+                    events: "{{ path('event_api') }}",
+                    eventClick: function(calEvent, jsEvent, view) {
+                        $(this).css('color', 'black')
+                        $(this).css('background-color', 'yellow');
+
+                    }
+                });
             });
         </script>
-    {#<script src="{{ asset('assets/js/moment.js') }}">#}
-    {#</script>#}
-    {#<script src="{{ asset('assets/js/fullcalendar.js') }}">#}
-    {#</script>#}
-
-    {#<script>#}
-        {#$(document).ready(function () {#}
-            {#$('#calendar').fullCalendar({#}
-                {#header: {#}
-                    {#left: 'prev,next today',#}
-                    {#center: 'title',#}
-                    {#right: 'month,basicWeek,basicDay'#}
-                {#},#}
-                {#navLinks: true, // can click day/week names to navigate views#}
-                {#eventLimit: true, // allow "more" link when too many events#}
-                {#events: "{{ path('event_api') }}"#}
-            {#})#}
-        {#});#}
-    {#</script>#}
 
     <script>
         function initMap() {

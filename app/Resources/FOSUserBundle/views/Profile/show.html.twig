@@ -67,7 +67,7 @@
                                                     <div class="portfolio-caption">
                                                         <h4>{{ reservation.event.title }}</h4>
                                                         <p class="text-muted"> Où ? {{ reservation.event.city }} </p>
-                                                        <p class="text-muted"> Combien ? {{ reservation.event.targetMoney ~ ' €' }} </p>
+                                                        <p class="text-muted"> A récolter : {{ reservation.event.targetMoney ~ ' €' }} </p>
                                                         {#<p class="text-muted"> Participants : {{ user.reservation.doParticipate}} </p>#}
                                                     </div>
                                                     <a class="btn btn-primary" href="{{ path('event_edit', {'id': reservation.event.id}) }}">Modifier</a>
@@ -138,8 +138,9 @@
                                                     </a>
                                                     <div class="portfolio-caption">
                                                         <h4>{{ reservation.event.title }}</h4>
+                                                        {#<p class="text-muted">Organisateur : {{ reservation.user.isCreator }} </p>#}
                                                         <p class="text-muted">{{ reservation.event.city }} </p>
-                                                        <p class="text-muted">{{ reservation.event.targetMoney }} </p>
+                                                        {#<p class="text-muted">Ma participation : {{ reservation.event.targetMoney ~ ' €'  }} </p>#}
                                                     </div>
                                                     <a href="#"
                                                        class="btn btn-primary">Se désinscrire</a>
@@ -206,8 +207,9 @@
                                                 </a>
                                                 <div class="portfolio-caption">
                                                     <h4>{{ reservation.event.title }}</h4>
+                                                    {#<p class="text-muted">Organisateur : {{ reservation.user.isCreator }} </p>#}
                                                     <p class="text-muted">{{ reservation.event.city }} </p>
-                                                    <p class="text-muted">{{ reservation.event.targetMoney }}</p>
+                                                    {#<p class="text-muted">Ma participation : {{ reservation.event.targetMoney ~ ' €'  }}</p>#}
 
                                                     <a href="{{ path('review_new', {'id': reservation.event.id}) }}"
                                                        class="btn btn-primary">Ajouter un commentaire</a>

@@ -56,6 +56,16 @@ ul.social-buttons li.instagram a{
     left: 10%
 }
 
+.modal-body p{
+    margin-bottom : 2% !important;
+}
+.modal-body img{
+    margin-top: 1% !important;
+}
+.modale-description{
+    font-style: italic;
+}
+
 a.logo{
     font-size: 2em;
 }

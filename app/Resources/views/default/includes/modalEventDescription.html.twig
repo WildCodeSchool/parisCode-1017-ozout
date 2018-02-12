@@ -11,22 +11,20 @@
                     <div class="col-lg-8 mx-auto">
                         <div class="modal-body">
                             <h2 class="text-uppercase">{{ event.title }}</h2>
+                            <p><i class="fa fa-clock-o"></i> Le {{ event.start|date('d/m/Y à h:i') }}</p>
+                            <p><i class="fa fa-map-marker" aria-hidden="true"></i> Adresse : {{ event.adress }}, {{ event.zipcode }} {{ event.city }}</p>
                             <img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="eventimg">
-                            <p>{{ event.eventDescription }} <br>
-                                Le {{ event.start|date('d/m/Y, h:i') }}<br>
-                                Adresse :<br>
-                                {{ event.adress }}, {{ event.zipcode }} {{ event.city }}<br>
-                                La cagnotte à atteindre est de : {{ event.targetMoney ~ '€' }}
-                                avant le {{ event.deadline|date ("d/m/Y")}}<br>
-                                Maximum d'invités : {{ event.maxPeople }}<br>
-                                Cagnotte en cours : {{ event.onGoingMoney ~ '€' }}
-                            </p>
+                            <p class="modale-description info">{{ event.eventDescription }}</p>
+                            <p><i class="fa fa-dot-circle-o" aria-hidden="true"></i> Somme nécessaire pour que l'événement ait lieu : {{ event.targetMoney ~ '€' }} avant le {{ event.deadline|date ("d/m/Y")}}</p>
+                            <p>{{ event.onGoingMoney ~ ' €' }} actuellement récoltés</p>
+                            <p><i class="fa fa-user-circle"></i> Capacité maximum : {{ event.maxPeople }} personnes</p>
+
 
                             {% if event.nbPeopleParticipate >= event.maxPeople %}
-                                <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                    Evènement complet</button>
+                                <button class="btn btn-danger" data-dismiss="modal" type="button">
+                                    Evénement complet</button>
                             {% elseif event.userParticipate is defined %}
-                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                <button class="btn btn-danger" data-dismiss="modal" type="button">
                                     Vous participez déjà à l'événement</button>
                             {% else %}
                                 <a href="{{ path('reservation_create', {'id': event.id}) }}"

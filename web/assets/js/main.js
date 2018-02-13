@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
     google.maps.event.addDomListener(window, 'load', initialize);
+    invite();
 
     $("#fos_user_registration_form_picture_pictureUpload").change(function() {
         readURL(this, "#previewPictureProfil");
@@ -84,5 +85,13 @@ function initMap() {
             map: map
         });
     }
+
+}
+
+function invite(){
+    $('#add-email').click(function(event){
+        event.preventDefault()
+       $('#inputs-email').append("<input class='row' type='email' name='emails[]'>")
+    })
 
 }

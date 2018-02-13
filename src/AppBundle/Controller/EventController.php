@@ -251,11 +251,33 @@ class EventController extends Controller
 
     /**
      * @Route("/{id}/invite", name="event_invite")
-     * @Method("GET")
+     * @Method({"POST", "GET"})
      */
-    public function inviteAction(){
+    public function inviteAction(Event $event, Request $request){
 
-        return $this->render('event/invite.html.twig');
+
+
+        if ($request ->isMethod('POST')){
+            /* Send Message */
+            $message = (new \Swift_Message())
+                ->setSubject('Invitation Evénement OzOut')
+                ->setFrom($this->getParameter('mailer_user'))
+                ->setTo($request->get('emails'))
+                ->setBody(
+                    $this->renderView('email/mailNewEvent.html.twig', array(
+                            'event' => $event,
+                            'user' => $this->getUser()
+                        )
+                    ),
+                    'text/html'
+                );
+            $this->get('mailer')->send($message);
+            return $this->redirectToRoute('fos_user_profile_show');
+        }
+
+        return $this->render('event/invite.html.twig', array(
+            'event' => $event
+        ));
     }
 
 

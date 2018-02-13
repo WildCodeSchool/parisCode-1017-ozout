@@ -103,7 +103,7 @@
                                                         <p><i class="fa fa-dot-circle-o" aria-hidden="true"></i> Somme nécessaire pour que l'événement ait lieu : {{ reservation.event.targetMoney ~ '€' }} avant le {{ reservation.event.deadline|date ("d/m/Y")}}</p>
                                                         <p>{{ reservation.event.onGoingMoney ~ ' €' }} actuellement récoltés</p>
                                                         <p><i class="fa fa-user-circle"></i> Capacité maximum : {{ reservation.event.maxPeople }} personnes</p>
-
+                                                        <p><i class="fa fa-user-circle"></i> Nombre de participants : {{ reservation.event.NbPeopleParticipate }} personnes</p>
                                                         <button class="btn btn-primary" data-dismiss="modal" type="button">
                                                             <i class="fa fa-times"></i>
                                                             Fermer

@@ -142,8 +142,7 @@
                                                         <p class="text-muted">{{ reservation.event.city }} </p>
                                                         {#<p class="text-muted">Ma participation : {{ reservation.event.targetMoney ~ ' €'  }} </p>#}
                                                     </div>
-                                                    <a href="#"
-                                                       class="btn btn-primary">Se désinscrire</a>
+                                                    <a class="btn btn-danger" href="{{ path('reservation_delete', {'id': reservation.event.id}) }}">Se désinscrire</a>
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -151,7 +150,7 @@
                                     </div>
                                 </section>
                             </div>
-                        <!-- Modal participated events -->
+                        <!-- Modal participating events -->
                         {% for reservation in user.reservations %}
                             <div class="portfolio-modal modal fade" id="portfolioModal2{{ reservation.event.id }}" tabindex="-1" role="dialog"
                                  aria-hidden="true">
@@ -179,7 +178,7 @@
                                                             <i class="fa fa-times"></i>
                                                             Fermer
                                                         </button>
-                                                        <a class="btn btn-danger" href="{#{{ path('event_delete', {'id': reservation.event.id}) }}#}">Annuler ma participation</a>
+                                                        <a class="btn btn-danger" href="{{ path('reservation_delete', {'id': reservation.event.id}) }}">Annuler ma participation</a>
                                                     </div>
                                                 </div>
                                             </div>

@@ -14,7 +14,7 @@
                             <p><i class="fa fa-clock-o"></i> Le {{ event.start|date('d/m/Y à h:i') }}</p>
                             <p><i class="fa fa-map-marker" aria-hidden="true"></i> Adresse : {{ event.adress }}, {{ event.zipcode }} {{ event.city }}</p>
                             <img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="eventimg">
-                            <p class="modale-description info">{{ event.eventDescription }}</p>
+                            <p class="modale-description info text-muted">{{ event.eventDescription }}</p>
                             <p><i class="fa fa-dot-circle-o" aria-hidden="true"></i> Somme nécessaire pour que l'événement ait lieu : {{ event.targetMoney ~ '€' }} avant le {{ event.deadline|date ("d/m/Y")}}</p>
                             <p>{{ event.onGoingMoney ~ ' €' }} actuellement récoltés</p>
                             <p><i class="fa fa-user-circle"></i> Capacité maximum : {{ event.maxPeople }} personnes</p>

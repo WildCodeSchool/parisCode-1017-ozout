@@ -1,10 +1,19 @@
 <div class="col-md-4 col-sm-6 portfolio-item thumb-post">
     <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1{{ event.id }}">
-        <div class="portfolio-hover">
-            <div class="portfolio-hover-content">
-                <i class="fa fa-plus fa-3x"></i>
+        {% if event.nbPeopleParticipate >= event.maxPeople %}
+            <div class="portfolio-hover-complete">
+                <div class="portfolio-hover-complete-content">
+                    <p class="text-uppercase">Complet</p>
+                    <i class="fa fa-user-times fa-3x"></i>
+                </div>
             </div>
-        </div>
+        {% else %}
+            <div class="portfolio-hover">
+                <div class="portfolio-hover-content">
+                    <i class="fa fa-plus fa-3x"></i>
+                </div>
+            </div>
+        {% endif %}
         <img class="img-fluid" src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}"
              alt="{{ event.title }}">
     </a>

@@ -248,4 +248,15 @@ class EventController extends Controller
 
         return $this->redirectToRoute('fos_user_profile_show');
     }
+
+    /**
+     * @Route("/{id}/invite", name="event_invite")
+     * @Method("GET")
+     */
+    public function inviteAction(){
+
+        return $this->render('event/invite.html.twig');
+    }
+
+
 }

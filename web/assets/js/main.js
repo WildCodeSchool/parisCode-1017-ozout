@@ -22,7 +22,7 @@ $(document).ready(function() {
 
         if (dateEnd === ''){
             alert('Veuillez definir vos dates de recherche')
-        } else if (new Date(dateEnd) < new Date()){
+        } else if (new Date(dateEnd) < new Date("Y m d")){
             alert('Veuillez definir des dates correct')
         } else {
             $.ajax({
@@ -61,8 +61,28 @@ function readURL(input, insertDiv) {
     }
 }
 
+function initMap() {
 
+    var options = {
+        zoom: 10,
+        center: {lat: 48.856614, lng: 2.3522219000000177}
+    };
 
+    var map = new google.maps.Map(document.getElementById('map'), options);
 
+    var markers = JSON.parse($('#markers_locations').text());
 
+    for (i = 0; i < markers.private.length; i++) {
+        new google.maps.Marker({
+            position: new google.maps.LatLng(markers.private[i].lat, markers.private[i].lng),
+            map: map
+        });
+    }
+    for (i = 0; i < markers.public.length; i++) {
+        new google.maps.Marker({
+            position: new google.maps.LatLng(markers.public[i].lat, markers.public[i].lng),
+            map: map
+        });
+    }
 
+}

@@ -264,7 +264,7 @@ class EventController extends Controller
                 ->setFrom($this->getParameter('mailer_user'))
                 ->setTo($request->get('emails'))
                 ->setBody(
-                    $this->renderView('email/mailNewEvent.html.twig', array(
+                    $this->renderView('email/invitation.html.twig', array(
                             'event' => $event,
                             'user' => $this->getUser()
                         )

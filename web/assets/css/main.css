@@ -154,12 +154,25 @@ img {
 /** 1_'Profile / edit.html.twig'***************************************************         1_PAGE PROFILE EDIT**/
 
 .fos_user_user_show .profile{
-    width: 25%;
-    border: 11px solid #fed136;
     margin-bottom: 6vh;
-    margin-left: 37%;
+
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    border: 4px solid #fff;
 }
 
+.h2EditProfil {
+    color: #111111;
+}
+
+.editProfil{
+    border-radius: 5px;
+}
+
+.profiledit{
+    padding-top: 100px !important;
+}
 
 
 /**************************************** REGISTER ****************************************************/
@@ -391,5 +404,14 @@ legend {
     font-size: 15px;
 }
 
-/******VIDEO*******/
+.btn {
+    background-color: #fed300 !important;
+    border-color: #fed300 !important;
+}
+.btn:hover{
+    background-color: #fec810 !important;
+}
 
+.form-control-file{
+    width: 100%;
+}

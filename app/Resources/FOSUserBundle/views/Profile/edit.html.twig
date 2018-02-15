@@ -5,29 +5,65 @@
 
 <header class="masthead">
     <div class="container">
-        <div class="intro-text">
-            <div class="intro-lead-in"><a class="navbar-brand logo" href="{{ path('homepage') }}"> OzOut</a></div>
+        <div class="intro-text profiledit">
+            {#<div class="intro-lead-in"><a class="navbar-brand logo" href="{{ path('homepage') }}"> OzOut</a></div>#}
+            <section class="bg-light editProfil" id="portfolio">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <h2 class="section-heading text-uppercase h2EditProfil">Modifier mes informations</h2>
+                        </div>
+                    </div>
+                    <div class="fos_user_user_show">
+                        <img class="profile" src="{{ asset('uploads/pictures/' ~ form.vars['value'].picture.namePicture) }}">
+                    </div>
+                    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+                    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+                    <div>
+                        {{ form_label(form.nameUser) }}
+                        {{ form_widget(form.nameUser) }}
+                        {{ form_errors(form.nameUser) }}
+                    </div>
+                    <div>
+                        {{ form_label(form.surnameUser) }}
+                        {{ form_widget(form.surnameUser) }}
+                        {{ form_errors(form.surnameUser) }}
+                    </div>
+                    <div>
+                        {{ form_label(form.current_password) }}
+                        {{ form_widget(form.current_password) }}
+                        {{ form_errors(form.current_password) }}
+                    </div>
+                    <div>
+                        {{ form_label(form.username) }}
+                        {{ form_widget(form.username) }}
+                        {{ form_errors(form.username) }}
+                    </div>
+                    <div>
+                        {{ form_label(form.email) }}
+                        {{ form_widget(form.email) }}
+                        {{ form_errors(form.email) }}
+                    </div>
+                    <div class="birthdate_field">
+                        {{ form_label(form.dateOfBirth) }}
+                        {{ form_widget(form.dateOfBirth) }}
+                        {{ form_errors(form.dateOfBirth) }}
+                    </div>
+                    <div>
+                        {{ form_label(form.picture) }}
+                        {{ form_widget(form.picture) }}
+                        {{ form_errors(form.picture) }}
+                    </div>
+                    <img width="200" id="previewPictureProfil" src="#" alt="">
+                    <div>
+                        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </section>
         </div>
     </div>
 </header>
 
-<section class="bg-light" id="portfolio">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center ">
-                <h2 class="section-heading text-uppercase">Modifier mes informations</h2>
-            </div>
-        </div>
-        <div class="fos_user_user_show">
-            <img class="profile" src="{{ asset('uploads/pictures/' ~ form.vars['value'].picture.namePicture) }}">
-        </div>
-        {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-        {{ form_widget(form) }}
-        <img width="200" id="previewPictureProfil" src="#" alt="">
-        <div>
-            <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
-        </div>
-    </div>
-</section>
-    {{ form_end(form) }}
+
 {% endblock fos_user_content %}

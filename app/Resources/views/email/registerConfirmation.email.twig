@@ -1,0 +1,22 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% block subject %}Réinitialisation de ton mot de passe{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+        Bonjour {{ user.username }} !
+
+        Nous avons bien enregistré ton inscription sur OzOut.
+        Avant de pouvoir créer ton premier événement et inviter tes amis à y participer, clique sur le lien ci-dessous pour activer ton compte.
+        Ce lien ne peut être validé qu'une seule fois.
+
+        {{ 'registration.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
+
+        A très vite,
+        L'Equipe OzOut
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% include 'email/registerConfirmation.html.twig' %}
+{% endblock %}
+

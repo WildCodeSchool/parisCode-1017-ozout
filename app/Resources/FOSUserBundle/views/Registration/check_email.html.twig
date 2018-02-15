@@ -3,5 +3,15 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-    <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+    <header class="masthead">
+        <div class="container">
+            <div class="row">
+                <div class="register-container confirmed">
+                    <p>Bienvenue dans la communauté OzOut <span class="text-uppercase">{{ user.username }}</span> !</p>
+                    <p>Un e-mail a été envoyé à l'adresse {{ user.email }}.</p>
+                    <p>Il contient un lien d'activation sur lequel il te faudra cliquer pour activer ton compte.</p>
+                </div>
+            </div>
+        </div>
+    </header>
 {% endblock fos_user_content %}

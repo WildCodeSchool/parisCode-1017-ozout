@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bienvenue sur OzOut !</title>
+    <style>
+
+        h1 {
+            color: #fed136;
+        }
+        .container{
+            /* background-image: url("img/backgroundEmail.png");*/
+            background-color: #f7f7f7;
+            padding: 5vh;
+            width: 60vw;
+            height: 25vh;
+            border: 1px solid #f7f7f9;
+        }
+        span{
+            color: #fed136;
+            font-weight: bold;
+            font-size: 1em;
+        }
+        p{
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Bonjour {{ user.username }} !</h1>
+    <p>Avant de pouvoir créer ton premier événement et inviter tes amis à y participer, clique sur le lien ci-dessous pour activer ton compte.</p>
+    <p>Ce lien ne peut être validé qu'une seule fois.</p>
+    <p>{{ 'registration.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}</p>
+    <p>A très vite,</p>
+    <p>L'Equipe <span>OzOut</span></p>
+</div>
+</body>
+</html>
+
+
+
+
+
+

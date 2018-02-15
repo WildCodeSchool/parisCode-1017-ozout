@@ -7,6 +7,8 @@
 {% endblock %}
 
 {% block body %}
+    <p class="d-none" id="markers_locations">{{ events_json }}</p>
+
     <body id="page-top">
     <!-- Header -->
     <header class="masthead">
@@ -23,19 +25,19 @@
             <div class="row">
                 {% include ('default/includes/searchFormEvent.html.twig') %}
             </div>
-                <div class="magangenda">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h2 align="center" class="section-heading">Localisation</h2>
-                            <div id="map" style="height:400px; width: 100%;"></div>
-                        </div>
+            <div class="magangenda">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2 align="center" class="section-heading">Localisation</h2>
+                        <div id="map" style="height:400px; width: 100%;"></div>
+                    </div>
 
-                        <div class="offset-md-1 col-md-5">
-                            <h2 align="center" class="section-heading">Agenda</h2>
-                            <div id="calendar"></div>
-                        </div>
+                    <div class="offset-md-1 col-md-5">
+                        <h2 align="center" class="section-heading">Agenda</h2>
+                        <div id="calendar"></div>
                     </div>
                 </div>
+            </div>
         </div>
     </section>
 
@@ -63,7 +65,7 @@
         <script src="{{ asset('assets/js/moment.js') }}"></script>
         <script src="{{ asset('assets/js/fullcalendar.js') }}"></script>
         <script src="{{ asset('assets/js/langFullcalendar.js') }}"></script>
-         <script src="{{ asset('assets/js/fr.js') }}"></script>
+        <script src="{{ asset('assets/js/fr.js') }}"></script>
 
 
         <script>
@@ -73,46 +75,19 @@
                         left: 'prev,next today',
                         right: 'month,basicWeek,basicDay'
                     },
-            locale: 'fr',
+                    locale: 'fr',
                     navLinks: true, // can click day/week names to navigate views
                     eventLimit: true, // allow "more" link when too many events
                     events: "{{ path('event_api') }}",
                     eventClick: function(calEvent, jsEvent, view) {
                         $(this).css('color', 'black')
                         $(this).css('background-color', 'yellow');
-
                     }
                 });
             });
+            initMap();
         </script>
 
-    <script>
-        function initMap() {
-
-            var options = {
-                zoom: 10,
-                center: {lat: 48.856614, lng: 2.3522219000000177}
-            };
-
-            var map = new google.maps.Map(document.getElementById('map'), options);
-
-
-            var markers = JSON.parse(document.querySelector('#markers_locations').value);
-
-            console.info(markers);
-
-            markers.map(function (marker) {
-                new google.maps.Marker({
-                    map: map,
-                    position: {lat: marker.lat, lng: marker.lng}
-                })
-            });
-
-        }
-    </script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPoRjII2N8Ce3xXg3hRshEikPWbDMlGNY&callback=initMap">
-    </script>
 {% endblock %}
 
 

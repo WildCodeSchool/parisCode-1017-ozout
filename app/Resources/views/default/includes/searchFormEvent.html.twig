@@ -1,17 +1,23 @@
-{{ form_start(formSearch) }}
 
-<div class="row text-center">
-    <div class="col-md-4 col-xs-12">
-        {{ form_widget(formSearch.location) }}
-        {{ form_errors(formSearch.location) }}
-    </div>
-    <div class="col-md-4 col-xs-12">
-        {{ form_widget(formSearch.dateEnd) }}
-        {{ form_errors(formSearch.dateEnd) }}
-    </div>
-    <div class="col-md-4 col-xs-12">
-        {{ form_widget(formSearch.submit) }}
-    </div>
+<div class="col-lg-12 text-center">
+    <h2 class="section-heading text-uppercase">Trouver un évènement</h2>
 </div>
 
-{{ form_end(formSearch) }}
+    {{ form_start(formSearch) }}
+
+        <div class="row text-center">
+            <div class="col-md-4 col-xs-10">
+                {{ form_widget(formSearch.location) }}
+                {{ form_errors(formSearch.location) }}
+            </div>
+            <div class="col-md-4 col-xs-10">
+                {{ form_widget(formSearch.dateEnd) }}
+                {{ form_errors(formSearch.dateEnd) }}
+            </div>
+            <div class="col-md-4 col-xs-10 submitSearch">
+                {{ form_widget(formSearch.submit) }}
+            </div>
+        </div>
+
+    {{ form_end(formSearch) }}
+

@@ -16,8 +16,8 @@
                     <div class="photo-left">
                         <img class="photo" src="{{ asset('uploads/pictures/'~ user.picture.namePicture) }}">
                     </div>
-                    <h4 class="name"> Salut {{ user.nameuser }}</h4>
-                    <p class="info">({{ user.username }} {{ user.surnameuser }})</p>
+                    <h4 class="name"> Salut {{ user.username }}</h4>
+                    <p class="info">({{ user.nameuser }} {{ user.surnameuser }})</p>
                     <p class="info">{{ user.email }}</p>
                     <p class="info">{{ user.dateOfBirth |date('d-m-Y') }}</p>
                     <div class="social">

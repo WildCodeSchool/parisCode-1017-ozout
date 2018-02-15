@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/css/review.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<div class="container formCreateEvent">
+    <h1 align="center">Review edit</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Modifier" />
+    {{ form_end(edit_form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('review_index') }}" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header">Retour à la liste des avis</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+</div>
+{% endblock %}
+{% block javascripts %}
+    <!-- Custom scripts for this template -->
+    <script src="{{ asset('assets/js/review.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+<div class="container formShowEvent">
+    <h1 align="center">{{ event.title }}</h1>
+    <table class="table-hover">
+        <tbody>
+            <tr>
+                <th>Date de l'événement</th>
+                <td>{% if event.start %}{{ event.start|localizeddate('none', 'none', null, null, 'EEEE d MMMM Y')  }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Catégorie</th>
+                <td>{{ event.category }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ event.eventDescription }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ event.adress }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ event.city }}</td>
+            </tr>
+            <tr>
+                <th>Code Postal</th>
+                <td>{{ event.zipcode }}</td>
+            </tr>
+            <tr>
+                <th>Montant de la cagnotte à atteindre</th>
+                <td>{{ event.targetMoney }} €</td>
+            </tr>
+            <tr>
+                <th>Date limite de participation à la cagnotte</th>
+                <td>{% if event.deadline %}{{ event.deadline|localizeddate('none', 'none', null, null, 'EEEE d MMMM Y')  }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>L'événement est privé ?</th>
+                <td>{% if event.isPrivate %}Oui{% else %}Non{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Participants (max.)</th>
+                <td>{{ event.maxPeople}}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="" width="400"> </td>
+            </tr>
+        </tbody>
+    </table>
+        <div class="row">
+            <div class="col-md-1">
+                <a class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header" href="{{ path('event_edit', { 'id': event.id }) }}">Modifier</a>
+            </div>
+
+            <div class="col-md-1">
+                <a class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header" href="{{ path('event_delete', {'id': event.id}) }}">Supprimer</a>
+            </div>
+        </div>
+    <div align="center">
+    <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header" href="{{ path('event_index') }}">Retour à la liste</a>
+    </div>
+
+</div>
+{% endblock %}

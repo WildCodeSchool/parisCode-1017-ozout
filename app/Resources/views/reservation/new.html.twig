@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<header class="masthead">
+    <div class="container">
+        <div class="row">
+            <div class="register-container">
+                <div>
+                    <h1 class="titleMoneyGiven">{{ reservation.event.title }}</h1>
+                    <p class="moneyGiven">Organisé par {{ reservation.isCreator }}</p>
+                </div>
+                <div>
+                    <p class="moneyGiven">Objectif à atteindre : {{ reservation.event.targetMoney }} euros </p>
+                    <p class="moneyGiven">Somme récoltée : {{ reservation.event.onGoingMoney}} euros </p>
+                </div>
+
+                <div>
+                    <p class="moneyGiven">Limite de participation à la cagnotte: {{ reservation.event.deadline|date("d/m/Y") }} </p>
+                    {#<p>Nombre de participants : {{ total reservation }}</p>#}
+                </div>
+
+                <div class="progress">
+                    <div
+                            class="progress-bar progress-bar-striped active"
+                            role="progressbar"
+                            aria-valuenow="{{ progress }}"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                            style="width: {{ progress ~ '%' }}">{{ progress ~ ' %' }}
+                    </div>
+                </div>
+
+                <div>
+                    <p class="moneyGiven">{{ reservation.event.eventDescription}}</p>
+                </div>
+
+                <div>
+                    <h2 class="titleMoneyGiven">Quel est le montant de ta participation ?</h2>
+
+                    {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        <input type="submit" value="Participer" class="btn btn-primary btn-xl text-uppercase btn-header createaccount" />
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Ton inscription à un événement OzOut</title>
+        <style>
+            h1 {
+                color: #fed136;
+            }
+            th{
+                text-align: left;
+            }
+            a{
+                color: #fed136 !important;
+                text-decoration: none;
+                font-size: 1em;
+                text-align: left !important;
+            }
+            .container{
+               /* background-image: url("img/backgroundEmail.png");*/
+                background-color: #f7f7f7;
+                padding: 5vh;
+                width: 60vw;
+                height: 30vh;
+                border: 1px solid #f7f7f9;
+            }
+            table{
+                text-align: left;
+            }
+            span{
+                color: #fed136;
+                font-weight: bold;
+                font-size: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1 align="left">Inscription bien enregistrée, {{ user.username }} !</h1>
+            <p align="left">Voici les détails de ta participation à l'événement <strong>{{ event.title }}</strong> :</p>
+            <img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="" width="400">
+            <table>
+                <tbody>
+                {#<tr>
+                    <th>Organisateur</th>
+                    <td>{{ user.roles {{ reservation.isCreator }} }}</td>
+                </tr>#}
+                <tr>
+                    <th>Date de l'événement</th>
+                    <td>{% if event.deadline %}{{ event.deadline|localizeddate('none', 'none', null, null, 'EEEE d MMMM Y') }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ event.eventDescription }}</td>
+                </tr>
+                <tr>
+                    <th>Adresse</th>
+                    <td>{{ event.adress }}, {{ event.zipcode }} {{ event.city }}</td>
+                </tr>
+                <tr>
+                    <th>Montant de ta participation à la cagnotte</th>
+                    <td>{{ reservation.moneyGiven }} €</td>
+                </tr>
+                </tbody>
+            </table>
+            <p>A très bientôt,</p>
+            <p>L'Equipe <span><a href="{{ path('event_index') }}">OzOut </a></span></p>
+        </div>
+    </body>
+</html>
+
+
+

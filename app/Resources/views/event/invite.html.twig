@@ -15,13 +15,13 @@
     <!-- Portfolio Grid -->
     <section class="bg-light" id="portfolio">
         <div class="container formCreateEvent">
-                <h1 align="center">Inviter des participants</h1>
+                <h1 align="center" class="h1Invite">Inviter des participants</h1>
                 <div class="offset-md-3 col-md-6">
                     <form id="form-invite" method="post" action="{{ path('event_invite', {'id': event.id}) }}">
-                       <div id="inputs-email">
-                           <input class="row" type="email" name="emails[]">
+                       <div id="inputs-email" class="col-md-8 invite">
+                           <input class="row row-invite" type="email" name="emails[]">
                        </div>
-                        <button class="btn" id="add-email">+</button>
+                        <button class="btn btn-primary" id="add-email">+</button>
                         <div>
                             <input type="submit" value="Envoyer" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header btn-create"/>
                         </div>

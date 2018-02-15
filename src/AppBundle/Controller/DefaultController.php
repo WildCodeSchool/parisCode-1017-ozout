@@ -107,10 +107,29 @@ class DefaultController extends Controller
     public function deleteAction(User $user )
     {
         $em = $this->getDoctrine()->getManager();
+        $reservations = $em ->getRepository(Reservation::class)->findBy(array(
+            "user"=> $user,
+            "isCreator"=> true
+        ));
+        
+        $participate = array();
+        foreach ($reservations as $reservation){
+            $event = $reservation->getEvent();
+            $participates = $em->getRepository(Reservation::class)->findBy(array(
+                "isCreator"=> false,
+            ));
+            foreach ($participates as $participate) {
+                $participate[$event->getTitle][] = $participate->getUser()->getEmail();
+                $em->remove($participate);
+
+            }
+            $em->remove($event);
+        }
         $em->remove($user);
         $em->flush($user);
 
         return $this->redirectToRoute('homepage');
+
     }
 
 

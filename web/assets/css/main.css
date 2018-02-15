@@ -11,10 +11,16 @@ ul {
     max-height: 250px;
 }
 
-/*header.masthead .intro-text {*/
-    /*padding-top: 400px;*/
-    /*padding-bottom: 200px;*/
-/*}*/
+@media (max-width: 576px) {
+    .hidden-sm-down{
+        display:none;
+    }
+}
+
+header.masthead .intro-text {
+    padding-top: 400px;
+    padding-bottom: 200px;
+}
 
 .btn-header {
     margin-bottom: 20px !important;
@@ -460,4 +466,6 @@ legend {
 #calendar h2 {
     font-size: 15px;
 }
+
+/******VIDEO*******/
 

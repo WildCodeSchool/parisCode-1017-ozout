@@ -22,9 +22,9 @@ $(document).ready(function() {
         var form = $(this);
 
         if (dateEnd === ''){
-            alert('Veuillez definir vos dates de recherche')
+            alert('Définis tes dates de recherche')
         } else if (new Date(dateEnd) < new Date("Y m d")){
-            alert('Veuillez definir des dates correct')
+            alert('Définis des dates correctes')
         } else {
             $.ajax({
                 type: form.attr('method'),

@@ -19,7 +19,7 @@
     </a>
     <div class="portfolio-caption">
         <h4>{{ event.title }}</h4>
-        <p class="text-muted">{{ event.city }} </p>
-        <p class="text-muted">{{ event.targetMoney }} </p>
+        <p class="text-muted"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ event.city }} </p>
+        <p class="text-muted"><i class="fa fa-clock-o"></i> {{ event.start|localizeddate('none', 'none', null, null, 'd MMMM Y à H:mm') }} </p>
     </div>
 </div>

@@ -136,6 +136,9 @@ a.logo{
     margin: 10%;
     margin-top: 0;
 }
+.row-edit-event{
+    margin-top: 5%;
+}
 
 /** 1_'index.html.twig'**************************************************        4_PAGE INDEX EVENT**/
 .formIndexEvent {
@@ -148,7 +151,10 @@ img {
 
 
 /**************************************** FOSUSER /PROFILE ****************************************************/
-/** 1- Page Profile Edit
+/** 1- Page Profile Edit **/
+.profile-container{
+    max-width: 80%;
+}
 
 
 /** 1_'Profile / edit.html.twig'***************************************************         1_PAGE PROFILE EDIT**/
@@ -249,7 +255,9 @@ legend {
     font-weight: bold;
 }
 
-
+.alert-success{
+    margin: 0;
+}
 /** Reservation => moneyGiven **/
 
 .moneyGiven {
@@ -405,8 +413,8 @@ legend {
 }
 
 .btn {
-    background-color: #fed300 !important;
-    border-color: #fed300 !important;
+    background-color: #fed300;
+    border-color: #fed300;
 }
 .btn:hover{
     background-color: #fec810 !important;
@@ -415,3 +423,21 @@ legend {
 .form-control-file{
     width: 100%;
 }
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+.btn-danger:hover {
+    color: #fff;
+    background-color: #dd4945 !important;
+    border-color: #dd4945 !important; }
+.btn-actions{
+    text-align: center;
+    margin-top: 4%;
+}
+.row-search{
+    margin: 0;
+}
+

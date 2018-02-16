@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Event;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -22,7 +23,7 @@ class ReviewType extends AbstractType
                 'event', EntityType::class, array(
                     'class' => Event::class,
                     'choice_label' => 'title',
-                    'label' => 'A quel événement correspond ton avis ?'
+                    'label' => 'A quel événement correspond ton avis ?',
                 )
             )
             ->add(

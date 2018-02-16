@@ -66,14 +66,14 @@
                                                     </a>
                                                     <div class="portfolio-caption">
                                                         <h4>{{ reservation.event.title }}</h4>
-                                                        <p class="text-muted"> Où ? {{ reservation.event.city }} </p>
+                                                        <p class="text-muted"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ reservation.event.city }} </p>
+                                                        <p class="text-muted"><i class="fa fa-clock-o"></i> {{ reservation.event.start|localizeddate('none', 'none', null, null, 'd MMMM Y à H:mm') }} </p>
                                                         <p class="text-muted"> A récolter : {{ reservation.event.targetMoney ~ ' €' }} </p>
-                                                        {#<p class="text-muted"> Participants : {{ user.reservation.doParticipate}} </p>#}
-                                                    </div>
-                                                    <div class="btn-actions">
-                                                        <a class="btn btn-primary" href="{{ path('event_edit', {'id': reservation.event.id}) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                                        <a class="btn btn-danger" href="{{ path('event_delete', {'id': reservation.event.id}) }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                                        <a class="btn btn-primary" href="{{ path('event_invite', {'id': reservation.event.id}) }}"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                                                        <div class="btn-actions">
+                                                            <a class="btn btn-primary" href="{{ path('event_edit', {'id': reservation.event.id}) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                            <a class="btn btn-danger" href="{{ path('event_delete', {'id': reservation.event.id}) }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                            <a class="btn btn-primary" href="{{ path('event_invite', {'id': reservation.event.id}) }}"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             {% endif %}
@@ -141,11 +141,12 @@
                                                     </a>
                                                     <div class="portfolio-caption">
                                                         <h4>{{ reservation.event.title }}</h4>
-                                                        {#<p class="text-muted">Organisateur : {{ reservation.user.isCreator }} </p>#}
-                                                        <p class="text-muted">{{ reservation.event.city }} </p>
+                                                        <p class="text-muted"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ reservation.event.city }} </p>
+                                                        <p class="text-muted"><i class="fa fa-clock-o"></i> {{ reservation.event.start|localizeddate('none', 'none', null, null, 'd MMMM Y à H:mm') }} </p>
                                                         <p class="text-muted">Ma participation : {{ reservation.moneyGiven ~ ' €'  }} </p>
+
+                                                        <a class="btn btn-danger" href="{#{{ path('reservation_delete', {'id': reservation.event.id}) }}#}">Se désinscrire</a>
                                                     </div>
-                                                    <a class="btn btn-danger" href="{#{{ path('reservation_delete', {'id': reservation.event.id}) }}#}">Se désinscrire</a>
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -209,12 +210,9 @@
                                                 </a>
                                                 <div class="portfolio-caption">
                                                     <h4>{{ reservation.event.title }}</h4>
-                                                    {#<p class="text-muted">Organisateur : {{ reservation.user.isCreator }} </p>#}
-                                                    <p class="text-muted">{{ reservation.event.city }} </p>
-                                                    {#<p class="text-muted">Ma participation : {{ reservation.event.targetMoney ~ ' €'  }}</p>#}
-
-                                                    <a href="{{ path('review_new', {'id': reservation.event.id}) }}"
-                                                       class="btn btn-primary">Ajouter un commentaire</a>
+                                                    <p class="text-muted"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ reservation.event.city }} </p>
+                                                    <p class="text-muted"><i class="fa fa-clock-o"></i> {{ reservation.event.start|localizeddate('none', 'none', null, null, 'd MMMM Y à H:mm') }} </p>
+                                                    <a href="{{ path('review_new', {'id': reservation.event.id}) }}"class="btn btn-primary">Ajouter un avis</a>
                                                 </div>
 
                                             </div>

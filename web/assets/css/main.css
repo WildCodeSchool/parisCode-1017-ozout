@@ -136,6 +136,9 @@ a.logo{
     margin: 10%;
     margin-top: 0;
 }
+.row-edit-event{
+    margin-top: 5%;
+}
 
 /** 1_'index.html.twig'**************************************************        4_PAGE INDEX EVENT**/
 .formIndexEvent {
@@ -148,7 +151,10 @@ img {
 
 
 /**************************************** FOSUSER /PROFILE ****************************************************/
-/** 1- Page Profile Edit
+/** 1- Page Profile Edit **/
+.profile-container{
+    max-width: 80%;
+}
 
 
 /** 1_'Profile / edit.html.twig'***************************************************         1_PAGE PROFILE EDIT**/

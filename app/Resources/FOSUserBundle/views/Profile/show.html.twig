@@ -145,7 +145,7 @@
                                                         <p class="text-muted"><i class="fa fa-clock-o"></i> {{ reservation.event.start|localizeddate('none', 'none', null, null, 'd MMMM Y à H:mm') }} </p>
                                                         <p class="text-muted">Ma participation : {{ reservation.moneyGiven ~ ' €'  }} </p>
 
-                                                        <a class="btn btn-danger" href="{#{{ path('reservation_delete', {'id': reservation.event.id}) }}#}">Se désinscrire</a>
+                                                        <a class="btn btn-danger" href="{{ path('reservation_delete', {'id': reservation.id}) }}">Se désinscrire</a>
                                                     </div>
                                                 </div>
                                             {% endif %}
@@ -182,7 +182,7 @@
                                                             <i class="fa fa-times"></i>
                                                             Fermer
                                                         </button>
-                                                        <a class="btn btn-danger" {#href="{{ path('reservation_delete', {'id': reservation.event.id}) }}"#}>Annuler ma participation</a>
+                                                        <a class="btn btn-danger" href="{{ path('reservation_delete', {'id': reservation.id}) }}">Annuler ma participation</a>
                                                     </div>
                                                 </div>
                                             </div>

@@ -405,8 +405,8 @@ legend {
 }
 
 .btn {
-    background-color: #fed300 !important;
-    border-color: #fed300 !important;
+    background-color: #fed300;
+    border-color: #fed300;
 }
 .btn:hover{
     background-color: #fec810 !important;
@@ -414,5 +414,22 @@ legend {
 
 .form-control-file{
     width: 100%;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+.btn-danger:hover {
+    color: #fff;
+    background-color: #dd4945 !important;
+    border-color: #dd4945 !important; }
+.btn-actions{
+    text-align: center;
+    margin-top: 4%;
+}
+.row-search{
+    margin: 0;
 }
 

@@ -415,6 +415,7 @@ legend {
 .form-control-file{
     width: 100%;
 }
+
 .btn-danger {
     color: #fff;
     background-color: #dc3545;
@@ -431,3 +432,4 @@ legend {
 .row-search{
     margin: 0;
 }
+

@@ -255,7 +255,9 @@ legend {
     font-weight: bold;
 }
 
-
+.alert-success{
+    margin: 0;
+}
 /** Reservation => moneyGiven **/
 
 .moneyGiven {

@@ -77,4 +77,74 @@ class ReservationController extends Controller
             'progress' => $progress
         ));
     }
+
+    /**
+     * Deletes a reservation
+     * @method ("GET")
+     * @param Reservation $reservation
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/{id}/delete", name="reservation_delete")
+     */
+    public function deleteReservationAction(Reservation $reservation)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $event= $reservation->getEvent();
+
+        $money= $reservation->getMoneyGiven();
+
+        $event->setOnGoingMoney($event->getOnGoingMoney()-$money);
+
+        $em->remove($reservation);
+
+        $em->flush();
+
+        $reservations = $em->getRepository(Reservation::class)->findByEvent($event);
+        $participants = array();
+        foreach ($reservations as $key => $value){
+            if ($value->getIsCreator()){
+                $creator = $value->getUser();
+            } else{
+                $emails[] = $value->getUser()->getEmail();
+                $participants = $value->getUser();
+            }
+        }
+
+        /* Send Message Creator */
+        $message = (new \Swift_Message())
+            ->setSubject( $reservation->getUser() . " ". 'a annulé sa participation à l\'événement'. $event->getTitle())
+            ->setFrom($this->getParameter('mailer_user'))
+            ->setTo($creator->getEmail())
+            ->setBody(
+                $this->renderView('email/mailDeleteReservationCreator.html.twig', array(
+                        'event' => $event,
+                        'creator' => $creator,
+
+                    )
+                ),
+                'text/html'
+            );
+        $this->get('mailer')->send($message);
+
+        if (isset($emails)){
+
+            /* Send Message Participant */
+            $message = (new \Swift_Message())
+                ->setSubject('Ta participation à l\'événement' . " " . $event->getTitle() . " ". 'a été annulée')
+                ->setFrom($this->getParameter('mailer_user'))
+                ->setTo($emails)
+                ->setBody(
+                    $this->renderView('email/mailDeleteReservationParticipant.html.twig', array(
+                            'event' => $event,
+                            'participants' => $participants,
+                            'creator' => $creator
+                        )
+                    ),
+                    'text/html'
+                );
+            $this->get('mailer')->send($message);
+        }
+
+        return $this->redirectToRoute('fos_user_profile_show');
+    }
 }

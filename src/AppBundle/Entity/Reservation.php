@@ -14,6 +14,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Reservation
 {
 
+    public function __toString()
+    {
+        return 'Reservation id: ' . $this->getId();
+    }
+
     public function __construct()
     {
         $this->date = new \DateTime();

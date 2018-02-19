@@ -16,7 +16,7 @@ class Reservation
 
     public function __toString()
     {
-        return 'Reservation id: ' . $this->getId();
+        return 'Reservation id: ' . $this->getId() . ' User: ' . $this->getUser()->getNameUser();
     }
 
     public function __construct()

@@ -15,7 +15,7 @@ class Review
 
     public function __toString()
     {
-        return 'Review id: ' . $this->getId();
+        return 'Review id: ' . $this->getId() . ' User: ' . $this->getUser()->getNameUser();
     }
 
     /**

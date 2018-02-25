@@ -16,25 +16,25 @@
                     <div class="photo-left">
                         <img class="photo" src="{{ asset('uploads/pictures/'~ user.picture.namePicture) }}">
                     </div>
-                    <h4 class="name">{{ user.nameuser }}</h4>
-                    <p class="info">{{ user.surnameuser }}</p>
-                    <p class="info">{{ user.username }}</p>
+                    <h4 class="name"> Salut {{ user.username }}</h4>
+                    <p class="info">({{ user.nameuser }} {{ user.surnameuser }})</p>
                     <p class="info">{{ user.email }}</p>
                     <p class="info">{{ user.dateOfBirth |date('d-m-Y') }}</p>
-                    <p class="desc">Salut {{ user.nameuser }}.</p>
                     <div class="social">
                         <p class="info">Invite tes ami.e.s !</p>
                         <i class="fa fa-facebook-square" aria-hidden="true"></i>
                         <i class="fa fa-twitter-square" aria-hidden="true"></i>
                     </div>
                     <a href="{{ path('fos_user_profile_edit', {'id': user.id}) }}">Modifier mes informations</a>
+                    <a href="{{ path('fos_user_security_logout', {'id': user.id}) }}">Me déconnecter</a>
+                    <a href="{{ path('user_delete', {'id': user.id}) }}" onclick="return confirm('Es-tu certain de vouloir supprimer ton compte ?')">Supprimer mon compte</a>
                 </div>
 
                 <div class="right col-lg-9">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#eventcreate" role="tab"
-                               aria-controls="home" aria-selected="true">Les évènements crées</a>
+                               aria-controls="home" aria-selected="true">Les événements créés</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#participation" role="tab"
@@ -42,12 +42,12 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="contact-tab" data-toggle="tab" href="#pastevent" role="tab"
-                               aria-controls="contact" aria-selected="false">Évènements passés</a>
+                               aria-controls="contact" aria-selected="false">Événements passés</a>
                         </li>
                     </ul>
 
                     <div class="tab-content" id="myTabContent">
-
+                        <!-- Created events -->
                         <div class="tab-pane fade show active" id="eventcreate" role="tabpanel" aria-labelledby="eventcreate-tab">
                             <section class="bg-light" id="portfolio">
                                 <div class="container">
@@ -66,12 +66,15 @@
                                                     </a>
                                                     <div class="portfolio-caption">
                                                         <h4>{{ reservation.event.title }}</h4>
-                                                        <p class="text-muted">{{ reservation.event.city }} </p>
-                                                        <p class="text-muted">{{ reservation.event.targetMoney }} </p>
+                                                        <p class="text-muted"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ reservation.event.city }} </p>
+                                                        <p class="text-muted"><i class="fa fa-clock-o"></i> {{ reservation.event.start|localizeddate('none', 'none', null, null, 'd MMMM Y à H:mm') }} </p>
+                                                        <p class="text-muted"> A récolter : {{ reservation.event.targetMoney ~ ' €' }} </p>
+                                                        <div class="btn-actions">
+                                                            <a class="btn btn-primary" href="{{ path('event_edit', {'id': reservation.event.id}) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                            <a class="btn btn-danger" href="{{ path('event_delete', {'id': reservation.event.id}) }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                            <a class="btn btn-primary" href="{{ path('event_invite', {'id': reservation.event.id}) }}"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                                                        </div>
                                                     </div>
-                                                    <a href="{{ path('event_edit', {'id': reservation.event.id}) }}"
-                                                       class="btn btn-primary">Modifier l'évènement</a>
-                                                    <a class="btn btn-primary" href="{{ path('event_delete', {'id': reservation.event.id}) }}">Supprimer</a>
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -79,7 +82,7 @@
                                 </div>
                             </section>
                         </div>
-                        <!-- Modal -->
+                        <!-- Modal created events -->
                         {% for reservation in user.reservations %}
                             <div class="portfolio-modal modal fade" id="portfolioModal1{{ reservation.event.id }}" tabindex="-1" role="dialog"
                                  aria-hidden="true">
@@ -95,19 +98,22 @@
                                                 <div class="col-lg-8 mx-auto">
                                                     <div class="modal-body">
                                                         <h2 class="text-uppercase">{{ reservation.event.title }}</h2>
-                                                        <a class="item-intro text-muted"></a>
-                                                        <p>{{ reservation.event.eventDescription }}</p>
-                                                        <p>{{ reservation.event.deadline|date ("d/m/Y") }}</p>
-                                                        <p>{{ reservation.event.city }}</p>
-                                                        <img src="{{ asset('uploads/pictures/'~ reservation.event.picture.namePicture) }}"
-                                                             alt="eventimg">
+                                                        <p><i class="fa fa-clock-o"></i> Le {{ reservation.event.start|date('d/m/Y à h:i') }}</p>
+                                                        <p><i class="fa fa-map-marker" aria-hidden="true"></i> Adresse : {{ reservation.event.adress }}, {{ reservation.event.zipcode }} {{ reservation.event.city }}</p>
+                                                        <img src="{{ asset('uploads/pictures/'~ reservation.event.picture.namePicture) }}" alt="eventimg">
+                                                        <p class="modale-description info">{{ reservation.event.eventDescription }}</p>
+                                                        <p><i class="fa fa-dot-circle-o" aria-hidden="true"></i> Somme nécessaire pour que l'événement ait lieu : {{ reservation.event.targetMoney ~ '€' }} avant le {{ reservation.event.deadline|date ("d/m/Y")}}</p>
+                                                        <p>{{ reservation.event.onGoingMoney ~ ' €' }} actuellement récoltés</p>
+                                                        <p><i class="fa fa-user-circle"></i> Capacité maximum : {{ reservation.event.maxPeople }} personnes</p>
+                                                        <p><i class="fa fa-user-circle"></i> Nombre de participants : {{ reservation.event.NbPeopleParticipate }} personnes</p>
                                                         <button class="btn btn-primary" data-dismiss="modal" type="button">
                                                             <i class="fa fa-times"></i>
                                                             Fermer
                                                         </button>
                                                         <a href="{{ path('event_edit', {'id': reservation.event.id}) }}"
-                                                           class="btn btn-primary">Modifier l'évènement</a>
-                                                        <a class="btn btn-primary" href="{{ path('event_delete', {'id': reservation.event.id}) }}">Supprimer</a>
+                                                           class="btn btn-primary">Modifier</a>
+                                                        <a class="btn btn-danger" href="{{ path('event_delete', {'id': reservation.event.id}) }}">Supprimer</a>
+                                                        <a class="btn btn-primary" href="{{ path('event_invite', {'id': reservation.event.id}) }}">Inviter</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -116,7 +122,7 @@
                                 </div>
                             </div>
                         {% endfor %}
-
+                        <!-- Participating events -->
                         <div class="tab-pane fade show" id="participation" role="tabpanel" aria-labelledby="participation-tab">
                             <section class="bg-light" id="portfolio">
                                 <div class="container">
@@ -135,11 +141,12 @@
                                                     </a>
                                                     <div class="portfolio-caption">
                                                         <h4>{{ reservation.event.title }}</h4>
-                                                        <p class="text-muted">{{ reservation.event.city }} </p>
-                                                        <p class="text-muted">{{ reservation.event.targetMoney }} </p>
+                                                        <p class="text-muted"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ reservation.event.city }} </p>
+                                                        <p class="text-muted"><i class="fa fa-clock-o"></i> {{ reservation.event.start|localizeddate('none', 'none', null, null, 'd MMMM Y à H:mm') }} </p>
+                                                        <p class="text-muted">Ma participation : {{ reservation.moneyGiven ~ ' €'  }} </p>
+
+                                                        <a class="btn btn-danger" href="{{ path('reservation_delete', {'id': reservation.id}) }}">Se désinscrire</a>
                                                     </div>
-                                                    <a href="#"
-                                                       class="btn btn-primary">Se désinscrire</a>
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -147,6 +154,7 @@
                                     </div>
                                 </section>
                             </div>
+                        <!-- Modal participating events -->
                         {% for reservation in user.reservations %}
                             <div class="portfolio-modal modal fade" id="portfolioModal2{{ reservation.event.id }}" tabindex="-1" role="dialog"
                                  aria-hidden="true">
@@ -162,18 +170,19 @@
                                                 <div class="col-lg-8 mx-auto">
                                                     <div class="modal-body">
                                                         <h2 class="text-uppercase">{{ reservation.event.title }}</h2>
-                                                        <a class="item-intro text-muted"></a>
-                                                        <p>{{ reservation.event.eventDescription }}</p>
-                                                        <p>{{ reservation.event.deadline|date ("d/m/Y") }}</p>
-                                                        <p>{{ reservation.event.city }}</p>
-                                                        <img src="{{ asset('uploads/pictures/'~ reservation.event.picture.namePicture) }}"
-                                                             alt="eventimg">
+                                                        <p><i class="fa fa-clock-o"></i> Le {{ reservation.event.start|date('d/m/Y à h:i') }}</p>
+                                                        <p><i class="fa fa-map-marker" aria-hidden="true"></i> Adresse : {{ reservation.event.adress }}, {{ reservation.event.zipcode }} {{ reservation.event.city }}</p>
+                                                        <img src="{{ asset('uploads/pictures/'~ reservation.event.picture.namePicture) }}" alt="eventimg">
+                                                        <p class="modale-description info">{{ reservation.event.eventDescription }}</p>
+                                                        <p><i class="fa fa-dot-circle-o" aria-hidden="true"></i> Somme nécessaire pour que l'événement ait lieu : {{ reservation.event.targetMoney ~ '€' }} avant le {{ reservation.event.deadline|date ("d/m/Y")}}</p>
+                                                        <p>{{ reservation.event.onGoingMoney ~ ' €' }} actuellement récoltés</p>
+                                                        <p><i class="fa fa-user-circle"></i> Capacité maximum : {{ reservation.event.maxPeople }} personnes</p>
+
                                                         <button class="btn btn-primary" data-dismiss="modal" type="button">
                                                             <i class="fa fa-times"></i>
                                                             Fermer
                                                         </button>
-                                                        {#<a href="{{ path('', {'id': reservation.event.id}) }}"#}
-                                                           {#class="btn btn-primary">Se désinscrire</a>#}
+                                                        <a class="btn btn-danger" href="{{ path('reservation_delete', {'id': reservation.id}) }}">Annuler ma participation</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -182,7 +191,7 @@
                                 </div>
                             </div>
                         {% endfor %}
-
+                        <!-- Past events -->
                     <div class="tab-pane fade" id="pastevent" role="tabpanel" aria-labelledby="pastevent-tab">
                         <section class="bg-light" id="portfolio">
                             <div class="container">
@@ -201,11 +210,9 @@
                                                 </a>
                                                 <div class="portfolio-caption">
                                                     <h4>{{ reservation.event.title }}</h4>
-                                                    <p class="text-muted">{{ reservation.event.city }} </p>
-                                                    <p class="text-muted">{{ reservation.event.targetMoney }}</p>
-
-                                                    <a href="{{ path('review_new', {'id': reservation.event.id}) }}"
-                                                       class="btn btn-primary">Ajouter un commentaire</a>
+                                                    <p class="text-muted"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ reservation.event.city }} </p>
+                                                    <p class="text-muted"><i class="fa fa-clock-o"></i> {{ reservation.event.start|localizeddate('none', 'none', null, null, 'd MMMM Y à H:mm') }} </p>
+                                                    <a href="{{ path('review_new', {'id': reservation.event.id}) }}"class="btn btn-primary">Ajouter un avis</a>
                                                 </div>
 
                                             </div>
@@ -215,6 +222,7 @@
                             </div>
                         </section>
                     </div>
+                        <!-- Modal past events -->
                     {% for reservation in user.reservations %}
                         <div class="portfolio-modal modal fade" id="portfolioModal3{{ reservation.event.id }}" tabindex="-1" role="dialog"
                              aria-hidden="true">
@@ -230,18 +238,16 @@
                                             <div class="col-lg-8 mx-auto">
                                                 <div class="modal-body">
                                                     <h2 class="text-uppercase">{{ reservation.event.title }}</h2>
-                                                    <a class="item-intro text-muted"></a>
-                                                    <p>{{ reservation.event.eventDescription }}</p>
-                                                    <p>{{ reservation.event.start|date ("d/m/Y") }}</p>
-                                                    <p>{{ reservation.event.city }}</p>
-                                                    <img src="{{ asset('uploads/pictures/'~ reservation.event.picture.namePicture) }}"
-                                                         alt="eventimg">
-                                                    <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                                        <i class="fa fa-times"></i>
-                                                        Fermer
-                                                    </button>
+                                                    <p><i class="fa fa-clock-o"></i> Le {{ reservation.event.start|date('d/m/Y à h:i') }}</p>
+                                                    <p><i class="fa fa-map-marker" aria-hidden="true"></i> Adresse : {{ reservation.event.adress }}, {{ reservation.event.zipcode }} {{ reservation.event.city }}</p>
+                                                    <img src="{{ asset('uploads/pictures/'~ reservation.event.picture.namePicture) }}" alt="eventimg">
+                                                    <p class="modale-description info">{{ reservation.event.eventDescription }}</p>
+                                                    <p><i class="fa fa-dot-circle-o" aria-hidden="true"></i> Somme nécessaire pour que l'événement ait lieu : {{ reservation.event.targetMoney ~ '€' }} avant le {{ reservation.event.deadline|date ("d/m/Y")}}</p>
+                                                    <p>{{ reservation.event.onGoingMoney ~ ' €' }} actuellement récoltés</p>
+                                                    <p><i class="fa fa-user-circle"></i> Capacité maximum : {{ reservation.event.maxPeople }} personnes</p>
+                                                    <button class="btn btn-primary" data-dismiss="modal" type="button"><i class="fa fa-times"></i>Fermer</button>
                                                     <a href="{{ path('review_new', {'id': reservation.event.id}) }}"
-                                                       class="btn btn-primary">Ajouter un commentaire</a>
+                                                       class="btn btn-success">Ajouter un commentaire</a>
                                                 </div>
                                             </div>
                                         </div>

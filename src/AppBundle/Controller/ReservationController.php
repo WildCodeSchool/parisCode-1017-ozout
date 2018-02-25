@@ -77,4 +77,46 @@ class ReservationController extends Controller
             'progress' => $progress
         ));
     }
+
+    /**
+     * Deletes a reservation
+     * @method ("GET")
+     * @param Reservation $reservation
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/{id}/delete", name="reservation_delete")
+     */
+    public function deleteReservationAction(Reservation $reservation)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $event= $reservation->getEvent();
+
+        $money= $reservation->getMoneyGiven();
+
+        $event->setOnGoingMoney($event->getOnGoingMoney()-$money);
+
+        $em->remove($reservation);
+
+        $em->flush();
+
+        if (isset($emails)){
+
+            /* Send Message Participant */
+            $message = (new \Swift_Message())
+                ->setSubject('Ta participation à l\'événement' . " " . $event->getTitle() . " ". 'a été annulée')
+                ->setFrom($this->getParameter('mailer_user'))
+                ->setTo($reservation->getUser()->getEmail())
+                ->setBody(
+                    $this->renderView('email/mailDeleteReservationParticipant.html.twig', array(
+                            'event' => $event,
+                            'participant' => $reservation->getUser(),
+                        )
+                    ),
+                    'text/html'
+                );
+            $this->get('mailer')->send($message);
+        }
+
+        return $this->redirectToRoute('fos_user_profile_show');
+    }
 }

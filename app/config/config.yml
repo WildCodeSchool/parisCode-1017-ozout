@@ -86,8 +86,8 @@ fos_user:
         form:
             type: AppBundle\Form\RegistrationType
         confirmation:
-            enabled: true
-            template: FOSUserBundle:Registration:email.txt.twig
+            enabled: false
+            template: email/registerConfirmation.email.twig
     profile:
         form:
             type: AppBundle\Form\ProfileType

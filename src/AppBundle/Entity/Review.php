@@ -12,6 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Review
 {
+
+    public function __toString()
+    {
+        return 'Review id: ' . $this->getId() . ' User: ' . $this->getUser()->getNameUser();
+    }
+
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Event", inversedBy="reviews"))
      * @ORM\JoinColumn(nullable=false)

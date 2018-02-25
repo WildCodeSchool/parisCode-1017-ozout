@@ -1,16 +1,25 @@
 <div class="col-md-4 col-sm-6 portfolio-item thumb-post">
     <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1{{ event.id }}">
-        <div class="portfolio-hover">
-            <div class="portfolio-hover-content">
-                <i class="fa fa-plus fa-3x"></i>
+        {% if event.nbPeopleParticipate >= event.maxPeople %}
+            <div class="portfolio-hover-complete">
+                <div class="portfolio-hover-complete-content">
+                    <p class="text-uppercase">Complet</p>
+                    <i class="fa fa-user-times fa-3x"></i>
+                </div>
             </div>
-        </div>
+        {% else %}
+            <div class="portfolio-hover">
+                <div class="portfolio-hover-content">
+                    <i class="fa fa-plus fa-3x"></i>
+                </div>
+            </div>
+        {% endif %}
         <img class="img-fluid" src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}"
              alt="{{ event.title }}">
     </a>
     <div class="portfolio-caption">
         <h4>{{ event.title }}</h4>
-        <p class="text-muted">{{ event.city }} </p>
-        <p class="text-muted">{{ event.targetMoney }} </p>
+        <p class="text-muted"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ event.city }} </p>
+        <p class="text-muted"><i class="fa fa-clock-o"></i> {{ event.start|localizeddate('none', 'none', null, null, 'd MMMM Y à H:mm') }} </p>
     </div>
 </div>

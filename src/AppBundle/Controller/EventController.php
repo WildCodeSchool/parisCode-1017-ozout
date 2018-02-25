@@ -171,7 +171,7 @@ class EventController extends Controller
             }
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('event_edit', array('id' => $event->getId()));
+            return $this->redirectToRoute('fos_user_profile_show', array('id' => $event->getId()));
         }
 
         return $this->render(
@@ -212,7 +212,7 @@ class EventController extends Controller
 
         /* Send Message Creator */
         $message = (new \Swift_Message())
-            ->setSubject('L\'évènement' . " " . $event->getTitle() . 'a été annulé')
+            ->setSubject('L\'évènement' . " " . $event->getTitle() . " ". 'a été annulé')
             ->setFrom($this->getParameter('mailer_user'))
             ->setTo($creator->getEmail())
             ->setBody(
@@ -230,7 +230,7 @@ class EventController extends Controller
 
             /* Send Message Participants */
             $message = (new \Swift_Message())
-                ->setSubject('L\'évènement' . " " . $event->getTitle() . 'a été annulé')
+                ->setSubject('L\'évènement' . " " . $event->getTitle() . " ". 'a été annulé')
                 ->setFrom($this->getParameter('mailer_user'))
                 ->setTo($emails)
                 ->setBody(
@@ -246,6 +246,39 @@ class EventController extends Controller
         }
 
 
-        return $this->redirectToRoute('event_index');
+        return $this->redirectToRoute('fos_user_profile_show');
     }
+
+    /**
+     * @Route("/{id}/invite", name="event_invite")
+     * @Method({"POST", "GET"})
+     */
+    public function inviteAction(Event $event, Request $request){
+
+
+
+        if ($request ->isMethod('POST')){
+            /* Send Message */
+            $message = (new \Swift_Message())
+                ->setSubject('Invitation Evénement OzOut')
+                ->setFrom($this->getParameter('mailer_user'))
+                ->setTo($request->get('emails'))
+                ->setBody(
+                    $this->renderView('email/invitation.html.twig', array(
+                            'event' => $event,
+                            'user' => $this->getUser()
+                        )
+                    ),
+                    'text/html'
+                );
+            $this->get('mailer')->send($message);
+            return $this->redirectToRoute('fos_user_profile_show');
+        }
+
+        return $this->render('event/invite.html.twig', array(
+            'event' => $event
+        ));
+    }
+
+
 }

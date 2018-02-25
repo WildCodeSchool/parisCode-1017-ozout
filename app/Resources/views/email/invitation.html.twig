@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Invitation à l'événement ozOut !</title>
+    <style>
+        h1 {
+            color: #fed136;
+        }
+        th{
+            text-align: left;
+        }
+        a{
+            color: #fed136 !important;
+            text-decoration: none;
+            font-size: 1em;
+            text-align: left !important;
+        }
+        .container{
+            /* background-image: url("img/backgroundEmail.png");*/
+            background-color: #f7f7f7;
+            padding: 5vh;
+            width: 60vw;
+            height: 45vh;
+            border: 1px solid #f7f7f9;
+        }
+        table{
+            text-align: left;
+        }
+        span{
+            color: #fed136;
+            font-weight: bold;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 align="left"> Bonjour</h1>
+    <h2>Tu es invité.e à l'événement {{ event.title }} par {{ user.username }} !</h2>
+    <h2>Pour en savoir plus et y participer, clique ici: <a href="{{ url('reservation_create', {'id' : event.id}) }}">Invitation </a></h2>
+    <h2>A très vite,</h2>
+    <h2>L'Equipe <span><a href="{{ url('event_index') }}">OzOut </a></span></h2>
+
+</div>
+</body>
+</html>
+
+
+

@@ -11,10 +11,16 @@ ul {
     max-height: 250px;
 }
 
-/*header.masthead .intro-text {*/
-    /*padding-top: 400px;*/
-    /*padding-bottom: 200px;*/
-/*}*/
+@media (max-width: 576px) {
+    .hidden-sm-down{
+        display:none;
+    }
+}
+
+header.masthead .intro-text {
+    padding-top: 400px;
+    padding-bottom: 200px;
+}
 
 .btn-header {
     margin-bottom: 20px !important;
@@ -56,6 +62,41 @@ ul.social-buttons li.instagram a{
     left: 10%
 }
 
+.modal-body p{
+    margin-bottom : 2% !important;
+}
+.modal-body img{
+    margin-top: 1% !important;
+}
+.modale-description{
+    font-style: italic;
+}
+
+#portfolio .portfolio-item .portfolio-link .portfolio-hover-complete {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+    opacity: 0;
+    background: rgba(220,53,69,.9); }
+#portfolio .portfolio-item .portfolio-link .portfolio-hover-complete:hover {
+    opacity: 1; }
+
+#portfolio .portfolio-item .portfolio-link .portfolio-hover-complete .portfolio-hover-complete-content {
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 20px;
+    margin-top: -45px;
+    text-align: center;
+    color: white; }
+#portfolio .portfolio-item .portfolio-link .portfolio-hover-complete .portfolio-hover-complete-content p{
+    margin-bottom: 1%;
+}
+
 a.logo{
     font-size: 2em;
 }
@@ -90,6 +131,14 @@ a.logo{
 .formEditEvent {
     margin-top: 150px;
 }
+.btn-edit{
+    width: 30%;
+    margin: 10%;
+    margin-top: 0;
+}
+.row-edit-event{
+    margin-top: 5%;
+}
 
 /** 1_'index.html.twig'**************************************************        4_PAGE INDEX EVENT**/
 .formIndexEvent {
@@ -98,6 +147,37 @@ a.logo{
 
 img {
     max-width: 100%;
+}
+
+
+/**************************************** FOSUSER /PROFILE ****************************************************/
+/** 1- Page Profile Edit **/
+.profile-container{
+    max-width: 80%;
+}
+
+
+/** 1_'Profile / edit.html.twig'***************************************************         1_PAGE PROFILE EDIT**/
+
+.fos_user_user_show .profile{
+    margin-bottom: 6vh;
+
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    border: 4px solid #fff;
+}
+
+.h2EditProfil {
+    color: #111111;
+}
+
+.editProfil{
+    border-radius: 5px;
+}
+
+.profiledit{
+    padding-top: 100px !important;
 }
 
 
@@ -175,7 +255,9 @@ legend {
     font-weight: bold;
 }
 
-
+.alert-success{
+    margin: 0;
+}
 /** Reservation => moneyGiven **/
 
 .moneyGiven {
@@ -208,99 +290,60 @@ legend {
 
 .btnconnectHome{
     width: 20% !important;
-
 }
 
+/** Event => invite **/
+.invite{
+    min-width: 100%;
+}
 
-/* Ballons*********************************************************/
+.invite .row {
+    min-width: 100%;
+    margin-left: 0;
+    margin-bottom: 2%;
+}
+.h1Invite{
+    margin-bottom : 5%;
+}
 
-.animBallon {
-    width: 180px;
-    margin: 0 auto;
-    padding-top: 0px;
+/**************************************** REVIEW ****************************************************/
+/** 1- Page Review New
+
+
+/** 1_'Review / new.html.twig'***************************************************         1_PAGE REVIEW NEW**/
+
+/*Permet de voir les étoiles*/
+@charset "UTF-8";
+
+/*section rating-score*/
+.rating {
+    margin: auto;
+    width: 145px;
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    cursor: pointer;
+}
+.rating > span {
+    display: inline-block;
     position: relative;
+    width: 1.1em;
+    font-size: 25px;
+    color: #e9e9e9;
 }
-.animBallon > div {
-    /* Tailles ballons */
-    width: 120px;
-    height: 135px;
-    /* couleur */
-    /*background: rgba(182, 15, 97, 0.9);*/
-    border-radius: 0;
-    border-radius: 80% 80% 80% 80%;
-    margin: 140px auto;
+.rating > span:hover:before,
+.rating > span:hover ~ span:before,
+.rating > span.active:before,
+.rating > span.active ~ span:before {
+    content: "★";
     position: absolute;
-    padding: 10px;
-    /*box-shadow: inset 17px 7px 10px rgba(182, 15, 97, 0.9);*/
-    -webkit-transform-origin: bottom center;
-}
-.animBallon > div:nth-child(1) {
-    background: #21252a;
-    left: 0;
-    box-shadow: inset 60px 60px 60px #000000;
-    -webkit-animation: balloon1 6s ease-in-out infinite;
-    -moz-animation: balloon1 6s ease-in-out infinite;
-    -o-animation: balloon1 6s ease-in-out infinite;
-    animation: balloon1 6s ease-in-out infinite;
-}
-.animBallon > div:nth-child(1):before {
-    color: #111111;
+    color: #fed300;
 }
 
-.animBallon > div:before {
-    color: rgba(182, 15, 97, 0.9);
-    position: absolute;
-    bottom: -11px;
-    left: 52px;
-    content:"▲";
-    font-size: 1em;
+#rating {
+    display: none;
 }
 
-.ball{
-    font-family: 'Kaushan Script', 'Helvetica Neue', Helvetica, Arial, cursive;
-    font-size: 1.5em;
-    color: #fed136;
-    position: relative;
-    top: 35px;
-    left: 14%;
-    margin-left: -30px;
-}
-
-/*ANIMATION*/
-/*BALLOON 1 4*/
-
-@-webkit-keyframes balloon1 {
-    0%, 100% {
-        -webkit-transform: translateY(0) rotate(-6deg);
-    }
-    50% {
-        -webkit-transform: translateY(-20px) rotate(8deg);
-    }
-}
-@-moz-keyframes balloon1 {
-    0%, 100% {
-        -moz-transform: translateY(0) rotate(-6deg);
-    }
-    50% {
-        -moz-transform: translateY(-20px) rotate(8deg);
-    }
-}
-@-o-keyframes balloon1 {
-    0%, 100% {
-        -o-transform: translateY(0) rotate(-6deg);
-    }
-    50% {
-        -o-transform: translateY(-20px) rotate(8deg);
-    }
-}
-@keyframes balloon1 {
-    0%, 100% {
-        transform: translateY(0) rotate(-6deg);
-    }
-    50% {
-        transform: translateY(-20px) rotate(8deg);
-    }
-}
+/*end rating-score*/
 
 .h3Home{
     margin-bottom: 20px !important;
@@ -367,5 +410,34 @@ legend {
 
 #calendar h2 {
     font-size: 15px;
+}
+
+.btn {
+    background-color: #fed300;
+    border-color: #fed300;
+}
+.btn:hover{
+    background-color: #fec810 !important;
+}
+
+.form-control-file{
+    width: 100%;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+.btn-danger:hover {
+    color: #fff;
+    background-color: #dd4945 !important;
+    border-color: #dd4945 !important; }
+.btn-actions{
+    text-align: center;
+    margin-top: 4%;
+}
+.row-search{
+    margin: 0;
 }
 

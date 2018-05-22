@@ -1,0 +1,64 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block body %}
+<header class="masthead">
+    <div class="container">
+            <div class="row">
+                <div class="register-container">
+                    <div class="hregister">
+                        <h2>Pas encore de compte ?</h2>
+                        <h4>A toi de jouer !</h4>
+                    </div>
+                    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+
+                    <div>
+                        {{ form_label(form.nameUser) }}
+                        {{ form_widget(form.nameUser) }}
+                        {{ form_errors(form.nameUser) }}
+                    </div>
+                    <div>
+                        {{ form_label(form.surnameUser) }}
+                        {{ form_widget(form.surnameUser) }}
+                        {{ form_errors(form.surnameUser) }}
+                    </div>
+                    <div>
+                        {{ form_label(form.username) }}
+                        {{ form_widget(form.username) }}
+                        {{ form_errors(form.username) }}
+                    </div>
+                    <div>
+                        {{ form_label(form.email) }}
+                        {{ form_widget(form.email) }}
+                        {{ form_errors(form.email) }}
+                    </div>
+                    <div class="password">
+                        {{ form_label(form.plainPassword) }}
+                        {{ form_widget(form.plainPassword) }}
+                        {{ form_errors(form.plainPassword) }}
+                    </div>
+                    <div class="birthdate_field">
+                        {{ form_label(form.dateOfBirth) }}
+                        {{ form_widget(form.dateOfBirth) }}
+                        {{ form_errors(form.dateOfBirth) }}
+                    </div>
+                    <div>
+                        {{ form_label(form.picture) }}
+                        {{ form_widget(form.picture) }}
+                        {{ form_errors(form.picture) }}
+                    </div>
+                    <img width="200" id="previewPictureProfil" src="#" alt="">
+
+                    <div>
+                        <input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-primary btn-xl text-uppercase btn-header btn-create"/>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+    </div>
+</header>
+
+{% endblock body %}
+
+
+

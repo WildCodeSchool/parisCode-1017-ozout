@@ -1,0 +1,52 @@
+version: '3'
+services:
+  ozout-fpm:
+    image: php:7.1-fpm
+    container_name: ozout
+    volumes:
+      - ./:/var/www/html
+    links:
+      - database:database
+    depends_on:
+      - database
+
+  ozout-nginx:
+    image: nginx
+    ports:
+      - 8083:80
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./:/var/www/html
+    depends_on:
+      - ozout-fpm
+
+  database:
+    image: mysql:5.7
+    volumes:
+      - ./docker/my.cnf:/etc/mysql/my.cnf
+    environment:
+      - MYSQL_DATABASE=ozout
+      - MYSQL_USER=ozout
+      - MYSQL_PASSWORD=ozout
+      - MYSQL_ROOT_PASSWORD=root
+
+
+  phpmyadmin-dev:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8082:80"
+    environment:
+      - PMA_HOST=database
+      - PMA_USER=ozout
+      - PMA_PASSWORD=ozout
+
+
+  composer:
+    image: composer:latest
+    volumes:
+      - .:/app
+      - $SSH_AUTH_SOCK:/ssh-auth.sock
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/group:/etc/group:ro
+    environment:
+      - SSH_AUTH_SOCK=/ssh-auth.sock

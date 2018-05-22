@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Participation annulée !</title>
+    <style>
+        h1 {
+            color: #fed136;
+        }
+        a{
+            color: #fed136 !important;
+            text-decoration: none;
+            font-size: 1em;
+            text-align: left !important;
+        }
+        .container{
+            /* background-image: url("img/backgroundEmail.png");*/
+            background-color: #f7f7f7;
+            padding: 5vh;
+            width: 60vw;
+            height: 45vh;
+            border: 1px solid #f7f7f9;
+        }
+        span{
+            color: #fed136;
+            font-weight: bold;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 align="left">Hey {{ participant.username }} !</h1>
+    <h2 align="left">Tu viens d'annuler ta participation à l'événement {{ event.title }}</h2>
+    <p>Si tu as participé à une cagnotte, un remboursement te parviendra sous 48h.</p>
+    <p>A très vite,</p>
+    <p>L'Equipe <span><a href="{{ url('event_index') }}">OzOut </a></span></p>
+</div>
+</body>
+</html>
+
+
+

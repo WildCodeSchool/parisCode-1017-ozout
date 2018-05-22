@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<body id="page-top">
+<!-- Header -->
+<header class="masthead">
+    <div class="container">
+        <div class="intro-text">
+            <div class="intro-lead-in"><a class="navbar-brand logo" href="{{ path('homepage') }}"> OzOut</a></div>
+        </div>
+    </div>
+</header>
+
+<section class="bg-light" id="portfolio">
+    <div class="container formCreateEvent">
+        <h1 align="center">Modifier ton événement</h1>
+            <div class="offset-md-3 col-md-6">
+            {{ form_start(edit_form) }}
+                {{ form_widget(edit_form) }}
+                <img width="200" id="previewPictureEditEvent" src="#" alt="">
+                <div class="row">
+                    <input type="submit" value="Modifier" class="btn btn-primary btn-xs text-uppercase js-scroll-trigger btn-header btn-edit"/>
+                {{ form_end(edit_form) }}
+                    <a class="btn btn-danger btn-xs text-uppercase je-scroll-trigger btn-header btn-edit" href="{{ path('event_delete', {'id': event.id}) }}">Supprimer</a>
+                </div>
+                <div class="row row-edit-event">
+                <div class="offset-md-3 col-md-6">
+                    <a class="btn btn-primary btn-lg text-uppercase js-scroll-trigger btn-header" href="{{ path('fos_user_profile_show') }}">Retour au profil</a>
+                </div>
+                </div>
+            </div>
+    </div>
+</section>
+{% endblock %}

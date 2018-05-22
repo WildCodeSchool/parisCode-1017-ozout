@@ -1,0 +1,18 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <header class="masthead">
+        <div class="container">
+            <div class="row">
+                <div class="register-container confirmed">
+                    <p>Un e-mail vient de partir !</p>
+                    <p>Il contient un lien sur lequel il te faudra cliquer pour réinitialiser ton mot de passe.</p>
+                    <p>Si tu n'as rien reçu d'ici quelques minutes, pense bien à vérifier le dossier spam de ta boîte mail !</p>
+                    <p>(Attention, tu ne peux demander un nouveau mot de passe que toutes les 2 heures.)</p>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}

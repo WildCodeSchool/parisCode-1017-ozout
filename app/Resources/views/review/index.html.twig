@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/css/review.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<div class="container formCreateEvent">
+    <h1 align="center">Liste des avis</h1>
+
+    <table align="center">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Commentaire</th>
+                <th>Score</th>
+                <th>Evénement associé</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for review in reviews %}
+            <tr>
+                <td><a href="{{ path('review_show', { 'id': review.id }) }}">{{ review.id }}</a></td>
+                <td>{{ review.comment }}</td>
+                <td>{{ review.score }}</td>
+                <td>{{ review.event }}</td>
+                <td>{{ review.user }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('review_show', { 'id': review.id }) }}">Voir</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('review_edit', { 'id': review.id }) }}">Modifier</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div align="center">
+        <a href="{{ path('review_new') }}" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger btn-header">Créer un nouvel avis</a>
+    </div>
+</div>
+{% endblock %}

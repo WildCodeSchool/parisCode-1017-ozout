@@ -1,0 +1,443 @@
+/** GENERAL **/
+
+ul {
+    list-style: none;
+}
+
+.thumb-post img {
+    object-fit: cover; /* Do not scale the image */
+    object-position: center; /* Center the image within the element */
+    width: 100%;
+    max-height: 250px;
+}
+
+@media (max-width: 576px) {
+    .hidden-sm-down{
+        display:none;
+    }
+}
+
+header.masthead .intro-text {
+    padding-top: 400px;
+    padding-bottom: 200px;
+}
+
+.btn-header {
+    margin-bottom: 20px !important;
+    width:100%;
+}
+
+footer {
+    background-color: #212529;
+}
+
+footer p {
+    color: #fed136;
+}
+
+.footerCopy{
+    margin-top: 30px;
+}
+
+ul.social-buttons li.twitter a{
+    background-color: #00aced;
+}
+ul.social-buttons li.twitter a:hover{
+    background-color: #00aced;
+}
+ul.social-buttons li.facebook a{
+    background-color: #3c51a0;
+}
+ul.social-buttons li.facebook a:hover{
+    background-color: #3b5998;
+}
+ul.social-buttons li.instagram a{
+    background-color: #8a3ab9;
+}
+
+.modal {
+    width: 70%;
+    height: 90%;
+    top:5%;
+    left: 10%
+}
+
+.modal-body p{
+    margin-bottom : 2% !important;
+}
+.modal-body img{
+    margin-top: 1% !important;
+}
+.modale-description{
+    font-style: italic;
+}
+
+#portfolio .portfolio-item .portfolio-link .portfolio-hover-complete {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+    opacity: 0;
+    background: rgba(220,53,69,.9); }
+#portfolio .portfolio-item .portfolio-link .portfolio-hover-complete:hover {
+    opacity: 1; }
+
+#portfolio .portfolio-item .portfolio-link .portfolio-hover-complete .portfolio-hover-complete-content {
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 20px;
+    margin-top: -45px;
+    text-align: center;
+    color: white; }
+#portfolio .portfolio-item .portfolio-link .portfolio-hover-complete .portfolio-hover-complete-content p{
+    margin-bottom: 1%;
+}
+
+a.logo{
+    font-size: 2em;
+}
+
+#services{
+    background-color: #21252a;
+}
+
+#searchFormEvent{
+    width: 100%;
+    margin-bottom: 30px;
+}
+/**************************************** ÉVÈNEMENTS ****************************************************/
+/** 1- Page New Event
+    2_ Page Show Event
+    3_ Page Edit Event
+    4_ Page INDEX
+
+
+/** 1_'new.html.twig'***************************************************         1_PAGE CREATE NEW EVENT**/
+
+.formCreateEvent {
+    text-align:center;
+}
+
+/** 2_'show.html.twig'***************************************************        2_PAGE SHOW EVENT**/
+.formShowEvent {
+    margin-top: 150px;
+}
+
+/** 1_'edit.html.twig'***************************************************        3_PAGE EDIT EVENT**/
+.formEditEvent {
+    margin-top: 150px;
+}
+.btn-edit{
+    width: 30%;
+    margin: 10%;
+    margin-top: 0;
+}
+.row-edit-event{
+    margin-top: 5%;
+}
+
+/** 1_'index.html.twig'**************************************************        4_PAGE INDEX EVENT**/
+.formIndexEvent {
+    margin-top: 150px;
+}
+
+img {
+    max-width: 100%;
+}
+
+
+/**************************************** FOSUSER /PROFILE ****************************************************/
+/** 1- Page Profile Edit **/
+.profile-container{
+    max-width: 80%;
+}
+
+
+/** 1_'Profile / edit.html.twig'***************************************************         1_PAGE PROFILE EDIT**/
+
+.fos_user_user_show .profile{
+    margin-bottom: 6vh;
+
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    border: 4px solid #fff;
+}
+
+.h2EditProfil {
+    color: #111111;
+}
+
+.editProfil{
+    border-radius: 5px;
+}
+
+.profiledit{
+    padding-top: 100px !important;
+}
+
+
+/**************************************** REGISTER ****************************************************/
+
+/** 'register.html.twig'***************************************************         1_REGISTER USER**/
+
+.register {
+    margin-top: 120px;
+    text-align: center;
+}
+
+.imgTable{
+    width: 50%;
+}
+
+.register-container {
+    padding: 30px;
+    max-width: 800px;
+    width: 100% !important;
+    background-color: #F7F7F7;
+    margin: 100px auto;
+    border-radius: 3px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.hregister {
+    color: #111;
+    margin-bottom: 4%;
+}
+
+label {
+    color: #111;
+}
+
+legend {
+    color: #111;
+}
+
+/* Register Form */
+.password legend{
+    display: none;
+}
+.birthdate_field{
+    margin-bottom: 2%;
+}
+.birthdate_field legend{
+    font-size: 1rem;
+    line-height: 2;
+}
+.birthdate_field .form-inline{
+    display: inline;
+}
+.form-control-file{
+    margin-left: 25%;
+    color: black;
+    width: 24vw;
+}
+.btn-create{
+    margin-top:2%;
+}
+
+/* Page Register/confirmed */
+
+.confirmed{
+    margin-top: 40vh;
+    transform: translateY(-50%);
+    text-align: center;
+    color: black;
+}
+
+.confirmed span {
+    color: #fed136;
+    font-weight: bold;
+}
+
+.alert-success{
+    margin: 0;
+}
+/** Reservation => moneyGiven **/
+
+.moneyGiven {
+    color: #111;
+    font-size: 1em;
+}
+
+.titleMoneyGiven {
+    color: #111;
+}
+
+.connectedLight {
+    background: rgb(66, 183, 42);
+    border-radius: 50%;
+    display: inline-block;
+    height: 9px;
+    margin-left: 4px;
+    width: 9px;
+}
+
+.userreview{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.previewImage{
+    margin-bottom: 30px;
+}
+
+.btnconnectHome{
+    width: 20% !important;
+}
+
+/** Event => invite **/
+.invite{
+    min-width: 100%;
+}
+
+.invite .row {
+    min-width: 100%;
+    margin-left: 0;
+    margin-bottom: 2%;
+}
+.h1Invite{
+    margin-bottom : 5%;
+}
+
+/**************************************** REVIEW ****************************************************/
+/** 1- Page Review New
+
+
+/** 1_'Review / new.html.twig'***************************************************         1_PAGE REVIEW NEW**/
+
+/*Permet de voir les étoiles*/
+@charset "UTF-8";
+
+/*section rating-score*/
+.rating {
+    margin: auto;
+    width: 145px;
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    cursor: pointer;
+}
+.rating > span {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+    font-size: 25px;
+    color: #e9e9e9;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before,
+.rating > span.active:before,
+.rating > span.active ~ span:before {
+    content: "★";
+    position: absolute;
+    color: #fed300;
+}
+
+#rating {
+    display: none;
+}
+
+/*end rating-score*/
+
+.h3Home{
+    margin-bottom: 20px !important;
+}
+
+.h2apropos{
+    margin-bottom: 20px !important;
+    color: #fff;
+}
+
+.step {
+    margin-top: 30px !important;
+    position: relative;
+}
+
+.bgvid {
+    /*position: relative;*/
+    min-width: 100%;
+    height: auto;
+    object-fit: fill;
+    border-radius: 30px;
+}
+
+.service-heading{
+    color: #fff;
+}
+
+.portfolio-item .thumb-post{
+    border-radius: 3px;
+}
+
+.img-fluid {
+    border-radius: 6px;
+}
+
+/**************************************** CGV ****************************************************/
+/**'cgv.html.twig'**/
+
+.cgv-container{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.para-cgv{
+    text-align: justify;
+}
+
+.title-cgv{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.subtitle-cgv, .article-cgv{
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+/**************************************** About / Contact ****************************************************/
+/**'about.html.twig'**/
+/**'contact.html.twig'**/
+.row-about-contact{
+    margin-top: 15vh;
+}
+
+#calendar h2 {
+    font-size: 15px;
+}
+
+.btn {
+    background-color: #fed300;
+    border-color: #fed300;
+}
+.btn:hover{
+    background-color: #fec810 !important;
+}
+
+.form-control-file{
+    width: 100%;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+.btn-danger:hover {
+    color: #fff;
+    background-color: #dd4945 !important;
+    border-color: #dd4945 !important; }
+.btn-actions{
+    text-align: center;
+    margin-top: 4%;
+}
+.row-search{
+    margin: 0;
+}
+

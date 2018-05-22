@@ -6,11 +6,12 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: fr
+    pictures_directory: '%kernel.project_dir%/web/uploads/pictures'
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -35,6 +36,7 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    form_themes: ['bootstrap_4_layout.html.twig']
 
 # Doctrine Configuration
 doctrine:
@@ -65,3 +67,67 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+
+# FOSUser Configuration
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    service:
+        mailer: fos_user.mailer.twig_swift
+    from_email:
+        address: "bonjour@ozout.fr"
+        sender_name: "OzOut"
+    resetting:
+        email:
+            template: email/password_resetting.email.twig
+    registration:
+        form:
+            type: AppBundle\Form\RegistrationType
+        confirmation:
+            enabled: false
+            template: email/registerConfirmation.email.twig
+    profile:
+        form:
+            type: AppBundle\Form\ProfileType
+
+
+
+#EasyAdmin Configuration
+easy_admin:
+    site_name: 'OzOut'
+    design:
+        brand_color: '#fec503'
+    list:
+        actions:
+            - { name: 'edit', label: '', icon: 'edit'}
+            - { name: 'delete', label: '', icon: 'trash'}
+    entities:
+        Event:
+            class: AppBundle\Entity\Event
+            list:
+                fields:
+                    - id
+                    - title
+                    - city
+                    - targetMoney
+                    - isPrivate
+                    - deadline
+                    - maxPeople
+        User:
+            class: AppBundle\Entity\User
+        Category:
+            class: AppBundle\Entity\Category
+        Reservation:
+            class: AppBundle\Entity\Reservation
+        Review:
+            class: AppBundle\Entity\Review
+        Picture:
+            class: AppBundle\Entity\Picture
+            list:
+                fields:
+                    - id
+                    - { property: 'namePicture', type: 'image', base_path: '../web/uploads/pictures/'}
+                    - description
+                    - altPicture

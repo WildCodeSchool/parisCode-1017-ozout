@@ -28,7 +28,12 @@ class EventRepository extends \Doctrine\ORM\EntityRepository
             ->addSelect('p')
             ->where('e.start > :dateNow')
             ->orderBy('e.start', 'ASC')
-            ->setMaxResults($maxResult);
+            ->setMaxResults($maxResult)
+            ->join('e.reservations', 'r')
+            ->andWhere('r.isCreator = true')
+            /*->join('r.user', 'u')*/
+            ->addSelect('r')
+
         ;
         $parameters['dateNow'] = new \DateTime();
 
@@ -88,4 +93,5 @@ class EventRepository extends \Doctrine\ORM\EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
 }

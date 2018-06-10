@@ -28,9 +28,7 @@ class EventController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $events = $em->getRepository('AppBundle:Event')->getAllNotPrivateEvent($this->getUser(), null);
-
         $form = $this->createForm(SearchType::class, null, array(
             'action' => $this->generateUrl('result_search'),
             'method' => "post",

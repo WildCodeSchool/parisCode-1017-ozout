@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Event;
+
 /**
  * ReservationRepository
  *
@@ -18,5 +20,18 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('user', $user->getId())
         ;
         return $qb->getQuery()->getResult();
+    }
+
+    public function getUserCreator(Event $event)
+    {
+        $qb = $this-> createQueryBuilder('r');
+        $qb->where('r.event = :event')
+            ->andWhere('r.isCreator = true')
+            ->select('u.username')
+            ->join('r.user', 'u')
+            ->setParameter('event', $event->getId())
+            ;
+        return $qb->getQuery()->getSingleResult();
+
     }
 }

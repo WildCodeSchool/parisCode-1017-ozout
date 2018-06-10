@@ -11,6 +11,7 @@
                     <div class="col-lg-8 mx-auto">
                         <div class="modal-body">
                             <h2 class="text-uppercase">{{ event.title }}</h2>
+                            <p> Organisateur : {{ event.reservations[0].user.username }}</p>
                             <p><i class="fa fa-clock-o"></i> Le {{ event.start|date('d/m/Y à h:i') }}</p>
                             <p><i class="fa fa-map-marker" aria-hidden="true"></i> Adresse : {{ event.adress }}, {{ event.zipcode }} {{ event.city }}</p>
                             <img src="{{ asset('uploads/pictures/'~ event.picture.namePicture) }}" alt="eventimg">
@@ -18,7 +19,6 @@
                             <p><i class="fa fa-dot-circle-o" aria-hidden="true"></i> Somme nécessaire pour que l'événement ait lieu : {{ event.targetMoney ~ '€' }} avant le {{ event.deadline|date ("d/m/Y")}}</p>
                             <p>{{ event.onGoingMoney ~ ' €' }} actuellement récoltés</p>
                             <p><i class="fa fa-user-circle"></i> Capacité maximum : {{ event.maxPeople }} personnes</p>
-
 
                             {% if event.nbPeopleParticipate >= event.maxPeople %}
                                 <button class="btn btn-danger" data-dismiss="modal" type="button">

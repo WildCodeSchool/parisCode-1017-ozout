@@ -141,9 +141,14 @@
                                                     </a>
                                                     <div class="portfolio-caption">
                                                         <h4>{{ reservation.event.title }}</h4>
+                                                        {% for reservation in event.reservations %}
+                                                        {{ dump(reservation) }}
+                                                        {#<p>Organisateur: {{ event.reservations[0].user.username }}</p>#}
+                                                            {% endfor %}
                                                         <p class="text-muted"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ reservation.event.city }} </p>
                                                         <p class="text-muted"><i class="fa fa-clock-o"></i> {{ reservation.event.start|localizeddate('none', 'none', null, null, 'd MMMM Y à H:mm') }} </p>
                                                         <p class="text-muted">Ma participation : {{ reservation.moneyGiven ~ ' €'  }} </p>
+
 
                                                         <a class="btn btn-danger" href="{{ path('reservation_delete', {'id': reservation.id}) }}">Se désinscrire</a>
                                                     </div>

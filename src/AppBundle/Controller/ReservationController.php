@@ -98,7 +98,7 @@ class ReservationController extends Controller
         $em->remove($reservation);
 
         $em->flush();
-        
+
         return $this->redirectToRoute('fos_user_profile_show');
     }
 }

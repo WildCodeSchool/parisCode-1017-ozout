@@ -255,8 +255,6 @@ class EventController extends Controller
      */
     public function inviteAction(Event $event, Request $request){
 
-
-
         if ($request ->isMethod('POST')){
             /* Send Message */
             $message = (new \Swift_Message())
@@ -279,6 +277,4 @@ class EventController extends Controller
             'event' => $event
         ));
     }
-
-
 }
